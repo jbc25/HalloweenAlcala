@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.halloweenalcala.app.ui.MainActivity">
+
+
+    <include layout="@layout/toolbar" />
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/view_update_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/red_halloween"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/TextBase.White"
+                    android:text="@string/app_dying"
+                    android:lines="1"
+                    android:ellipsize="end"/>
+
+                <View style="@style/XpansorHoriz" />
+
+                <TextView
+                    android:id="@+id/btn_update_app"
+                    style="@style/TextBase.White"
+                    android:text="@string/resurrect"
+                    android:padding="5dp"
+                    android:layout_marginRight="15dp"/>
+
+                <ImageView
+                    android:id="@+id/btn_close_update_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_close"/>
+
+            </LinearLayout>
+            <FrameLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+
+            </FrameLayout>
+
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/navigation_bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="?android:attr/windowBackground"
+                app:menu="@menu/navigation_bottom"
+                app:itemIconTint="@color/navigation_item"
+                app:itemTextColor="@color/navigation_item"
+                />
+
+        </LinearLayout>
+
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:menu="@menu/navigation_drawer"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/view_header_menu"/>
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+
+</LinearLayout>

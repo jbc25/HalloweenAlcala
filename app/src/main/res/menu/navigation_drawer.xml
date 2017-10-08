@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_agenda"
+        android:icon="@mipmap/ic_agenda"
+        android:title="@string/halloween_2017" />
+
+
+    <item
+        android:id="@+id/navigation_map"
+        android:icon="@mipmap/ic_map"
+        android:title="@string/participants" />
+
+    <item
+        android:id="@+id/navigation_poems"
+        android:icon="@mipmap/ic_book_poem"
+        android:title="@string/contact" />
+
+    <item
+        android:id="@+id/menu_halloween_alcala_17_twitter"
+        android:icon="@mipmap/ic_nav_twitter"
+        android:title="@string/halloween_hashtag" />
+
+    <item
+        android:id="@+id/menu_7mz_web"
+        android:icon="@mipmap/ic_nav_web"
+        android:title="@string/web_7mz" />
+</menu>

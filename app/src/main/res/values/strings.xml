@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Halloween Alcala 2017</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="agenda">Agenda</string>
+    <string name="map">Mapa</string>
+    <string name="poems">Poemas</string>
+
+
+    <string name="hidden_poem_guess_character">POEMA OCULTO\nDebes acertar el personaje para verlo</string>
+    <string name="check">Comprobar</string>
+    <string name="guessed">¡Acertaste!</string>
+    <string name="fail">Fallaste</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shows">ACTUACIONES</string>
+    <string name="participants">Participantes</string>
+    <string name="about">Sobre Halloween...</string>
+    <string name="contact">Contacto?</string>
+    <string name="marcha_zombie">7ª Marcha Zombie</string>
+    <string name="halloween_2017">Halloween 2017</string>
+    <string name="halloween_alcala_17_twitter">#HalloweenAlcala17 en Twitter</string>
+    <string name="web_7mz">Web 7MZ</string>
+    <string name="halloween_hashtag">#Halloween</string>
+    <string name="update_available">Actualización disponible</string>
+    <string name="update">ACTUALIZAR</string>
+    <string name="resurrect">¡RESUCITAR!</string>
+    <string name="app_dying">App moribunda</string>
+</resources>

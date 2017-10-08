@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/view_locked_poem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            style="@style/TextBase.White"
+            android:text="@string/hidden_poem_guess_character"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_character_locked"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:layout_margin="10dp"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_character_name"
+            style="@style/TextBase.White"
+            android:ems="9"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_frame_white"
+            android:padding="5dp"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:lines="1"
+            android:gravity="center_horizontal"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check"/>
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_character"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_margin="10dp"
+        android:alpha="0.7"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/view_unlocked_poem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_poem_title"
+            style="@style/TextBase.White"
+            android:textSize="21sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="true"
+            android:layout_centerHorizontal="true"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/tv_poem_text"
+                style="@style/TextBase.White"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:padding="15dp"
+                android:background="@drawable/bg_poem"/>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -19,6 +19,10 @@ public class App extends Application {
     public static final String PREFIX = "org.halloweenalcala.app.";
     public static final String SHARED_POEM_UNLOCKED = PREFIX + "shared_poem_unlocked";
     public static final String SHARED_CURRENT_DATA_VERSION = PREFIX + "shared_current_data_version";
+    public static final String SHARED_FIRST_TIME = PREFIX + "shared_first_time";
+    public static final String SHARED_DATA_PLACES = PREFIX + "shared_data_places";
+    public static final String SHARED_DATA_PERFORMANCES = PREFIX + "shared_data_performances";
+    public static final String SHARED_DATA_PARTICIPANTS = PREFIX + "shared_data_participants";
 
     public static final String URL_GOOGLE_PLAY_APP = "https://play.google.com/store/apps/details?id=org.halloweenalcala.app";
     public static final String URL_DIRECT_GOOGLE_PLAY_APP = "market://details?id=org.halloweenalcala.app";

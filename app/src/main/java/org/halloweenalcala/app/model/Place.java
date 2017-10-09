@@ -11,7 +11,8 @@ public class Place {
 
     private int id;
     private String name;
-    private double lat, lng;
+    private double lat;
+    private double lng;
 
     public static final List<Place> places = new ArrayList<>();
     static {
@@ -21,6 +22,7 @@ public class Place {
     public Place(){
 
     }
+
     public Place(int id, String name, double lat, double lng) {
         this.id = id;
         this.name = name;
@@ -58,5 +60,10 @@ public class Place {
 
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    @Override
+    public String toString() {
+        return "id: " + id + ", name: " + name;
     }
 }

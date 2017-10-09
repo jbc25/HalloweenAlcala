@@ -3,6 +3,7 @@ package org.halloweenalcala.app.csv;
 import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -26,20 +27,35 @@ public class CsvConverter<T> implements Converter<ResponseBody, List<T>> {
         itemClass = (Class<T>) ((ParameterizedType)type).getActualTypeArguments()[0];
     }
 
+    public CsvConverter(Class<T> itemClass) {
+        this.itemClass = itemClass;
+    }
+
+    public List<T> convert(String csvString) throws IOException {
+        CSVReader csvReader = new CSVReader(new StringReader(csvString));
+        return convert(csvReader);
+    }
+
     @Override
     public List<T> convert(ResponseBody body) throws IOException {
-        CSVReader csvreader = new CSVReader(body.charStream());
+        CSVReader csvReader = new CSVReader(body.charStream());
+        return convert(csvReader);
+    }
+
+    public List<T> convert(CSVReader csvReader) throws IOException {
+
         String [] nextLine;
 
         List<T> result = new ArrayList<>();
-        String[] titles = csvreader.readNext();
+        String[] titles = csvReader.readNext();
         List<Field> fields = processFirstLine(titles);
-        while ((nextLine = csvreader.readNext()) != null) {
+        while ((nextLine = csvReader.readNext()) != null) {
             T model = createModel(nextLine, fields);
             result.add(model);
         }
         return result;
     }
+
 
     /**
      * Creates a model from the line and the fields

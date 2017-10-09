@@ -111,12 +111,11 @@ public final class Util {
 
     }
 
-    public static String getStringFromAssets(Context context, String fileName) {
+    public static String getStringFromAssets(Context context, String fileName) throws IOException {
         AssetManager assetManager = context.getAssets();
         InputStream input;
         String text = null;
 
-        try {
             input = assetManager.open(fileName);
 
             int size = input.available();
@@ -127,13 +126,39 @@ public final class Util {
             // byte buffer into a string
             text = new String(buffer);
 
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
         return text;
     }
+
+//    public static <T> List<T> parseCsvList(Class<T> model, String csvString) {
+//
+//        ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
+//        strat.setType(model);
+////        String[] columns = new String[] {"countryName", "capital"}; // the fields to bind do in your JavaBean
+////        strat.setColumnMapping(columns);
+//
+//        CsvToBean csv = new CsvToBean();
+//
+//        CSVReader csvReader = null;
+////        try {
+////            csvReader = new CSVReader(new FileReader(context.getAssets().openFd("data/places.csv").getFileDescriptor()));
+////        } catch (IOException e) {
+////            e.printStackTrace();
+////            view.toast("error csv");
+////        }
+//
+//        csvReader = new CSVReader(new StringReader(csvString));
+//
+//        csv.setCsvReader(csvReader);
+//        csv.setMappingStrategy(strat);
+//
+//        List list = csv.parse();
+//        List<T> listParsed = new ArrayList<>();
+//        for (Object object : list) {
+//            listParsed.add((T) object);
+//        }
+//
+//        return listParsed;
+//    }
 
     public static String normalizeText(String text) {
         return Normalizer

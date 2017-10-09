@@ -10,31 +10,40 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseFragment;
 import org.halloweenalcala.app.base.BasePresenter;
+import org.halloweenalcala.app.model.Place;
+
+import java.util.List;
 
 /**
  * Created by julio on 6/10/17.
  */
 
-public class MapsFragment extends BaseFragment implements OnMapReadyCallback {
+public class MapsFragment extends BaseFragment implements OnMapReadyCallback, MapsView, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
+    private MapsPresenter presenter;
 
     @Override
     public BasePresenter getPresenter() {
-        return null;
+        return presenter;
     }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
+        presenter = MapsPresenter.newInstance(this, getActivity());
 
         View layout = inflater.inflate(R.layout.fragment_maps, null);
 
@@ -48,14 +57,10 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback {
     }
 
 
+    // CONFIGURATIONS
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(
                 new LatLngBounds(new LatLng(40.479326, -3.373612),
@@ -71,5 +76,42 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback {
                 MapStyleOptions.loadRawResourceStyle(
                         getActivity(), R.raw.style_map));
 
+
+        mMap.setOnMarkerClickListener(this);
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                toast(marker.getTag().toString());
+            }
+        });
+
+
+        presenter.onMapReady();
+
     }
+
+
+    // INTERACTIONS
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
+
+    // PRESENTER CALLBACKS
+    @Override
+    public void showMarkers(List<Place> places) {
+
+        for (Place place : places) {
+
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(new LatLng(place.getLat(), place.getLng()))
+                    .title(place.getName())
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_zombie3));
+            Marker marker = mMap.addMarker(markerOptions);
+            marker.setTag(place);
+        }
+
+    }
+
 }

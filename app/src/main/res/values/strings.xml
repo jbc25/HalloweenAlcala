@@ -29,4 +29,5 @@
     <string name="update">ACTUALIZAR</string>
     <string name="resurrect">¡RESUCITAR!</string>
     <string name="app_dying">App moribunda</string>
+    <string name="cannot_open_link">No se puede abrir este link</string>
 </resources>

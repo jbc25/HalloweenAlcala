@@ -14,7 +14,7 @@ import org.halloweenalcala.app.base.BasePresenter;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShowsFragment extends BaseFragment {
+public class PerformancesFragment extends BaseFragment {
 
 
     @Override
@@ -22,7 +22,7 @@ public class ShowsFragment extends BaseFragment {
         return null;
     }
 
-    public ShowsFragment() {
+    public PerformancesFragment() {
         // Required empty public constructor
     }
 

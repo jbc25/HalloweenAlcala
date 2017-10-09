@@ -19,11 +19,13 @@ import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.api.ApiClient;
 import org.halloweenalcala.app.api.GoogleSheetApiCsv;
 import org.halloweenalcala.app.base.BaseActivity;
+import org.halloweenalcala.app.base.BaseFragment;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.ui.map.MapsFragment;
+import org.halloweenalcala.app.ui.participants.list.ParticipantsPresenter;
 import org.halloweenalcala.app.ui.poems.PoemsFragment;
-import org.halloweenalcala.app.ui.shows.ShowsFragment;
+import org.halloweenalcala.app.ui.shows.PerformancesFragment;
 
 import java.util.List;
 
@@ -75,7 +77,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         configureToolbar();
         configureDrawerLayout();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content, new ShowsFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content, new PerformancesFragment()).commit();
 
         presenter.onCreate();
 
@@ -105,21 +107,21 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // Bottom Navigation
         switch (item.getItemId()) {
             case R.id.navigation_agenda:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content, new ShowsFragment()).commit();
+                showSection(new PerformancesFragment());
                 return true;
             case R.id.navigation_map:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content, new MapsFragment()).commit();
+                showSection(new MapsFragment());
                 return true;
             case R.id.navigation_poems:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content, new PoemsFragment()).commit();
+                showSection(new PoemsFragment());
                 return true;
         }
 
 
         // Left Navigation
         switch (item.getItemId()) {
-            case R.id.navigation_agenda:
-                getDataFromApi();
+            case R.id.menu_participants:
+                startActivity(ParticipantsPresenter.newParticipantsActivity(this));
                 break;
             case R.id.menu_halloween_alcala_17_twitter:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/hashtag/halloween?lang=es")));
@@ -136,6 +138,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return false;
     }
 
+    private void showSection(BaseFragment fragment) {
+
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(
+                R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.content, fragment)
+                .commit();
+    }
 
     @Override
     public void onClick(View v) {

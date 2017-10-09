@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_agenda"
-        android:icon="@mipmap/ic_agenda"
-        android:title="@string/halloween_2017" />
+        android:id="@+id/menu_participants"
+        android:icon="@mipmap/ic_participants"
+        android:title="@string/participants" />
 
 
     <item

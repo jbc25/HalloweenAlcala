@@ -1,41 +1,36 @@
 package org.halloweenalcala.app.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.orm.SugarRecord;
 
 /**
  * Created by julio on 7/10/17.
  */
 
-public class Place {
+public class Place extends SugarRecord {
 
-    private int id;
+
+    private int id_server;
     private String name;
     private double lat;
     private double lng;
-
-    public static final List<Place> places = new ArrayList<>();
-    static {
-        places.add(new Place(1, "Plaza Cervantes", 0, 0));
-    }
 
     public Place(){
 
     }
 
-    public Place(int id, String name, double lat, double lng) {
-        this.id = id;
+    public Place(int id_server, String name, double lat, double lng) {
+        this.id_server = id_server;
         this.name = name;
         this.lat = lat;
         this.lng = lng;
     }
 
-    public int getId() {
-        return id;
+    public int getId_server() {
+        return id_server;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_server(int id_server) {
+        this.id_server = id_server;
     }
 
     public String getName() {
@@ -64,6 +59,6 @@ public class Place {
 
     @Override
     public String toString() {
-        return "id: " + id + ", name: " + name;
+        return "id: " + id + ", name: " + name + ", id_server:" + id_server;
     }
 }

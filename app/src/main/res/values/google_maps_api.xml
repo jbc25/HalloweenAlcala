@@ -4,7 +4,7 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=BA:9D:F5:B6:06:3B:7C:23:7C:22:79:C7:C1:82:D3:CC:82:45:DB:6F%3Borg.halloweenalcala.app.ui.map
+    https://console.developers.google.com/flows/enableapi?apiid=maps_androidbackend&keyType=CLIENT_SIDE_ANDROID&r=BA:9D:F5:B6:06:3B:7C:23:7C:22:79:C7:C1:82:D3:CC:82:45:DB:6F%3Borg.halloweenalcala.app.ui.map
 
     You can also add your credentials to an existing key, using these values:
 

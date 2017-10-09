@@ -8,11 +8,17 @@ import android.util.Log;
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.BuildConfig;
 import org.halloweenalcala.app.base.BasePresenter;
+import org.halloweenalcala.app.csv.CsvConverter;
 import org.halloweenalcala.app.interactor.ConfigurationInteractor;
+import org.halloweenalcala.app.interactor.DataInteractor;
 import org.halloweenalcala.app.model.Configuration;
+import org.halloweenalcala.app.model.Participant;
+import org.halloweenalcala.app.model.Performance;
+import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.util.Util;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.halloweenalcala.app.App.URL_DIRECT_GOOGLE_PLAY_APP;
 import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
@@ -26,6 +32,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
     private final MainView view;
     private final ConfigurationInteractor configurationInteractor;
+    private final DataInteractor dataInteractor;
 
     public static Intent newMainActivity(Context context) {
 
@@ -45,6 +52,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
          this.view = view;
          configurationInteractor = new ConfigurationInteractor(context, view);
+         dataInteractor = new DataInteractor(context, view);
 
      }
 
@@ -79,7 +87,9 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
         try {
             String csvPlaces = Util.getStringFromAssets(context, "data/places.csv");
-            getPrefs().edit().putString(App.SHARED_DATA_PLACES, csvPlaces).commit();
+            List<Place> places = new CsvConverter<>(Place.class).convert(csvPlaces);
+            Place.deleteAll(Place.class);
+            Place.saveInTx(places);
         } catch (IOException e) {
             Log.e(TAG, "Failed to read places.csv", e);
             view.toast("Failed to read places.csv");
@@ -88,7 +98,6 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
         try {
             String csvPlaces = Util.getStringFromAssets(context, "data/participants.csv");
-            getPrefs().edit().putString(App.SHARED_DATA_PARTICIPANTS, csvPlaces).commit();
         } catch (IOException e) {
             Log.e(TAG, "Failed to read participants.csv", e);
             view.toast("Failed to read participants.csv");
@@ -97,10 +106,9 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
         try {
             String csvPlaces = Util.getStringFromAssets(context, "data/performances.csv");
-            getPrefs().edit().putString(App.SHARED_DATA_PERFORMANCES, csvPlaces).commit();
         } catch (IOException e) {
             Log.e(TAG, "Failed to read performances.csv", e);
-            view.toast("Failed to read performances.csv");
+//            view.toast("Failed to read performances.csv");
             return false;
         }
 
@@ -117,15 +125,59 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
     private void checkDataVersion(int lastDataVersion) {
 
-        int currentDataVersion = getPrefs().getInt(App.SHARED_CURRENT_DATA_VERSION, 1);
+//        if (true) {
+//
+//            updateDataFromServer();
+//        }
+
+        int currentDataVersion = getPrefs().getInt(App.SHARED_CURRENT_DATA_VERSION, BuildConfig.CURRENT_DATA_VERSION);
         if (currentDataVersion < lastDataVersion) {
             updateDataFromServer();
+            getPrefs().edit().putInt(App.SHARED_CURRENT_DATA_VERSION, lastDataVersion).commit();
         }
     }
 
     private void updateDataFromServer() {
 
-        //todo get csv from google sheets and store in SharedPreferences as csv string
+        dataInteractor.getPlaces(new DataInteractor.DataCallback<Place>() {
+            @Override
+            public void onSuccess(List<Place> list) {
+                Place.deleteAll(Place.class);
+                Place.saveInTx(list);
+            }
+
+            @Override
+            public void onError(String message) {
+                Log.e(TAG, "Error -> getPlaces: " + message);
+            }
+        });
+
+        dataInteractor.getParticipants(new DataInteractor.DataCallback<Participant>() {
+            @Override
+            public void onSuccess(List<Participant> list) {
+                Participant.deleteAll(Participant.class);
+                Participant.saveInTx(list);
+            }
+
+            @Override
+            public void onError(String message) {
+                Log.e(TAG, "Error -> getParticipants: " + message);
+            }
+        });
+
+        dataInteractor.getPerformances(new DataInteractor.DataCallback<Performance>() {
+            @Override
+            public void onSuccess(List<Performance> list) {
+                Performance.deleteAll(Performance.class);
+                Performance.saveInTx(list);
+            }
+
+            @Override
+            public void onError(String message) {
+                Log.e(TAG, "Error -> getPerformances: " + message);
+            }
+        });
+
     }
 
 

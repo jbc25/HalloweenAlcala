@@ -20,11 +20,11 @@
     <string name="participants">Participantes</string>
     <string name="about">Sobre Halloween...</string>
     <string name="contact">Contacto?</string>
-    <string name="marcha_zombie">7ª Marcha Zombie</string>
+    <string name="marcha_zombie">Marcha Zombie</string>
     <string name="halloween_2017">Halloween 2017</string>
     <string name="halloween_alcala_17_twitter">#HalloweenAlcala17 en Twitter</string>
-    <string name="web_7mz">Web 7MZ</string>
-    <string name="halloween_hashtag">#Halloween</string>
+    <string name="hashtag_7mz">#7MZ</string>
+    <string name="hashtag_alcalahalloween">#AlcalaHalloween17</string>
     <string name="update_available">Actualización disponible</string>
     <string name="update">ACTUALIZAR</string>
     <string name="resurrect">¡RESUCITAR!</string>
@@ -32,4 +32,6 @@
     <string name="cannot_open_link">No se puede abrir este link</string>
     <string name="zinemazombies">ZinemaZombies</string>
     <string name="news">Noticias</string>
+    <string name="contact_and_social">Contacto y redes</string>
+    <string name="alcala_halloween">Alcala Halloween</string>
 </resources>

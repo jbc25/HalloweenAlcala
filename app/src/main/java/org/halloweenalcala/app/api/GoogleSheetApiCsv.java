@@ -2,6 +2,7 @@ package org.halloweenalcala.app.api;
 
 
 import org.halloweenalcala.app.model.Configuration;
+import org.halloweenalcala.app.model.News;
 import org.halloweenalcala.app.model.Participant;
 import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.model.Performance;
@@ -24,6 +25,9 @@ public interface GoogleSheetApiCsv {
 
     @GET("spreadsheets/d/e/2PACX-1vTPp_zC9vHYA5AGPZqv8WSpRy3yWUzMMbIGJ0PUumHWys7p3l1lUrL8s251_0n45_HBIXJvJr4g3y1U/pub?gid=1709987993&single=true&output=csv")
     Observable<List<Performance>> getPerformances();
+
+    @GET("spreadsheets/d/e/2PACX-1vTPp_zC9vHYA5AGPZqv8WSpRy3yWUzMMbIGJ0PUumHWys7p3l1lUrL8s251_0n45_HBIXJvJr4g3y1U/pub?gid=1218680906&single=true&output=csv")
+    Observable<List<News>> getNews();
 
     @GET("spreadsheets/d/e/2PACX-1vTPp_zC9vHYA5AGPZqv8WSpRy3yWUzMMbIGJ0PUumHWys7p3l1lUrL8s251_0n45_HBIXJvJr4g3y1U/pub?gid=1186789033&single=true&output=csv")
     Observable<List<Configuration>> getConfiguration();

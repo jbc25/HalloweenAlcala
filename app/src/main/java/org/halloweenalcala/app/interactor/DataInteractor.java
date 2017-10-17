@@ -6,6 +6,7 @@ import org.halloweenalcala.app.api.ApiClient;
 import org.halloweenalcala.app.api.GoogleSheetApiCsv;
 import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.base.BaseView;
+import org.halloweenalcala.app.model.News;
 import org.halloweenalcala.app.model.Participant;
 import org.halloweenalcala.app.model.Performance;
 import org.halloweenalcala.app.model.Place;
@@ -114,6 +115,37 @@ public class DataInteractor extends BaseInteractor {
 
                                @Override
                                public void onNext(List<Performance> list) {
+
+                                   // Only one row in configuration
+                                   callback.onSuccess(list);
+                               }
+                           }
+
+
+                );
+    }
+
+
+    public void getNews(final DataCallback<News> callback) {
+
+        ApiClient.getInstance().create(GoogleSheetApiCsv.class).getNews()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+//                .doOnTerminate(actionTerminate)
+                .subscribe(new Observer<List<News>>() {
+
+                               @Override
+                               public void onCompleted() {
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+
+                                   callback.onError(e.getMessage());
+                               }
+
+                               @Override
+                               public void onNext(List<News> list) {
 
                                    // Only one row in configuration
                                    callback.onSuccess(list);

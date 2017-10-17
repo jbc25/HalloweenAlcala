@@ -23,7 +23,7 @@ import org.halloweenalcala.app.base.BaseFragment;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.ui.map.MapsFragment;
-import org.halloweenalcala.app.ui.news.NewsFragment;
+import org.halloweenalcala.app.ui.news.list.NewsFragment;
 import org.halloweenalcala.app.ui.participants.list.ParticipantsPresenter;
 import org.halloweenalcala.app.ui.poems.PoemsFragment;
 import org.halloweenalcala.app.ui.performances.PerformancesFragment;
@@ -127,11 +127,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.menu_participants:
                 startActivity(ParticipantsPresenter.newParticipantsActivity(this));
                 break;
-            case R.id.menu_halloween_alcala_17_twitter:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/hashtag/halloween?lang=es")));
+            case R.id.menu_twitter_halloween_alcala_17:
+                String hashtagAlcalaHalloween = getString(R.string.hashtag_alcalahalloween).replace("#", "");
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(String.format("https://twitter.com/hashtag/%s?lang=es", hashtagAlcalaHalloween))));
                 break;
-            case R.id.menu_7mz_web:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.alcalasuena.es/")));
+            case R.id.menu_twitter_7mz:
+                String hashtag7mz = getString(R.string.hashtag_7mz).replace("#", "");
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(String.format("https://twitter.com/hashtag/%s?lang=es", hashtag7mz))));
                 break;
         }
 

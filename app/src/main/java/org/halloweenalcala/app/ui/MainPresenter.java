@@ -12,6 +12,7 @@ import org.halloweenalcala.app.csv.CsvConverter;
 import org.halloweenalcala.app.interactor.ConfigurationInteractor;
 import org.halloweenalcala.app.interactor.DataInteractor;
 import org.halloweenalcala.app.model.Configuration;
+import org.halloweenalcala.app.model.News;
 import org.halloweenalcala.app.model.Participant;
 import org.halloweenalcala.app.model.Performance;
 import org.halloweenalcala.app.model.Place;
@@ -125,10 +126,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
     private void checkDataVersion(int lastDataVersion) {
 
-//        if (true) {
-//
-//            updateDataFromServer();
-//        }
+//        if (true) { updateDataFromServer(); }
 
         int currentDataVersion = getPrefs().getInt(App.SHARED_CURRENT_DATA_VERSION, BuildConfig.CURRENT_DATA_VERSION);
         if (currentDataVersion < lastDataVersion) {
@@ -175,6 +173,19 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
             @Override
             public void onError(String message) {
                 Log.e(TAG, "Error -> getPerformances: " + message);
+            }
+        });
+
+        dataInteractor.getNews(new DataInteractor.DataCallback<News>() {
+            @Override
+            public void onSuccess(List<News> list) {
+                News.deleteAll(News.class);
+                News.saveInTx(list);
+            }
+
+            @Override
+            public void onError(String message) {
+                Log.e(TAG, "Error -> getNews: " + message);
             }
         });
 

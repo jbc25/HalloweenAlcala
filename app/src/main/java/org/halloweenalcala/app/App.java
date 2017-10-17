@@ -41,7 +41,7 @@ public class App extends SugarApp {
         Picasso.setSingletonInstance(built);
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/ZombieQueen.ttf")
+                .setDefaultFontPath("fonts/typewriter.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
 

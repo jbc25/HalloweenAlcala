@@ -14,4 +14,7 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="MenuItem" parent="TextBase">
+        <!--<item name="fontPath">fonts/ZombieQueen.ttf</item>-->
+    </style>
 </resources>

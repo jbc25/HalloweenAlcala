@@ -16,6 +16,7 @@ public class PoemPagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
+
     @Override
     public Fragment getItem(int position) {
         return PoemItemFragment.newInstance(position);

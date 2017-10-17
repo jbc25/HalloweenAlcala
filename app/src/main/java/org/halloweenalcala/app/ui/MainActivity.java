@@ -23,9 +23,10 @@ import org.halloweenalcala.app.base.BaseFragment;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.ui.map.MapsFragment;
+import org.halloweenalcala.app.ui.news.NewsFragment;
 import org.halloweenalcala.app.ui.participants.list.ParticipantsPresenter;
 import org.halloweenalcala.app.ui.poems.PoemsFragment;
-import org.halloweenalcala.app.ui.shows.PerformancesFragment;
+import org.halloweenalcala.app.ui.performances.PerformancesFragment;
 
 import java.util.List;
 
@@ -114,6 +115,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 return true;
             case R.id.navigation_poems:
                 showSection(new PoemsFragment());
+                return true;
+            case R.id.navigation_news:
+                showSection(new NewsFragment());
                 return true;
         }
 

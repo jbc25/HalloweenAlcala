@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Halloween Alcala 2017</string>
+    <string name="app_name">Alcala Halloween 2017</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -30,4 +30,6 @@
     <string name="resurrect">¡RESUCITAR!</string>
     <string name="app_dying">App moribunda</string>
     <string name="cannot_open_link">No se puede abrir este link</string>
+    <string name="zinemazombies">ZinemaZombies</string>
+    <string name="news">Noticias</string>
 </resources>

@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="org.halloweenalcala.app.ui.MainActivity">
+    tools:context="org.halloweenalcala.app.ui.MainActivity"
+    android:background="@mipmap/img_app_bg">
 
 
     <include layout="@layout/toolbar" />
@@ -65,9 +66,9 @@
             <android.support.design.widget.BottomNavigationView
                 android:id="@+id/navigation_bottom_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/height_tabbar"
                 android:layout_gravity="bottom"
-                android:background="?android:attr/windowBackground"
+                android:background="@mipmap/img_tabbar_bg"
                 app:menu="@menu/navigation_bottom"
                 app:itemIconTint="@color/navigation_item"
                 app:itemTextColor="@color/navigation_item"

@@ -13,7 +13,12 @@
 
     <item
         android:id="@+id/navigation_poems"
-        android:icon="@mipmap/ic_book_poem"
-        android:title="@string/poems" />
+        android:icon="@mipmap/ic_nav_poem"
+        android:title="@string/zinemazombies" />
+
+    <item
+        android:id="@+id/navigation_news"
+        android:icon="@mipmap/ic_news"
+        android:title="@string/news" />
 
 </menu>

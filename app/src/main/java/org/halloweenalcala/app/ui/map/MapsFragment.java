@@ -63,8 +63,8 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Ma
         mMap = googleMap;
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(
-                new LatLngBounds(new LatLng(40.479326, -3.373612),
-                        new LatLng(40.485460, -3.356882)), 10));
+                new LatLngBounds(new LatLng(40.480143, -3.369801),
+                        new LatLng(40.483538, -3.364050)), getResources().getDimensionPixelSize(R.dimen.padding_map)));
 
 
         /*
@@ -76,6 +76,8 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Ma
                 MapStyleOptions.loadRawResourceStyle(
                         getActivity(), R.raw.style_map));
 
+        mMap.setBuildingsEnabled(false);
+        mMap.setIndoorEnabled(false);
 
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {

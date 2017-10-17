@@ -29,7 +29,11 @@
                     style="@style/TextBase.White"
                     android:layout_width="match_parent"
                     android:textColor="@color/red_halloween"
-                    android:textSize="22sp"/>
+                    app:fontPath="fonts/ZombieQueen.ttf"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:textSize="26sp"
+                    android:textAllCaps="true"/>
 
 
             </android.support.v7.widget.Toolbar>

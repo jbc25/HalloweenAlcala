@@ -8,6 +8,8 @@ import com.orm.SugarApp;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 /**
  * Created by julio on 17/06/16.
  */
@@ -38,6 +40,10 @@ public class App extends SugarApp {
         built.setLoggingEnabled(true);
         Picasso.setSingletonInstance(built);
 
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/ZombieQueen.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
 
     }
 

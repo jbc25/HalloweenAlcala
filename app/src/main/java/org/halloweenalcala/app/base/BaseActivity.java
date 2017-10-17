@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
@@ -38,7 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         if (getPresenter() != null) {
             getPresenter().setBaseView(this);
@@ -60,8 +63,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(newBase);
-//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//        super.attachBaseContext(newBase);
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     public abstract BasePresenter getPresenter();

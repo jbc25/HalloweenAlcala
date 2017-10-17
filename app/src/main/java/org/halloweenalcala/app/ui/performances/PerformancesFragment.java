@@ -1,4 +1,4 @@
-package org.halloweenalcala.app.ui.shows;
+package org.halloweenalcala.app.ui.performances;
 
 
 import android.os.Bundle;
@@ -30,7 +30,7 @@ public class PerformancesFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shows, container, false);
+        return inflater.inflate(R.layout.fragment_performances, container, false);
     }
 
 }

@@ -157,6 +157,17 @@
     ]
   },
   {
+    "featureType": "transit.line",
+    "stylers": [
+      {
+        "color": "#486846"
+      },
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
     "featureType": "transit.station",
     "elementType": "labels.text.fill",
     "stylers": [
@@ -166,11 +177,35 @@
     ]
   },
   {
+    "featureType": "transit.station.bus",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station.rail",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
     "featureType": "water",
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#17263c"
+        "color": "#8300bb"
       }
     ]
   },
@@ -179,7 +214,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#515c6d"
+        "color": "#ffffff"
       }
     ]
   },

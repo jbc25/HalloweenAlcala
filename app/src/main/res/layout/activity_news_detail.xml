@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="org.halloweenalcala.app.ui.newss.detail.ParticipantDetailActivity">
+    android:background="@mipmap/img_app_bg">
 
     <include layout="@layout/toolbar" />
 
@@ -50,10 +50,6 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/red_halloween"
-        android:textColor="@color/white"
-        android:layout_margin="5dp"
+        style="@style/ButtonHalloween"
         android:visibility="gone"/>
 </LinearLayout>

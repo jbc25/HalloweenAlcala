@@ -16,23 +16,25 @@ public class PoemCharacter {
     private int poemTextId;
     private int characterDrawableId;
     private int characterNameId;
+    private int filmNameId;
 
 
     public static final List<PoemCharacter> poemsCharacters = new ArrayList<>();
 
     static {
-        poemsCharacters.add(new PoemCharacter(1, R.string.poem_title_espartacus, R.string.poem_text_espartacus, R.mipmap.img_character_default, 0));
-        poemsCharacters.add(new PoemCharacter(2, R.string.poem_title_sor_citroen, R.string.poem_text_sor_citroen,  R.mipmap.img_character_default, 0));
-        poemsCharacters.add(new PoemCharacter(3, R.string.poem_title_pulp_fiction, R.string.poem_text_pulp_fiction, R.mipmap.img_character_mary_poppins, R.string.character_mary_poppins));
-        poemsCharacters.add(new PoemCharacter(4, R.string.poem_title_punado_dolares, R.string.poem_text_punado_dolares, R.mipmap.img_character_blondin, 0));
+        poemsCharacters.add(new PoemCharacter(1, R.string.poem_title_espartacus, R.string.poem_text_espartacus, R.mipmap.img_character_default, 0, 0));
+        poemsCharacters.add(new PoemCharacter(2, R.string.poem_title_sor_citroen, R.string.poem_text_sor_citroen,  R.mipmap.img_character_default, 0, 0));
+        poemsCharacters.add(new PoemCharacter(3, R.string.poem_title_pulp_fiction, R.string.poem_text_pulp_fiction, R.mipmap.img_character_mary_poppins, R.string.character_mary_poppins, R.string.film_mary_poppins));
+        poemsCharacters.add(new PoemCharacter(4, R.string.poem_title_punado_dolares, R.string.poem_text_punado_dolares, R.mipmap.img_character_blondin, 0, 0));
     }
 
-    public PoemCharacter(int id, int poemTitleId, int poemTextId, int characterDrawableId, int characterNameId) {
+    public PoemCharacter(int id, int poemTitleId, int poemTextId, int characterDrawableId, int characterNameId, int filmNameId) {
         this.id = id;
         this.poemTitleId = poemTitleId;
         this.poemTextId = poemTextId;
         this.characterDrawableId = characterDrawableId;
         this.characterNameId = characterNameId;
+        this.filmNameId = filmNameId;
     }
 
     public boolean isOpen() {
@@ -81,5 +83,13 @@ public class PoemCharacter {
 
     public void setPoemTitleId(int poemTitleId) {
         this.poemTitleId = poemTitleId;
+    }
+
+    public int getFilmNameId() {
+        return filmNameId;
+    }
+
+    public void setFilmNameId(int filmNameId) {
+        this.filmNameId = filmNameId;
     }
 }

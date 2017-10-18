@@ -11,6 +11,7 @@
     <color name="colorAccentTransp">#90be2e45</color>
     <color name="black">#000</color>
     <color name="white">#FFF</color>
+    <color name="white_semitransp">#9FFF</color>
 
 
 </resources>

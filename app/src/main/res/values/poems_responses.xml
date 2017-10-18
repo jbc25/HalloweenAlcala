@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="character_mary_poppins">mary poppins</string>
+    <string name="film_mary_poppins">mary popins</string>
+    <string name="character_bueno_feo_malo">sin nombre</string>
+    <string name="film_bueno_feo_malo">bueno feo malo</string>
+</resources>

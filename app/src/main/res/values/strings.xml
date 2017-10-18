@@ -34,4 +34,6 @@
     <string name="news">Noticias</string>
     <string name="contact_and_social">Contacto y redes</string>
     <string name="alcala_halloween">Alcala Halloween</string>
+    <string name="guess_character_or_film">Introduce el personaje o la película para desbloquearlo</string>
+    <string name="hidden_poem">Poema oculto</string>
 </resources>

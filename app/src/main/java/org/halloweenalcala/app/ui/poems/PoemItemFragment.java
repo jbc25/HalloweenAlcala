@@ -128,8 +128,9 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
     private void checkCharacterName() {
         String name = editCharacterName.getText().toString().trim().toLowerCase();
         String nameReal = getString(poemCharacter.getCharacterNameId()).toLowerCase();
+        String filmReal = getString(poemCharacter.getFilmNameId()).toLowerCase();
 
-        if (name.equals(nameReal)) {
+        if (containsAllWordsInSentence(nameReal, name) || containsAllWordsInSentence(filmReal, name)) {
 
             toastHalloween(R.string.guessed);
             getPrefs().edit().putBoolean(getUnlockedKey(), true).commit();
@@ -143,5 +144,17 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
         } else {
             toastHalloween(R.string.fail);
         }
+    }
+
+    private boolean containsAllWordsInSentence(String words, String sentence) {
+
+        String[] wordsParts = words.split(" ");
+        for (String wordPart : wordsParts) {
+            if (!sentence.contains(wordPart)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

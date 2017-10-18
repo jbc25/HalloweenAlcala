@@ -15,9 +15,11 @@
         android:gravity="center">
 
         <TextView
-            style="@style/TextBase.White"
-            android:text="@string/hidden_poem_guess_character"
+            style="@style/TextBase"
+            android:text="@string/hidden_poem"
             android:gravity="center_horizontal"
+            android:textAllCaps="true"
+            android:textSize="22sp"
             android:layout_marginTop="10dp"/>
 
         <android.support.v7.widget.AppCompatImageView
@@ -26,14 +28,21 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            style="@style/TextBase"
+            android:text="@string/guess_character_or_film"
+            android:gravity="center_horizontal"
+            android:textSize="17sp"
             android:layout_margin="10dp"/>
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/edit_character_name"
-            style="@style/TextBase.White"
+            style="@style/TextBase"
+            android:textColor="@color/red_halloween"
             android:ems="9"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_frame_white"
+            android:background="@drawable/bg_edit_halloween"
             android:padding="5dp"
             android:inputType="text"
             android:imeOptions="actionDone"
@@ -42,8 +51,7 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/ButtonHalloween"
             android:text="@string/check"/>
 
     </LinearLayout>

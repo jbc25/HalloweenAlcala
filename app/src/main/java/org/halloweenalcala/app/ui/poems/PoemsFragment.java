@@ -42,7 +42,7 @@ public class PoemsFragment extends BaseFragment {
         adapter = new PoemPagerAdapter(getChildFragmentManager());
         viewpagerPoems.setAdapter(adapter);
 
-        viewpagerPoems.setPageTransformer(true, new BookPageTransformer());
+        viewpagerPoems.setPageTransformer(true, new BookPageTransformer2());
 
         return layout;
     }

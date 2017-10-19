@@ -17,7 +17,7 @@ public class BookPageTransformer2 extends ABaseTransformer {
         if (position <= 0f) {
 
             view.setTranslationX(view.getWidth()*-position);
-            view.setScaleX(1f + position*1.5f);
+            view.setScaleX(1f + position*1.3f);
             view.setScaleY(1f);
 
             final float rotation = 90f * position;

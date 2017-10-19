@@ -45,6 +45,8 @@ public class App extends SugarApp {
                 .setFontAttrId(R.attr.fontPath)
                 .build());
 
+//        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
+
     }
 
     public static SharedPreferences getPrefs(Context context) {

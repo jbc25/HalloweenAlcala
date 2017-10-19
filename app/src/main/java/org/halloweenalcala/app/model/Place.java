@@ -8,11 +8,15 @@ import com.orm.SugarRecord;
 
 public class Place extends SugarRecord {
 
+    public static final String TYPE_MAIN = "MAIN";
+    public static final String TYPE_OTHERS = "OTHERS";
 
     private int id_server;
     private String name;
+    private String name_halloween;
     private double lat;
     private double lng;
+    private String type;
 
     public Place(){
 

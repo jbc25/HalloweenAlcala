@@ -98,7 +98,10 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         }
 
         try {
-            String csvPlaces = Util.getStringFromAssets(context, "data/participants.csv");
+            String csvParticipants = Util.getStringFromAssets(context, "data/participants.csv");
+            List<Participant> participants = new CsvConverter<>(Participant.class).convert(csvParticipants);
+            Participant.deleteAll(Participant.class);
+            Participant.saveInTx(participants);
         } catch (IOException e) {
             Log.e(TAG, "Failed to read participants.csv", e);
             view.toast("Failed to read participants.csv");
@@ -106,7 +109,10 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         }
 
         try {
-            String csvPlaces = Util.getStringFromAssets(context, "data/performances.csv");
+            String csvPerformances = Util.getStringFromAssets(context, "data/performances.csv");
+            List<Performance> performances = new CsvConverter<>(Performance.class).convert(csvPerformances);
+            Performance.deleteAll(Performance.class);
+            Performance.saveInTx(performances);
         } catch (IOException e) {
             Log.e(TAG, "Failed to read performances.csv", e);
 //            view.toast("Failed to read performances.csv");

@@ -13,11 +13,14 @@
         android:title="@string/alcala_halloween" />
 
     <item
-        android:id="@+id/menu_about_7mz"
+        android:id="@+id/menu_about_marcha_zombie"
         android:icon="@mipmap/ic_book_poem"
         android:title="@string/marcha_zombie" />
 
-
+    <item
+        android:id="@+id/menu_contest_decor"
+        android:icon="@mipmap/ic_contest"
+        android:title="@string/contest_decoration" />
 
     <item android:title="@string/contact_and_social">
         <menu>

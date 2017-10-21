@@ -83,6 +83,7 @@
             android:layout_height="match_parent"
             app:menu="@menu/navigation_drawer"
             android:layout_gravity="start"
+            android:background="#FFF"
             app:headerLayout="@layout/view_header_menu"/>
 
     </android.support.v4.widget.DrawerLayout>

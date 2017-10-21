@@ -19,7 +19,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import org.halloweenalcala.app.R;
-import org.halloweenalcala.app.ui.MainActivity;
+import org.halloweenalcala.app.ui.splash.SplashActivity;
 
 import java.util.Map;
 
@@ -94,15 +94,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String title, String text, Map<String, String> extras) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_notification)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_app))
+                .setSmallIcon(R.mipmap.ic_notification_roman)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_notification_roman))
                 .setContentTitle(title != null ? title : getString(R.string.app_name))
                 .setContentText(text)
                 .setAutoCancel(true)

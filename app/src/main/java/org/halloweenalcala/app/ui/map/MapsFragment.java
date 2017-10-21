@@ -1,6 +1,7 @@
 package org.halloweenalcala.app.ui.map;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,6 +98,15 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Ma
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        final Place place = (Place) marker.getTag();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                presenter.onPlaceMarkerClick(place);
+            }
+        }, 400);
+
         return false;
     }
 
@@ -108,8 +118,9 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Ma
 
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(new LatLng(place.getLat(), place.getLng()))
-                    .title(place.getName())
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_zombie3));
+//                    .title(title)
+//                    .snippet(text)
+                    .icon(BitmapDescriptorFactory.fromResource(place.getMarkerIcon()));
             Marker marker = mMap.addMarker(markerOptions);
             marker.setTag(place);
         }

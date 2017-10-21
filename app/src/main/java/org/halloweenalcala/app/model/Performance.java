@@ -1,12 +1,32 @@
 package org.halloweenalcala.app.model;
 
+import android.support.annotation.NonNull;
+
+import com.google.firebase.crash.FirebaseCrash;
 import com.orm.SugarRecord;
+
+import java.text.DateFormat;
+import java.text.Normalizer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import static org.halloweenalcala.app.util.DateUtils.formatDateApi;
 
 /**
  * Created by julio on 6/10/17.
  */
 
-public class Performance extends SugarRecord<Performance> {
+public class Performance extends SugarRecord<Performance> implements Comparable {
+
+    public static final int ID_MARCHA_ZOMBIE = 20;
+
+    DateFormat dateFormatFriendlyText = new SimpleDateFormat("EEEE dd MMMM");
+    SimpleDateFormat dateFormatApi = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat timeFormatApi = new SimpleDateFormat("HH:mm");
+    DateFormat dateTimeFormatApi = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    DateFormat dateTimeFormatHuman = new SimpleDateFormat("dd/MM HH:mm");
 
     private int id_server;
     private String date;
@@ -17,9 +37,105 @@ public class Performance extends SugarRecord<Performance> {
     private String info;
     private int id_place;
     private String place_text; // optional for place exceptions without id_place
+
+    private Place place;
 //    private String participants;
 //    private int durationMins;
 
+    public String getDayHeaderFormat() {
+
+        try {
+            Date dateDay = dateFormatApi.parse(getDate());
+            String dateStr = dateFormatFriendlyText.format(dateDay);
+            return stripAccents(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+
+            // Better than nothing :S
+            return getDate();
+        }
+
+    }
+    public static String stripAccents(String s)
+    {
+        s = Normalizer.normalize(s, Normalizer.Form.NFD);
+        s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        return s;
+    }
+
+    public String getDateTimeHumanFriendly() {
+
+        try {
+            Date dateTime = dateTimeFormatApi.parse(getDateTime());
+            return dateTimeFormatHuman.format(dateTime);
+        } catch (ParseException e) {
+            FirebaseCrash.report(e);
+        }
+
+        return getTime_begin();
+    }
+
+    public long getDayId() {
+
+        try {
+            Date date = formatDateApi.parse(getDate());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(date.getTime());
+            int dayInt = calendar.get(Calendar.DAY_OF_MONTH);
+            return (long) dayInt;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            FirebaseCrash.report(e);
+            throw new IllegalStateException("wrong date");
+        }
+    }
+
+
+    public String getPlaceInfo() {
+
+        if (place != null) {
+            return place.getName();
+        } else if (getPlace_text() != null && !getPlace_text().isEmpty()) {
+            return getPlace_text();
+        } else {
+            return "";
+        }
+    }
+
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        try {
+            Date time = getDateMidnightFix();
+            Date timeOther = ((Performance) o).getDateMidnightFix();
+            return time.compareTo(timeOther);
+        } catch (NullPointerException e) {
+        }
+        return 0;
+    }
+
+    private Date getDateMidnightFix() {
+
+        try {
+            Date dateTime = dateTimeFormatApi.parse(getDateTime());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(dateTime.getTime());
+            if (calendar.get(Calendar.HOUR_OF_DAY) < 5) {
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+                dateTime.setTime(calendar.getTimeInMillis());
+            }
+            return dateTime;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            FirebaseCrash.report(e);
+        }
+
+        return null;
+    }
+
+    private String getDateTime() {
+        return getDate() + " " + getTime_begin();
+    }
 
     public int getId_server() {
         return id_server;
@@ -92,4 +208,9 @@ public class Performance extends SugarRecord<Performance> {
     public void setPlace_text(String place_text) {
         this.place_text = place_text;
     }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
 }

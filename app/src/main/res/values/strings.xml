@@ -36,4 +36,9 @@
     <string name="alcala_halloween">Alcala Halloween</string>
     <string name="guess_character_or_film">Introduce el personaje o la película para desbloquearlo</string>
     <string name="hidden_poem">Poema oculto</string>
+    <string name="contest_decoration">Concurso decoración</string>
+    <string name="contest_decoration_info">Concurso de decoración de establecimientos: consistirá en premiar los locales mejor decorados y la mejor caracterización de su personal a través de una placa que lo acredite. Bases y ficha de inscripción desde el 24 al 30 de octubre.</string>
+    <string name="download">Descargar</string>
+    <string name="splash_message">¡Prepárate para vivir un Halloween de película en Alcalá!\nEn breve esta app resucitará, te avisaremos y esperemos que estés preparad@...</string>
+    <string name="splash_message_update">¡Aplicación disponible!</string>
 </resources>

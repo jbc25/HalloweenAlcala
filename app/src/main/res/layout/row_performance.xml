@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/tv_time_performance"
+        style="@style/TextBase.White"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="@drawable/bg_circle_red"
+        app:fontPath="fonts/ZombieQueen.ttf"
+        android:textSize="24sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
+
+
+        <TextView
+            android:id="@+id/tv_title_performance"
+            style="@style/TextBase.White"
+            app:fontPath="fonts/ZombieQueen.ttf"
+            android:textSize="21sp"/>
+
+        <TextView
+            android:id="@+id/tv_subtitle_performance"
+            style="@style/TextBase.White"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_place_performance"
+            style="@style/TextBase.White"
+            app:fontPath="fonts/ZombieQueen.ttf"
+            android:textSize="16sp"
+            android:layout_gravity="right"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -30,14 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_participant_modality"
-                    style="@style/TextBase.White"
-                    android:layout_marginTop="10dp"
-                    android:textSize="20sp" />
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/img_participant"
@@ -47,10 +41,18 @@
                     android:layout_marginTop="10dp" />
 
                 <TextView
+                    android:id="@+id/tv_participant_modality"
+                    style="@style/TextBase.White"
+                    android:layout_marginTop="3dp"
+                    android:textSize="16sp"
+                    android:padding="10dp" />
+
+                <TextView
                     android:id="@+id/tv_participant_description"
                     style="@style/TextBase.White"
                     android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:padding="10dp"/>
 
                 <fragment
                     android:id="@+id/fragment_youtube_player"

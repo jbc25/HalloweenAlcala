@@ -2,6 +2,11 @@ package org.halloweenalcala.app.model;
 
 import com.orm.SugarRecord;
 
+import org.halloweenalcala.app.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by julio on 7/10/17.
  */
@@ -18,16 +23,24 @@ public class Place extends SugarRecord {
     private double lng;
     private String type;
 
+    private List<Performance> performances = new ArrayList<>();
+
+    public int getMarkerIcon() {
+        return TYPE_MAIN.equals(type) ? R.mipmap.ic_marker_zombie3 : R.mipmap.ic_marker_rip;
+    }
+
+    public String getRealNameWithHalloweenName() {
+        if (getName_halloween() != null && !getName_halloween().isEmpty()) {
+            return getName_halloween() + " - (" + getName() + ")";
+        } else {
+            return getName();
+        }
+    }
+
     public Place(){
 
     }
 
-    public Place(int id_server, String name, double lat, double lng) {
-        this.id_server = id_server;
-        this.name = name;
-        this.lat = lat;
-        this.lng = lng;
-    }
 
     public int getId_server() {
         return id_server;
@@ -65,4 +78,25 @@ public class Place extends SugarRecord {
     public String toString() {
         return "id: " + id + ", name: " + name + ", id_server:" + id_server;
     }
+
+    public String getName_halloween() {
+        return name_halloween;
+    }
+
+    public void setName_halloween(String name_halloween) {
+        this.name_halloween = name_halloween;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<Performance> getPerformances() {
+        return performances;
+    }
+
+    public void setPerformances(List<Performance> performances) {
+        this.performances = performances;
+    }
+
 }

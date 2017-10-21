@@ -9,4 +9,5 @@
     <dimen name="space_grid">10dp</dimen>
     <dimen name="height_tabbar">65dp</dimen>
     <dimen name="padding_map">20dp</dimen>
+    <dimen name="text_size_mz">25sp</dimen>
 </resources>

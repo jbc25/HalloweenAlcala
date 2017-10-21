@@ -1,5 +1,6 @@
 package org.halloweenalcala.app.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,7 @@ import org.halloweenalcala.app.ui.news.list.NewsFragment;
 import org.halloweenalcala.app.ui.participants.list.ParticipantsPresenter;
 import org.halloweenalcala.app.ui.poems.PoemsFragment;
 import org.halloweenalcala.app.ui.performances.PerformancesFragment;
+import org.halloweenalcala.app.ui.static_info.WebViewActivity;
 
 import java.util.List;
 
@@ -109,15 +112,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (item.getItemId()) {
             case R.id.navigation_agenda:
                 showSection(new PerformancesFragment());
+                setToolbarTitle(R.string.alcala_halloween);
                 return true;
             case R.id.navigation_map:
                 showSection(new MapsFragment());
+                setToolbarTitle(R.string.alcala_halloween);
                 return true;
             case R.id.navigation_poems:
                 showSection(new PoemsFragment());
+                setToolbarTitle(R.string.zinemazombies);
                 return true;
             case R.id.navigation_news:
                 showSection(new NewsFragment());
+                setToolbarTitle(R.string.news);
                 return true;
         }
 
@@ -127,15 +134,29 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.menu_participants:
                 startActivity(ParticipantsPresenter.newParticipantsActivity(this));
                 break;
+
             case R.id.menu_twitter_halloween_alcala_17:
                 String hashtagAlcalaHalloween = getString(R.string.hashtag_alcalahalloween).replace("#", "");
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(String.format("https://twitter.com/hashtag/%s?lang=es", hashtagAlcalaHalloween))));
                 break;
+
             case R.id.menu_twitter_7mz:
                 String hashtag7mz = getString(R.string.hashtag_7mz).replace("#", "");
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(String.format("https://twitter.com/hashtag/%s?lang=es", hashtag7mz))));
+                break;
+
+            case R.id.menu_about_alcala_halloween:
+                WebViewActivity.start(this, WebViewActivity.TYPE_ALCALA_HALLOWEEN);
+                break;
+
+            case R.id.menu_about_marcha_zombie:
+                WebViewActivity.start(this, WebViewActivity.TYPE_7MZ);
+                break;
+
+            case R.id.menu_contest_decor:
+                showContestDecorationInfo();
                 break;
         }
 
@@ -144,6 +165,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
         return false;
+    }
+
+    private void showContestDecorationInfo() {
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle(R.string.contest_decoration);
+        ab.setMessage(R.string.contest_decoration_info);
+        ab.setPositiveButton(R.string.download, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                toast("Falta descargar archivo o ir a web");
+            }
+        });
+        ab.setNegativeButton(R.string.close, null);
+        ab.show();
     }
 
     private void showSection(BaseFragment fragment) {

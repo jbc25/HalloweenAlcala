@@ -2,7 +2,6 @@ package org.halloweenalcala.app.base;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -80,19 +79,27 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
         // Customize Toast: https://stackoverflow.com/questions/11288475/custom-toast-in-android-a-simple-example
 
-        Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
-        View toastView = toast.getView(); //This'll return the default View of the Toast.
+        View toastView = View.inflate(getActivity(), R.layout.toast, null);
+        TextView tvToast = toastView.findViewById(R.id.tv_toast);
+        tvToast.setText(message);
 
-        /* And now you can get the TextView of the default View of the Toast. */
-        TextView toastMessage = (TextView) toastView.findViewById(android.R.id.message);
-        toastMessage.setTextSize(getResources().getDimensionPixelSize(R.dimen.text_size_toast_halloween));
-        toastMessage.setTextColor(Color.RED);
-//        toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_fly, 0, 0, 0);
-        toastMessage.setGravity(Gravity.CENTER);
-//        toastMessage.setCompoundDrawablePadding(16);
-        toastView.setBackgroundColor(Color.TRANSPARENT);
-
+        Toast toast = new Toast(getActivity());
         toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(toastView);
+
+//        View toastView = toast.getView(); //This'll return the default View of the Toast.
+//        /* And now you can get the TextView of the default View of the Toast. */
+//        TextView toastMessage = (TextView) toastView.findViewById(android.R.id.message);
+//        toastMessage.setTextSize(getResources().getDimensionPixelSize(R.dimen.text_size_toast_halloween));
+//        toastMessage.setTextColor(Color.RED);
+////        toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_fly, 0, 0, 0);
+//        toastMessage.setGravity(Gravity.CENTER);
+////        toastMessage.setCompoundDrawablePadding(16);
+//        toastView.setBackgroundColor(Color.TRANSPARENT);
+//
+//        toast.setGravity(Gravity.CENTER, 0, 0);
+
         toast.show();
     }
 

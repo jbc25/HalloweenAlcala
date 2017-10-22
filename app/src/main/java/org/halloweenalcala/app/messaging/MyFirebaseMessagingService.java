@@ -19,7 +19,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import org.halloweenalcala.app.R;
-import org.halloweenalcala.app.ui.splash.SplashActivity;
+import org.halloweenalcala.app.ui.MainActivity;
 
 import java.util.Map;
 
@@ -94,7 +94,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String title, String text, Map<String, String> extras) {
-        Intent intent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

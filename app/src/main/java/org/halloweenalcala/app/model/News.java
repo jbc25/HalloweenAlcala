@@ -5,6 +5,10 @@ import android.webkit.URLUtil;
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.Date;
+
+import static org.halloweenalcala.app.model.Performance.stripAccents;
 
 /**
  * Created by julio on 17/10/17.
@@ -15,6 +19,19 @@ public class News extends SugarRecord<News> implements Serializable {
     private int id_server;
     private String datetime, title, text, image_url, btn_text, btn_link;
 
+    public String getDatetimeHumanFormat() {
+
+        try {
+            Date dateTime = Performance.dateTimeFormatApi.parse(getDatetime());
+            String dateStr = Performance.dateTimeFormatHuman.format(dateTime);
+            return stripAccents(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+
+            // Better than nothing :S
+            return getDatetime();
+        }
+    }
 
     public boolean hasValidLink() {
         return URLUtil.isValidUrl(btn_link);

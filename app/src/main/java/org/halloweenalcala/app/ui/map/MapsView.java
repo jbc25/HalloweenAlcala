@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface MapsView extends BaseView{
 
-    void showMarkers(List<Place> places);
+    void showMarkers(List<Place> places, Place placeFindCode);
 }

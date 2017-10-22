@@ -23,10 +23,10 @@ public class Performance extends SugarRecord<Performance> implements Comparable 
     public static final int ID_MARCHA_ZOMBIE = 20;
 
     DateFormat dateFormatFriendlyText = new SimpleDateFormat("EEEE dd MMMM");
-    SimpleDateFormat dateFormatApi = new SimpleDateFormat("yyyy-MM-dd");
+    static SimpleDateFormat dateFormatApi = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat timeFormatApi = new SimpleDateFormat("HH:mm");
-    DateFormat dateTimeFormatApi = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    DateFormat dateTimeFormatHuman = new SimpleDateFormat("dd/MM HH:mm");
+    static DateFormat dateTimeFormatApi = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    static DateFormat dateTimeFormatHuman = new SimpleDateFormat("dd/MM HH:mm");
 
     private int id_server;
     private String date;

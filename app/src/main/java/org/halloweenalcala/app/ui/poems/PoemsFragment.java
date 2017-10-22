@@ -1,21 +1,27 @@
 package org.halloweenalcala.app.ui.poems;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseFragment;
 import org.halloweenalcala.app.base.BasePresenter;
+import org.halloweenalcala.app.model.PoemCharacter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PoemsFragment extends BaseFragment {
+public class PoemsFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
 
     private PoemPagerAdapter adapter;
 
@@ -43,8 +49,84 @@ public class PoemsFragment extends BaseFragment {
         viewpagerPoems.setAdapter(adapter);
 
         viewpagerPoems.setPageTransformer(true, new BookPageTransformer2());
+        viewpagerPoems.addOnPageChangeListener(this);
+
 
         return layout;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        int lastPosition = getPrefs().getInt(App.SHARED_LAST_PAGE_POEMS, 0);
+        viewpagerPoems.setCurrentItem(lastPosition, true);
+        setupPoemIsShareable(lastPosition);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        setHasOptionsMenu(false);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.share_icon, menu);
+    }
+
+
+    public void setupPoemIsShareable(int position) {
+
+        PoemCharacter poemCharacter = PoemBook.poemBook.get(position);
+        String keyUnlocked = App.SHARED_POEM_UNLOCKED + "." + poemCharacter.getId();
+        boolean isUnlocked = poemCharacter.isOpen() || getPrefs().getBoolean(keyUnlocked, false);
+        setHasOptionsMenu(isUnlocked);
+    }
+
+    // INTERACTIONS
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menu_share:
+                onSharePoemClick();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void onSharePoemClick() {
+
+        PoemCharacter poemCharacter = PoemBook.poemBook.get(viewpagerPoems.getCurrentItem());
+        String poemShareMessage = String.format(getString(R.string.poem_share_message),
+                getString(poemCharacter.getPoemTitleId()), getString(poemCharacter.getPoemTextId()), App.URL_GOOGLE_PLAY_APP);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, poemShareMessage);
+        startActivity(intent);
+    }
+
+    // VIEWPAGER CALLBACKS
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        getPrefs().edit().putInt(App.SHARED_LAST_PAGE_POEMS, position).commit();
+
+        setupPoemIsShareable(position);
+    }
+
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 }

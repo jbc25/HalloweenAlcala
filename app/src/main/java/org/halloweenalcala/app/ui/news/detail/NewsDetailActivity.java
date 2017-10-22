@@ -7,11 +7,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseActivity;
 import org.halloweenalcala.app.base.BasePresenter;
@@ -27,29 +30,27 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     private AppCompatButton btnLink;
 
     private void findViews() {
-        tvNewsTitle = (TextView)findViewById( R.id.tv_news_title );
-        imgNews = (AppCompatImageView)findViewById( R.id.img_news );
-        tvNewsDescription = (TextView)findViewById( R.id.tv_news_description );
+        tvNewsTitle = (TextView) findViewById(R.id.tv_news_title);
+        imgNews = (AppCompatImageView) findViewById(R.id.img_news);
+        tvNewsDescription = (TextView) findViewById(R.id.tv_news_description);
         btnLink = (AppCompatButton) findViewById(R.id.btn_link);
 
         btnLink.setOnClickListener(this);
     }
 
 
-
-
     @Override
     public BasePresenter getPresenter() {
         return null;
     }
-    
+
     public static void start(Context context, News news) {
         Intent starter = new Intent(context, NewsDetailActivity.class);
         starter.putExtra(EXTRA_NEWS, news);
         context.startActivity(starter);
     }
 
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,13 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
 
         loadData();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.share_icon, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
 
     private void loadData() {
 
@@ -83,6 +91,35 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
 
     }
 
+
+    // INTERACTIONS
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_share:
+                shareNews();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void shareNews() {
+
+        String poemShareMessage = String.format(getString(R.string.news_share_message),
+                news.getTitle(), news.getText(), App.URL_GOOGLE_PLAY_APP);
+
+//        if (true) {
+//            alert(poemShareMessage);
+//            return;
+//        }
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, poemShareMessage);
+        startActivity(intent);
+    }
 
     @Override
     public void onClick(View v) {

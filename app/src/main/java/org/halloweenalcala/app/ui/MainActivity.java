@@ -18,24 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.halloweenalcala.app.R;
-import org.halloweenalcala.app.api.ApiClient;
-import org.halloweenalcala.app.api.GoogleSheetApiCsv;
 import org.halloweenalcala.app.base.BaseActivity;
 import org.halloweenalcala.app.base.BaseFragment;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.Place;
-import org.halloweenalcala.app.ui.map.MapsFragment;
+import org.halloweenalcala.app.ui.map.MapsPresenter;
 import org.halloweenalcala.app.ui.news.list.NewsFragment;
 import org.halloweenalcala.app.ui.participants.list.ParticipantsPresenter;
-import org.halloweenalcala.app.ui.poems.PoemsFragment;
 import org.halloweenalcala.app.ui.performances.PerformancesFragment;
+import org.halloweenalcala.app.ui.poems.PoemsFragment;
 import org.halloweenalcala.app.ui.static_info.WebViewActivity;
-
-import java.util.List;
-
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainView, BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -47,6 +39,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private TextView btnUpdateApp;
     private ImageView btnCloseUpdateApp;
     private MainPresenter presenter;
+    private Place placeToSelect;
 
     @Override
     public BasePresenter getPresenter() {
@@ -56,9 +49,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void findViews() {
         bottomNavView = (BottomNavigationView) findViewById(R.id.navigation_bottom_view);
         leftNavigacionView = (NavigationView) findViewById(R.id.navigation_view);
-        viewUpdateApp = (LinearLayout)findViewById( R.id.view_update_app );
-        btnUpdateApp = (TextView)findViewById( R.id.btn_update_app );
-        btnCloseUpdateApp = (ImageView)findViewById( R.id.btn_close_update_app );
+        viewUpdateApp = (LinearLayout) findViewById(R.id.view_update_app);
+        btnUpdateApp = (TextView) findViewById(R.id.btn_update_app);
+        btnCloseUpdateApp = (ImageView) findViewById(R.id.btn_close_update_app);
 
         bottomNavView.setOnNavigationItemSelectedListener(this);
         leftNavigacionView.setNavigationItemSelectedListener(this);
@@ -109,23 +102,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
         // Bottom Navigation
-        switch (item.getItemId()) {
-            case R.id.navigation_agenda:
-                showSection(new PerformancesFragment());
-                setToolbarTitle(R.string.alcala_halloween);
-                return true;
-            case R.id.navigation_map:
-                showSection(new MapsFragment());
-                setToolbarTitle(R.string.alcala_halloween);
-                return true;
-            case R.id.navigation_poems:
-                showSection(new PoemsFragment());
-                setToolbarTitle(R.string.zinemazombies);
-                return true;
-            case R.id.navigation_news:
-                showSection(new NewsFragment());
-                setToolbarTitle(R.string.news);
-                return true;
+        try {
+            switch (item.getItemId()) {
+                case R.id.navigation_agenda:
+                    showSection(new PerformancesFragment());
+                    setToolbarTitle(R.string.alcala_halloween);
+                    return true;
+                case R.id.navigation_map:
+                    showSection(MapsPresenter.newFragment(placeToSelect));
+                    setToolbarTitle(R.string.alcala_halloween);
+                    return true;
+                case R.id.navigation_poems:
+                    showSection(new PoemsFragment());
+                    setToolbarTitle(R.string.zinemazombies);
+                    return true;
+                case R.id.navigation_news:
+                    showSection(new NewsFragment());
+                    setToolbarTitle(R.string.news);
+                    return true;
+            }
+        } finally {
+            placeToSelect = null;
         }
 
 
@@ -202,40 +199,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
-    private void getDataFromApi() {
-
-        showProgressDialog("Cargando...");
-        ApiClient.getInstance().create(GoogleSheetApiCsv.class).getPlaces()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-//                .doOnTerminate(actionTerminate)
-                .subscribe(new Observer<List<Place>>() {
-
-                               @Override
-                               public void onCompleted() {
-                               }
-
-                               @Override
-                               public void onError(Throwable e) {
-
-//                        callback.onError(handleError(e));
-                                   hideProgressDialog();
-                                   toast("error");
-                               }
-
-                               @Override
-                               public void onNext(List<Place> places) {
-
-                                   hideProgressDialog();
-
-                                   toast("Lugares size: " + places.size());
-
-
-                               }
-                           }
-
-
-                );
+    public void onGoToMapButtonClick(Place place) {
+        placeToSelect = place;
+        bottomNavView.setSelectedItemId(R.id.navigation_map);
     }
 
 

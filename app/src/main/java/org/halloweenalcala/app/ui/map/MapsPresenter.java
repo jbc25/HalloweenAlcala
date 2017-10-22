@@ -2,6 +2,7 @@ package org.halloweenalcala.app.ui.map;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Bundle;
 
 import com.orm.query.Condition;
 import com.orm.query.Select;
@@ -21,12 +22,24 @@ import java.util.List;
 
 public class MapsPresenter extends BasePresenter {
 
+    private static final String EXTRA_PLACE_FIND_CODE = "EXTRA_PLACE_FIND_CODE";
+
     private final MapsView view;
+    private Place placeFindCode;
 
     public static MapsPresenter newInstance(MapsView view, Context context) {
 
         return new MapsPresenter(view, context);
 
+    }
+
+    public static MapsFragment newFragment(Place place) {
+
+        MapsFragment mapsFragment = new MapsFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_PLACE_FIND_CODE, place);
+        mapsFragment.setArguments(args);
+        return mapsFragment;
     }
 
     private MapsPresenter(MapsView view, Context context) {
@@ -36,8 +49,10 @@ public class MapsPresenter extends BasePresenter {
 
     }
 
-    public void onCreate() {
-
+    public void onCreate(Bundle arguments) {
+        if (arguments != null) {
+            this.placeFindCode = (Place) arguments.getSerializable(EXTRA_PLACE_FIND_CODE);
+        }
     }
 
     public void onResume() {
@@ -55,7 +70,10 @@ public class MapsPresenter extends BasePresenter {
             place.setPerformances(performanceList);
         }
 
-        view.showMarkers(placeList);
+        view.showMarkers(placeList, placeFindCode);
+
+
+
         return;
 
     }

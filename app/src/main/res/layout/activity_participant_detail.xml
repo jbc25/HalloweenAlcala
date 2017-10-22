@@ -37,8 +37,7 @@
                     android:id="@+id/img_participant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:layout_marginTop="10dp" />
+                    android:adjustViewBounds="true" />
 
                 <TextView
                     android:id="@+id/tv_participant_modality"
@@ -51,6 +50,7 @@
                     android:id="@+id/tv_participant_description"
                     style="@style/TextBase.White"
                     android:layout_marginTop="10dp"
+                    app:fontPath="fonts/Roboto-Medium.ttf"
                     android:textSize="18sp"
                     android:padding="10dp"/>
 

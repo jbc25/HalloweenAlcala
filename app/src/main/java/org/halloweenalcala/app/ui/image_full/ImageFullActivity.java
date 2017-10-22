@@ -45,7 +45,15 @@ public class ImageFullActivity extends AppCompatActivity {
     private ImageView imgClose;
 
     private static final String EXTRA_IMAGE_URL = "extra_image_url";
+    private static final String EXTRA_IMAGE_DRAWABLE_ID = "extra_image_drawable_id";
 
+
+    public static Intent newImageFullActivity(Context context, int drawableId) {
+
+        Intent intent = new Intent((context), ImageFullActivity.class);
+        intent.putExtra(EXTRA_IMAGE_DRAWABLE_ID, drawableId);
+        return intent;
+    }
 
     public static Intent newImageFullActivity(Context context, String imageUrl) {
 
@@ -135,13 +143,22 @@ public class ImageFullActivity extends AppCompatActivity {
         });
 
         String imageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
+        int drawableId = getIntent().getIntExtra(EXTRA_IMAGE_DRAWABLE_ID, 0);
+
+        if (imageUrl != null) {
 
 //        imageFull.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
-        Picasso.with(this)
-                .load(Uri.parse(imageUrl))
+            Picasso.with(this)
+                    .load(Uri.parse(imageUrl))
 //                .placeholder(R.mipmap.img_placeholder)
 //                .error(android.R.drawable.stat_notify_error)
-                .into(imageFull);
+                    .into(imageFull);
+        } else if (drawableId > 0) {
+            Picasso.with(this)
+                    .load(drawableId)
+                    .into(imageFull);
+        }
+
 
     }
 

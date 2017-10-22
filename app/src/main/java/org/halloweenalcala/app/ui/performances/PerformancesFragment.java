@@ -1,8 +1,11 @@
 package org.halloweenalcala.app.ui.performances;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,8 +49,14 @@ public class PerformancesFragment extends BaseFragment implements PerformancesVi
         View layout = inflater.inflate(R.layout.fragment_performances, container, false);
         recyclerPerformances = layout.findViewById(R.id.recycler_performances);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerPerformances.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
+                layoutManager.getOrientation());
+        Drawable verticalDivider = ContextCompat.getDrawable(getActivity(), R.drawable.horizontal_divider);
+        dividerItemDecoration.setDrawable(verticalDivider);
+        recyclerPerformances.addItemDecoration(dividerItemDecoration);
 
         presenter.onCreate();
 

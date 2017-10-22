@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatImageView
@@ -23,5 +24,7 @@
         android:id="@+id/tv_participant_name"
         style="@style/TextBase.White"
         android:layout_centerInParent="true"
+        app:fontPath="fonts/ZombieQueen.ttf"
+        android:textSize="22sp"
         android:gravity="center"/>
 </RelativeLayout>

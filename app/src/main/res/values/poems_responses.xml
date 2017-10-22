@@ -1,7 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="character_mary_poppins">mary poppins</string>
-    <string name="film_mary_poppins">mary popins</string>
-    <string name="character_bueno_feo_malo">sin nombre</string>
-    <string name="film_bueno_feo_malo">bueno feo malo</string>
+    <string-array name="responses_mary_poppins">
+        <item>mary poppins</item>
+        <item>mary popins</item>
+    </string-array>
+
+    <string-array name="responses_punado_dolares">
+        <item>sin nombre</item>
+        <item>bueno feo malo</item>
+        <item>muerte precio</item>
+        <item>puñado dolares</item>
+    </string-array>
+
+    <string-array name="responses_espartacus">
+        <item>espartacus</item>
+        <item>espartaco</item>
+    </string-array>
+
+    <string-array name="responses_sor_citroen">
+        <item>sor citroen</item>
+        <item>gracita morales</item>
+    </string-array>
+
+    <string-array name="responses_pulp_fiction">
+        <item>pulp fiction</item>
+        <item>jules winfield</item>
+    </string-array>
+
+    <string-array name="responses_indiana_jones">
+        <item>indiana jones</item>
+        <item>arca perdida</item>
+        <item>templo maldito</item>
+    </string-array>
+
+    <string-array name="responses_tiempos_modernos">
+        <item>tiempos modernos</item>
+        <item>chaplin</item>
+        <item>charlot</item>
+        <item>charlott</item>
+    </string-array>
+
+    <string-array name="responses_leia">
+        <item>leia</item>
+        <item>star wars</item>
+        <item>guerra galaxias</item>
+    </string-array>
+
 </resources>

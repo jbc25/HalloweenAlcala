@@ -53,7 +53,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         holder.tvNewsTitle.setText(newsList.getTitle());
         holder.tvNewsText.setText(newsList.getText());
-        holder.tvNewsDate.setText(newsList.getDatetime());
+        holder.tvNewsDate.setText(newsList.getDatetimeHumanFormat());
 
         Picasso.with(context)
                 .load(newsList.getImage_url())

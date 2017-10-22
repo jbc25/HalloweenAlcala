@@ -72,7 +72,6 @@ public class NewsFragment extends BaseFragment implements NewsView, NewsAdapter.
 
     @Override
     public void onItemClick(View view, int position) {
-        toast("click: " + position);
         presenter.onNewsClick(position);
     }
 }

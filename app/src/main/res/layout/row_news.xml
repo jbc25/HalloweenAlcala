@@ -20,7 +20,7 @@
         android:layout_toRightOf="@id/img_news"
         android:layout_marginLeft="10dp"
         app:fontPath="fonts/typewriter.ttf"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:maxLines="2"
         android:ellipsize="end"/>
 
@@ -39,7 +39,6 @@
         style="@style/TextBase"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tv_news_title"
-        android:layout_alignBottom="@+id/img_news"
         android:gravity="bottom"
         app:fontPath="fonts/ZombieQueen.ttf"
         android:layout_marginTop="10dp"

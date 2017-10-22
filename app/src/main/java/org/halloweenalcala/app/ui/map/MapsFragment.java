@@ -1,9 +1,13 @@
 package org.halloweenalcala.app.ui.map;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,6 +35,7 @@ import java.util.List;
 
 public class MapsFragment extends BaseFragment implements OnMapReadyCallback, MapsView, GoogleMap.OnMarkerClickListener {
 
+
     private GoogleMap mMap;
     private MapsPresenter presenter;
 
@@ -38,6 +43,7 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Ma
     public BasePresenter getPresenter() {
         return presenter;
     }
+
 
 
     @Nullable
@@ -53,10 +59,29 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Ma
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        presenter.onCreate(getArguments());
+
         return layout;
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        setHasOptionsMenu(false);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.map, menu);
+    }
 
     // CONFIGURATIONS
     @Override
@@ -110,21 +135,64 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Ma
         return false;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menu_legend:
+                showLegendInfo();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showLegendInfo() {
+        AlertDialog.Builder ab = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
+        ab.setTitle(R.string.legend);
+        ab.setView(View.inflate(getActivity(), R.layout.view_legend, null));
+        ab.setNegativeButton(R.string.close, null);
+        ab.show();
+    }
+
     // PRESENTER CALLBACKS
     @Override
-    public void showMarkers(List<Place> places) {
+    public void showMarkers(List<Place> places, Place placeFindCode) {
+
+        Marker markerToSelect = null;
 
         for (Place place : places) {
 
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(new LatLng(place.getLat(), place.getLng()))
-//                    .title(title)
-//                    .snippet(text)
                     .icon(BitmapDescriptorFactory.fromResource(place.getMarkerIcon()));
+
+            if (isSelectedPlace(place, placeFindCode)) {
+                if (placeFindCode.getId_server() == place.getId_server()) {
+                    markerOptions.title(placeFindCode.getName());
+                    markerOptions.snippet(getString(R.string.find_code));
+                }
+
+            }
+
             Marker marker = mMap.addMarker(markerOptions);
+
             marker.setTag(place);
+
+            if (isSelectedPlace(place, placeFindCode)) {
+                markerToSelect = marker;
+            }
         }
 
+        if (markerToSelect != null) {
+            markerToSelect.showInfoWindow();
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(markerToSelect.getPosition()));
+        }
+
+    }
+
+    private boolean isSelectedPlace(Place place, Place placeSelected) {
+        return placeSelected != null && placeSelected.getId_server() == place.getId_server();
     }
 
 }

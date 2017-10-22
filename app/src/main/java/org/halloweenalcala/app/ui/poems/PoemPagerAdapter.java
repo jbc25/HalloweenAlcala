@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import org.halloweenalcala.app.model.PoemCharacter;
-
 /**
  * Created by julio on 6/10/17.
  */
@@ -24,6 +22,6 @@ public class PoemPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return PoemCharacter.poemsCharacters.size();
+        return PoemBook.poemBook.size();
     }
 }

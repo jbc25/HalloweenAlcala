@@ -14,8 +14,6 @@
     <string name="guessed">¡Acertaste!</string>
     <string name="fail">Fallaste</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shows">ACTUACIONES</string>
     <string name="participants">Participantes</string>
     <string name="about">Sobre Halloween...</string>
@@ -41,4 +39,20 @@
     <string name="download">Descargar</string>
     <string name="splash_message">¡Prepárate para vivir un Halloween de película en Alcalá!\nEn breve esta app resucitará, te avisaremos y esperemos que estés preparad@...</string>
     <string name="splash_message_update">¡Aplicación disponible!</string>
+
+    <string name="fin">FIN</string>
+    <string name="poems_author">Versos: Enrique Sabaté\nIlustración: Joseba Threepwood</string>
+    <string name="go_to_map">Ir al mapa</string>
+    <string name="place_unlock_description">Para desbloquear este poema debes ir el día 31 a <b>%s</b> y escribir el código que encuentres allí</string>
+    <string name="find_code">Encuentra el código</string>
+    <string name="share">Compartir</string>
+    <string name="poem_share_message">ZinemaZombies. Poemas de #AlcalaHalloween17\n\n%1$s\n\n%2$s\n\nDisfruta de este y otros poemas descargándo la app gratuita de Halloween para Android:\n\n%3$s</string>
+    <string name="legend">Legenda</string>
+    <string name="public_spaces">Espacios públicos</string>
+    <string name="other_spaces">Locales y otros espacios</string>
+    <string name="news_share_message">NOTICIA #AlcalaHalloween17\n\n%1$s\n\n%2$s\n\n¡No te pierdas nada de este gran evento!\nDescarga la app gratuita de Halloween para Android:\n\n%3$s</string>
+
+
+
+
 </resources>

@@ -1,45 +1,68 @@
 package org.halloweenalcala.app.model;
 
-import org.halloweenalcala.app.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by julio on 6/10/17.
  */
 
 public class PoemCharacter {
 
+    public static final String TYPE_OPEN = "OPEN";
+    public static final String TYPE_RESPONSE = "RESPONSE";
+    public static final String TYPE_PLACE = "PLACE";
+
+
     private int id;
     private int poemTitleId;
     private int poemTextId;
+    private String typeId;
+
     private int characterDrawableId;
-    private int characterNameId;
-    private int filmNameId;
+    private int responsesArrayId;
+
+    private int idPlaceServer;
 
 
-    public static final List<PoemCharacter> poemsCharacters = new ArrayList<>();
-
-    static {
-        poemsCharacters.add(new PoemCharacter(1, R.string.poem_title_espartacus, R.string.poem_text_espartacus, R.mipmap.img_character_default, 0, 0));
-        poemsCharacters.add(new PoemCharacter(2, R.string.poem_title_sor_citroen, R.string.poem_text_sor_citroen,  R.mipmap.img_character_default, 0, 0));
-        poemsCharacters.add(new PoemCharacter(3, R.string.poem_title_pulp_fiction, R.string.poem_text_pulp_fiction, R.mipmap.img_character_mary_poppins, R.string.character_mary_poppins, R.string.film_mary_poppins));
-        poemsCharacters.add(new PoemCharacter(4, R.string.poem_title_punado_dolares, R.string.poem_text_punado_dolares, R.mipmap.img_character_blondin, 0, 0));
+    public static PoemCharacter newOpenPoem(int id, int poemTitleId, int poemTextId) {
+        PoemCharacter poemCharacter = new PoemCharacter();
+        poemCharacter.setId(id);
+        poemCharacter.setPoemTitleId(poemTitleId);
+        poemCharacter.setPoemTextId(poemTextId);
+        poemCharacter.setTypeId(TYPE_OPEN);
+        return poemCharacter;
     }
 
-    public PoemCharacter(int id, int poemTitleId, int poemTextId, int characterDrawableId, int characterNameId, int filmNameId) {
-        this.id = id;
-        this.poemTitleId = poemTitleId;
-        this.poemTextId = poemTextId;
-        this.characterDrawableId = characterDrawableId;
-        this.characterNameId = characterNameId;
-        this.filmNameId = filmNameId;
+    public static PoemCharacter newResponsePoem(int id, int poemTitleId, int poemTextId, int characterDrawableId, int responsesArrayId) {
+        PoemCharacter poemCharacter = new PoemCharacter();
+        poemCharacter.setId(id);
+        poemCharacter.setPoemTitleId(poemTitleId);
+        poemCharacter.setPoemTextId(poemTextId);
+        poemCharacter.setTypeId(TYPE_RESPONSE);
+        poemCharacter.setCharacterDrawableId(characterDrawableId);
+        poemCharacter.setResponsesArrayId(responsesArrayId);
+        return poemCharacter;
+    }
+
+    public static PoemCharacter newPlacePoem(int id, int poemTitleId, int poemTextId, int idPlaceServer) {
+        PoemCharacter poemCharacter = new PoemCharacter();
+        poemCharacter.setId(id);
+        poemCharacter.setPoemTitleId(poemTitleId);
+        poemCharacter.setPoemTextId(poemTextId);
+        poemCharacter.setTypeId(TYPE_PLACE);
+        poemCharacter.setIdPlaceServer(idPlaceServer);
+        return poemCharacter;
     }
 
     public boolean isOpen() {
-        return getCharacterNameId() == 0;
+        return TYPE_OPEN.equals(getTypeId());
     }
+
+
+    // --------------
+
+    public PoemCharacter() {
+
+    }
+
 
     public int getId() {
         return id;
@@ -65,18 +88,6 @@ public class PoemCharacter {
         this.characterDrawableId = characterDrawableId;
     }
 
-    public int getCharacterNameId() {
-        return characterNameId;
-    }
-
-    public void setCharacterNameId(int characterNameId) {
-        this.characterNameId = characterNameId;
-    }
-
-    public static List<PoemCharacter> getPoemsCharacters() {
-        return poemsCharacters;
-    }
-
     public int getPoemTitleId() {
         return poemTitleId;
     }
@@ -85,11 +96,28 @@ public class PoemCharacter {
         this.poemTitleId = poemTitleId;
     }
 
-    public int getFilmNameId() {
-        return filmNameId;
+
+    public int getResponsesArrayId() {
+        return responsesArrayId;
     }
 
-    public void setFilmNameId(int filmNameId) {
-        this.filmNameId = filmNameId;
+    public void setResponsesArrayId(int responsesArrayId) {
+        this.responsesArrayId = responsesArrayId;
+    }
+
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
+    public int getIdPlaceServer() {
+        return idPlaceServer;
+    }
+
+    public void setIdPlaceServer(int idPlaceServer) {
+        this.idPlaceServer = idPlaceServer;
     }
 }

@@ -6,16 +6,25 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.orm.query.Condition;
+import com.orm.query.Select;
 
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseFragment;
 import org.halloweenalcala.app.base.BasePresenter;
+import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.model.PoemCharacter;
+import org.halloweenalcala.app.ui.MainActivity;
+import org.halloweenalcala.app.ui.image_full.ImageFullActivity;
+import org.halloweenalcala.app.util.Util;
 import org.halloweenalcala.app.util.WindowUtils;
 
 /**
@@ -36,7 +45,10 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
     private View btnCheck;
     private PoemCharacter poemCharacter;
     private TextView tvPoemTitle;
+    private Button btnGoToMap;
     private View viewUnlockedPoem;
+    private TextView tvPoemUnlockDescription;
+    private TextView tvHiddenPoemName;
 
     @Override
     public BasePresenter getPresenter() {
@@ -51,14 +63,19 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
 
         tvPoemTitle = (TextView)layout.findViewById( R.id.tv_poem_title);
         tvPoemText = (TextView)layout.findViewById( R.id.tv_poem_text );
+        tvPoemUnlockDescription = (TextView)layout.findViewById( R.id.tv_poem_unlock_description );
+        tvHiddenPoemName = (TextView)layout.findViewById( R.id.tv_hidden_poem_name );
         imgCharacter = (AppCompatImageView)layout.findViewById( R.id.img_character );
         imgCharacterLocked = (AppCompatImageView)layout.findViewById( R.id.img_character_locked );
         viewLockedPoem = layout.findViewById(R.id.view_locked_poem);
         viewUnlockedPoem = layout.findViewById(R.id.view_unlocked_poem);
         editCharacterName = (AppCompatEditText)layout.findViewById( R.id.edit_character_name );
         btnCheck = layout.findViewById(R.id.btn_check);
+        btnGoToMap = layout.findViewById(R.id.btn_go_to_map);
 
         btnCheck.setOnClickListener(this);
+        btnGoToMap.setOnClickListener(this);
+        imgCharacterLocked.setOnClickListener(this);
     }
 
 
@@ -75,7 +92,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             position = getArguments().getInt(ARG_POSITION);
-            poemCharacter = PoemCharacter.poemsCharacters.get(position);
+            poemCharacter = PoemBook.poemBook.get(position);
         } else {
             throw new IllegalArgumentException("Position argument needed");
         }
@@ -94,6 +111,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
         return layout;
     }
 
+
     private void setupData() {
 
         boolean isUnlocked = poemCharacter.isOpen() || getPrefs().getBoolean(getUnlockedKey(), false);
@@ -105,14 +123,34 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
             imgCharacter.setImageResource(poemCharacter.getCharacterDrawableId());
             viewUnlockedPoem.setVisibility(View.VISIBLE);
         } else {
-            imgCharacterLocked.setImageResource(poemCharacter.getCharacterDrawableId());
+
             viewUnlockedPoem.setVisibility(View.GONE);
+
+            switch (poemCharacter.getTypeId()) {
+
+                case PoemCharacter.TYPE_RESPONSE:
+                    imgCharacterLocked.setImageResource(poemCharacter.getCharacterDrawableId());
+                    btnGoToMap.setVisibility(View.GONE);
+                    break;
+
+                case PoemCharacter.TYPE_PLACE:
+                    Place place = (Place) Select.from(Place.class).where(Condition.prop("idserver").eq(poemCharacter.getIdPlaceServer())).first();
+                    tvPoemUnlockDescription.setText(Html.fromHtml(String.format(getString(R.string.place_unlock_description), place.getName())));
+                    String title = getString(poemCharacter.getPoemTitleId());
+                    tvHiddenPoemName.setText(title);
+                    btnGoToMap.setVisibility(View.VISIBLE);
+                    break;
+
+            }
         }
+
 
     }
 
+
+
     private String getUnlockedKey() {
-        return App.SHARED_POEM_UNLOCKED + "." + position;
+        return App.SHARED_POEM_UNLOCKED + "." + poemCharacter.getId();
     }
 
     @Override
@@ -122,15 +160,23 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
                 checkCharacterName();
                 WindowUtils.hideSoftKeyboard(editCharacterName);
                 break;
+
+            case R.id.btn_go_to_map:
+                Place place = (Place) Select.from(Place.class).where(Condition.prop("idserver").eq(poemCharacter.getIdPlaceServer())).first();
+                ((MainActivity)getActivity()).onGoToMapButtonClick(place);
+                break;
+
+            case R.id.img_character_locked:
+                startActivity(ImageFullActivity.newImageFullActivity(getActivity(), poemCharacter.getCharacterDrawableId()));
+                break;
         }
     }
 
     private void checkCharacterName() {
         String name = editCharacterName.getText().toString().trim().toLowerCase();
-        String nameReal = getString(poemCharacter.getCharacterNameId()).toLowerCase();
-        String filmReal = getString(poemCharacter.getFilmNameId()).toLowerCase();
+        name = Util.normalizeText(name);
 
-        if (containsAllWordsInSentence(nameReal, name) || containsAllWordsInSentence(filmReal, name)) {
+        if (isValidNameOrCode(name)) {
 
             toastHalloween(R.string.guessed);
             getPrefs().edit().putBoolean(getUnlockedKey(), true).commit();
@@ -138,23 +184,52 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
                 @Override
                 public void run() {
                     setupData();
+                    ((PoemsFragment)getParentFragment()).setupPoemIsShareable(position);
                 }
             }, 2500);
+
 
         } else {
             toastHalloween(R.string.fail);
         }
     }
 
-    private boolean containsAllWordsInSentence(String words, String sentence) {
+    private boolean isValidNameOrCode(String nameOrCode) {
+        if (PoemCharacter.TYPE_RESPONSE.equals(poemCharacter.getTypeId())) {
+            return isValidName(nameOrCode);
+        } else {
+            return isValidCode(nameOrCode);
+        }
+    }
 
-        String[] wordsParts = words.split(" ");
-        for (String wordPart : wordsParts) {
-            if (!sentence.contains(wordPart)) {
-                return false;
+    private boolean isValidCode(String code) {
+        String correctCode = PoemBook.codesPlaces.get(poemCharacter.getIdPlaceServer());
+        return code.toLowerCase().equals(correctCode.toLowerCase());
+    }
+
+    private boolean isValidName(String name) {
+
+        int responsesArrayId = poemCharacter.getResponsesArrayId();
+        String[] responsesArray = getResources().getStringArray(responsesArrayId);
+
+        Response:
+        for (int i = 0; i < responsesArray.length; i++) {
+            String keywords = responsesArray[i];
+
+            String[] wordsParts = keywords.split(" ");
+            for (int j = 0; j < wordsParts.length; j++) {
+                String wordPart = wordsParts[j];
+
+                if (!name.contains(wordPart)) {
+                    continue Response;
+                } else if (j == wordsParts.length - 1) {
+                    return true;
+                }
+
             }
+
         }
 
-        return true;
+        return false;
     }
 }

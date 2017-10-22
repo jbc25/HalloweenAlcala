@@ -16,8 +16,10 @@
 
         <TextView
             style="@style/TextBase"
+            android:id="@+id/tv_hidden_poem_name"
             android:text="@string/hidden_poem"
             android:gravity="center_horizontal"
+            app:fontPath="fonts/typewriter.ttf"
             android:textAllCaps="true"
             android:textSize="22sp"
             android:layout_marginTop="10dp"/>
@@ -31,11 +33,21 @@
             android:layout_marginTop="10dp"/>
 
         <TextView
+            android:id="@+id/tv_poem_unlock_description"
             style="@style/TextBase"
             android:text="@string/guess_character_or_film"
+            app:fontPath="fonts/typewriter.ttf"
             android:gravity="center_horizontal"
             android:textSize="17sp"
             android:layout_margin="10dp"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_go_to_map"
+            android:text="@string/go_to_map"
+            style="@style/ButtonHalloween"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"/>
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/edit_character_name"
@@ -43,6 +55,7 @@
             android:textColor="@color/red_halloween"
             android:ems="9"
             android:background="@drawable/bg_edit_halloween"
+            app:fontPath="fonts/typewriter.ttf"
             android:padding="5dp"
             android:inputType="text"
             android:imeOptions="actionDone"
@@ -63,16 +76,16 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:layout_margin="10dp"
-        android:alpha="0.7"
+        android:alpha="0.4"
         android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
     <LinearLayout
         android:id="@+id/view_unlocked_poem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <TextView
             android:id="@+id/tv_poem_title"
@@ -80,14 +93,14 @@
             app:fontPath="fonts/typewriter.ttf"
             android:textSize="24sp"
             android:gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:textAllCaps="true"
             android:layout_centerHorizontal="true"/>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fillViewport="true">
 
@@ -97,7 +110,7 @@
                 app:fontPath="fonts/typewriter.ttf"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:padding="15dp"/>
 
         </ScrollView>

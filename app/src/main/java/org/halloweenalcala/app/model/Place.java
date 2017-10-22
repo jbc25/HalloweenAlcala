@@ -4,6 +4,7 @@ import com.orm.SugarRecord;
 
 import org.halloweenalcala.app.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by julio on 7/10/17.
  */
 
-public class Place extends SugarRecord {
+public class Place extends SugarRecord implements Serializable {
 
     public static final String TYPE_MAIN = "MAIN";
     public static final String TYPE_OTHERS = "OTHERS";

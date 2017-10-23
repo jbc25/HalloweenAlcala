@@ -9,20 +9,25 @@
 
     <item
         android:id="@+id/menu_about_alcala_halloween"
-        android:icon="@mipmap/ic_map"
+        android:icon="@mipmap/ic_alcala_halloween"
         android:title="@string/alcala_halloween" />
 
     <item
         android:id="@+id/menu_about_marcha_zombie"
-        android:icon="@mipmap/ic_book_poem"
+        android:icon="@mipmap/ic_marcha_zombie_mz"
         android:title="@string/marcha_zombie" />
 
     <item
-        android:id="@+id/menu_contest_decor"
+        android:id="@+id/menu_contest_and_raffle"
         android:icon="@mipmap/ic_contest"
-        android:title="@string/contest_decoration" />
+        android:title="@string/contests_and_raffle" />
 
-    <item android:title="@string/contact_and_social">
+    <item
+        android:id="@+id/menu_credits"
+        android:icon="@mipmap/ic_credits"
+        android:title="@string/credits" />
+
+    <item android:title="@string/social_networks">
         <menu>
             <item
                 android:id="@+id/menu_twitter_halloween_alcala_17"

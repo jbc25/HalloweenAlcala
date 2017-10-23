@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.orm.query.Condition;
 import com.orm.query.Select;
 
@@ -76,6 +77,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
         btnCheck.setOnClickListener(this);
         btnGoToMap.setOnClickListener(this);
         imgCharacterLocked.setOnClickListener(this);
+
     }
 
 
@@ -204,7 +206,10 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
 
     private boolean isValidCode(String code) {
         String correctCode = PoemBook.codesPlaces.get(poemCharacter.getIdPlaceServer());
-        return code.toLowerCase().equals(correctCode.toLowerCase());
+        boolean success = code.toLowerCase().equals(correctCode.toLowerCase());
+
+        FirebaseCrash.log("Poem guess: " + getString(poemCharacter.getPoemTitleId()) + ". Success: " + success);
+        return success;
     }
 
     private boolean isValidName(String name) {
@@ -223,6 +228,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
                 if (!name.contains(wordPart)) {
                     continue Response;
                 } else if (j == wordsParts.length - 1) {
+                    FirebaseCrash.log("Poem guess: " + getString(poemCharacter.getPoemTitleId()) + ". Success: true");
                     return true;
                 }
 
@@ -230,6 +236,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
 
         }
 
+        FirebaseCrash.log("Poem guess: " + getString(poemCharacter.getPoemTitleId()) + ". Success: false");
         return false;
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.google.firebase.crash.FirebaseCrash;
 import com.orm.SugarApp;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
@@ -22,6 +21,7 @@ public class App extends SugarApp {
     public static final String SHARED_CURRENT_DATA_VERSION = PREFIX + "shared_current_data_version";
     public static final String SHARED_FIRST_TIME = PREFIX + "shared_first_time";
     public static final String SHARED_LAST_PAGE_POEMS = PREFIX + "shared_last_page_poems";
+    public static final String SHARED_LAST_NEWS_ID_LOCAL = PREFIX + "shared_last_news_id_local";
 //    public static final String SHARED_DATA_PLACES = PREFIX + "shared_data_places";
 //    public static final String SHARED_DATA_PERFORMANCES = PREFIX + "shared_data_performances";
 //    public static final String SHARED_DATA_PARTICIPANTS = PREFIX + "shared_data_participants";
@@ -45,7 +45,7 @@ public class App extends SugarApp {
 //                .setFontAttrId(R.attr.fontPath)
 //                .build());
 
-        FirebaseCrash.setCrashCollectionEnabled(false);
+//        FirebaseCrash.setCrashCollectionEnabled(false);
 
 //        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
 

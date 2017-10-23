@@ -3,6 +3,7 @@ package org.halloweenalcala.app.ui.static_info;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.PluginState;
@@ -18,11 +19,19 @@ public class WebViewActivity extends BaseActivity  {
 
     public static final int TYPE_ALCALA_HALLOWEEN = 0;
     public static final int TYPE_7MZ = 1;
+    private static final String EXTRA_URL = "extra_url";
 
     private final String FILENAME_ALCALA_HALLOWEEN_HTML = "info_mock.html";
-    private final String FILENAME_7MZ_HTML = "info_mock.html";
+    private final String FILENAME_MARCHA_ZOMBIE_HTML = "info_marcha_zombie.html";
 
     private WebView webView;
+
+
+    public static void start(Context context, String url) {
+        Intent intent = new Intent(context, WebViewActivity.class);
+        intent.putExtra(EXTRA_URL, url);
+        context.startActivity(intent);
+    }
 
     public static void start(Context context, int typeInfo) {
         Intent intent = new Intent(context, WebViewActivity.class);
@@ -45,6 +54,12 @@ public class WebViewActivity extends BaseActivity  {
         configureSecondLevelActivity();
         configWebView();
 
+        if (true) {
+            String url = getIntent().getStringExtra(EXTRA_URL);
+            webView.loadUrl(url);
+            return;
+        }
+
         int typeScreen = getIntent().getIntExtra(Util.EXTRA_INT, -1);
 
         switch (typeScreen) {
@@ -57,7 +72,7 @@ public class WebViewActivity extends BaseActivity  {
 
             case TYPE_7MZ:
                 setToolbarTitle(R.string.marcha_zombie);
-                    loadHtml(FILENAME_7MZ_HTML);
+                    loadHtml(FILENAME_MARCHA_ZOMBIE_HTML);
                 break;
 
             default:
@@ -80,6 +95,8 @@ public class WebViewActivity extends BaseActivity  {
     }
 
     private void configWebView() {
+
+        webView.setBackgroundColor(Color.TRANSPARENT);
 
         WebSettings webviewSettings = webView.getSettings();
 

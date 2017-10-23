@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.google.firebase.crash.FirebaseCrash;
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.Normalizer;
 import java.text.ParseException;
@@ -18,11 +19,11 @@ import static org.halloweenalcala.app.util.DateUtils.formatDateApi;
  * Created by julio on 6/10/17.
  */
 
-public class Performance extends SugarRecord<Performance> implements Comparable {
+public class Performance extends SugarRecord<Performance> implements Comparable, Serializable {
 
     public static final int ID_MARCHA_ZOMBIE = 20;
 
-    DateFormat dateFormatFriendlyText = new SimpleDateFormat("EEEE dd MMMM");
+    DateFormat dateFormatFriendlyText = new SimpleDateFormat("EEEE, dd MMMM");
     static SimpleDateFormat dateFormatApi = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat timeFormatApi = new SimpleDateFormat("HH:mm");
     static DateFormat dateTimeFormatApi = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -36,6 +37,8 @@ public class Performance extends SugarRecord<Performance> implements Comparable 
     private String subtitle;
     private String info;
     private int id_place;
+    private String image_url;
+    private int highlight;
     private String place_text; // optional for place exceptions without id_place
 
     private Place place;
@@ -47,7 +50,8 @@ public class Performance extends SugarRecord<Performance> implements Comparable 
         try {
             Date dateDay = dateFormatApi.parse(getDate());
             String dateStr = dateFormatFriendlyText.format(dateDay);
-            return stripAccents(dateStr);
+            return dateStr;
+//            return stripAccents(dateStr);
         } catch (ParseException e) {
             e.printStackTrace();
 
@@ -213,4 +217,23 @@ public class Performance extends SugarRecord<Performance> implements Comparable 
         this.place = place;
     }
 
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
+    public int getHighlight() {
+        return highlight;
+    }
+
+    public void setHighlight(int highlight) {
+        this.highlight = highlight;
+    }
+
+    public boolean isHighlight() {
+        return getHighlight() == 1;
+    }
 }

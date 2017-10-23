@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/img_app_bg"
+    tools:context="org.halloweenalcala.app.ui.performances.detail.PerformanceDetailActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="15dp">
+
+
+            <ImageView
+                android:id="@+id/img_performance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/img_placeholder_performance"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_place_performance"
+                        style="@style/TextBase.White"
+                        android:textSize="18sp"/>
+
+                    <View style="@style/XpansorHoriz" />
+
+                    <TextView
+                        android:id="@+id/tv_time_performance"
+                        style="@style/TextBase.White"
+                        app:fontPath="fonts/ZombieQueen.ttf"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/SeparatorHorizontal"
+                    android:background="@color/white"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="15dp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_description_performance"
+                    style="@style/TextBase.White"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

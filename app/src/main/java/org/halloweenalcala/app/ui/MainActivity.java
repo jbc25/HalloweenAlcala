@@ -25,8 +25,9 @@ import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.ui.map.MapsPresenter;
 import org.halloweenalcala.app.ui.news.list.NewsFragment;
 import org.halloweenalcala.app.ui.participants.list.ParticipantsPresenter;
-import org.halloweenalcala.app.ui.performances.PerformancesFragment;
+import org.halloweenalcala.app.ui.performances.list.PerformancesFragment;
 import org.halloweenalcala.app.ui.poems.PoemsFragment;
+import org.halloweenalcala.app.ui.static_info.TextHtmlActivity;
 import org.halloweenalcala.app.ui.static_info.WebViewActivity;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainView, BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -94,6 +95,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     // INTERACTIONS
 
+
+    @Override
+    public void onBackPressed() {
+
+        if (drawerLayout.isDrawerOpen(Gravity.START)) {
+            drawerLayout.closeDrawer(Gravity.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -106,11 +118,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             switch (item.getItemId()) {
                 case R.id.navigation_agenda:
                     showSection(new PerformancesFragment());
-                    setToolbarTitle(R.string.alcala_halloween);
+                    setToolbarTitle(R.string.app_name);
                     return true;
                 case R.id.navigation_map:
                     showSection(MapsPresenter.newFragment(placeToSelect));
-                    setToolbarTitle(R.string.alcala_halloween);
+                    setToolbarTitle(R.string.app_name);
                     return true;
                 case R.id.navigation_poems:
                     showSection(new PoemsFragment());
@@ -145,15 +157,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.menu_about_alcala_halloween:
-                WebViewActivity.start(this, WebViewActivity.TYPE_ALCALA_HALLOWEEN);
+                TextHtmlActivity.start(this, WebViewActivity.TYPE_ALCALA_HALLOWEEN);
                 break;
 
             case R.id.menu_about_marcha_zombie:
-                WebViewActivity.start(this, WebViewActivity.TYPE_7MZ);
+                TextHtmlActivity.start(this, WebViewActivity.TYPE_7MZ);
                 break;
 
-            case R.id.menu_contest_decor:
+            case R.id.menu_contest_and_raffle:
                 showContestDecorationInfo();
+                break;
+
+            case R.id.menu_credits:
+                WebViewActivity.start(this, "http://www.marchazombiealcala.es/creditos");
                 break;
         }
 
@@ -166,15 +182,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void showContestDecorationInfo() {
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
-        ab.setTitle(R.string.contest_decoration);
-        ab.setMessage(R.string.contest_decoration_info);
-        ab.setPositiveButton(R.string.download, new DialogInterface.OnClickListener() {
+        ab.setTitle(R.string.contests_and_raffle);
+        ab.setMessage(R.string.contest_and_raffle_info);
+        ab.setPositiveButton(R.string.go_to_web_contest, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                toast("Falta descargar archivo o ir a web");
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.marchazombiealcala.es/concursos")));
             }
         });
-        ab.setNegativeButton(R.string.close, null);
+        ab.setNeutralButton(R.string.return_back, null);
         ab.show();
     }
 
@@ -214,7 +230,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void refreshFragmentsData() {
+        showSection(new PerformancesFragment());
+    }
 
+    @Override
+    public void showNewNewsMessage() {
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle(R.string.fresh_news);
+        ab.setMessage(R.string.fresh_news_message);
+        ab.setPositiveButton(R.string.go_to_news, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                bottomNavView.setSelectedItemId(R.id.navigation_news);
+            }
+        });
+        ab.setNegativeButton(R.string.no_thanks, null);
+        ab.show();
     }
 
 }

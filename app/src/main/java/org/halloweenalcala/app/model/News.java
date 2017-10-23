@@ -1,5 +1,6 @@
 package org.halloweenalcala.app.model;
 
+import android.net.Uri;
 import android.webkit.URLUtil;
 
 import com.orm.SugarRecord;
@@ -17,7 +18,7 @@ import static org.halloweenalcala.app.model.Performance.stripAccents;
 public class News extends SugarRecord<News> implements Serializable {
 
     private int id_server;
-    private String datetime, title, text, image_url, btn_text, btn_link;
+    private String datetime, title, text, image_url, btn_text, btn_link, link_youtube;
 
     public String getDatetimeHumanFormat() {
 
@@ -32,6 +33,36 @@ public class News extends SugarRecord<News> implements Serializable {
             return getDatetime();
         }
     }
+
+
+    public boolean hasValidYoutubeVideo() {
+        if (link_youtube == null || link_youtube.isEmpty()) {
+            return false;
+        }
+
+        Uri uriVideo = Uri.parse(link_youtube);
+        String host = uriVideo.getHost();
+        return host.contains("youtu.be") || host.contains("youtube.com");
+
+    }
+
+    public String getYoutube_video_ID() {
+
+        try {
+            Uri uriVideo = Uri.parse(link_youtube);
+            if (uriVideo.getHost().contains("youtu.be")) {
+                return uriVideo.getPathSegments().get(0);
+            } else if(uriVideo.getHost().contains("youtube.com")) {
+                return uriVideo.getQueryParameter("v");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    // -------------------
 
     public boolean hasValidLink() {
         return URLUtil.isValidUrl(btn_link);
@@ -97,4 +128,11 @@ public class News extends SugarRecord<News> implements Serializable {
         this.id_server = id_server;
     }
 
+    public String getLink_youtube() {
+        return link_youtube;
+    }
+
+    public void setLink_youtube(String link_youtube) {
+        this.link_youtube = link_youtube;
+    }
 }

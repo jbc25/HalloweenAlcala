@@ -27,14 +27,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@color/red_halloween"
-                android:padding="5dp"
+                android:background="@color/white"
+                android:padding="8dp"
                 android:gravity="center_vertical"
                 android:visibility="gone">
 
                 <TextView
-                    style="@style/TextBase.White"
+                    style="@style/TextBase"
                     android:text="@string/app_dying"
+                    android:textColor="@color/red_halloween"
                     android:lines="1"
                     android:ellipsize="end"/>
 
@@ -42,8 +43,9 @@
 
                 <TextView
                     android:id="@+id/btn_update_app"
-                    style="@style/TextBase.White"
+                    style="@style/TextBase"
                     android:text="@string/resurrect"
+                    android:textColor="@color/red_halloween"
                     android:padding="5dp"
                     android:layout_marginRight="15dp"/>
 
@@ -83,7 +85,7 @@
             android:layout_height="match_parent"
             app:menu="@menu/navigation_drawer"
             android:layout_gravity="start"
-            android:background="#FFF"
+            android:background="#dddddd"
             app:headerLayout="@layout/view_header_menu"/>
 
     </android.support.v4.widget.DrawerLayout>

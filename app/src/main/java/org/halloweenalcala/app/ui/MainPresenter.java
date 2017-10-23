@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.BuildConfig;
 import org.halloweenalcala.app.base.BasePresenter;
@@ -78,11 +80,40 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
              @Override
              public void onError(String message) {
-                view.toast(message);
+//                 view.toast(message);
+                    FirebaseCrash.report(new Error("Data request error (configuration): " + message));
+
+             }
+         });
+
+         dataInteractor.getNews(new DataInteractor.DataCallback<News>() {
+             @Override
+             public void onSuccess(List<News> list) {
+                 News.deleteAll(News.class);
+                 News.saveInTx(list);
+
+                 if (!list.isEmpty()) {
+                     int lastNewsId = list.get(list.size() - 1).getId_server();
+                     checkNewNews(lastNewsId);
+                 }
+             }
+
+             @Override
+             public void onError(String message) {
+                 Log.e(TAG, "Error -> getNews: " + message);
+                 FirebaseCrash.report(new Error("Data request error (news): " + message));
              }
          });
 
      }
+
+    private void checkNewNews(int lastNewsIdServer) {
+        int lastNewsIdLocal = getPrefs().getInt(App.SHARED_LAST_NEWS_ID_LOCAL, 1);
+        if (lastNewsIdLocal < lastNewsIdServer) {
+            view.showNewNewsMessage();
+            getPrefs().edit().putInt(App.SHARED_LAST_NEWS_ID_LOCAL, lastNewsIdServer).commit();
+        }
+    }
 
     private boolean storeDataFirstTime() {
 
@@ -93,7 +124,6 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
             Place.saveInTx(places);
         } catch (IOException e) {
             Log.e(TAG, "Failed to read places.csv", e);
-            view.toast("Failed to read places.csv");
             return false;
         }
 
@@ -104,7 +134,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
             Participant.saveInTx(participants);
         } catch (IOException e) {
             Log.e(TAG, "Failed to read participants.csv", e);
-            view.toast("Failed to read participants.csv");
+//            view.toast("Failed to read participants.csv");
             return false;
         }
 
@@ -152,6 +182,8 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
             @Override
             public void onError(String message) {
+
+                FirebaseCrash.report(new Error("Data request error (places): " + message));
                 Log.e(TAG, "Error -> getPlaces: " + message);
             }
         });
@@ -166,6 +198,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
             @Override
             public void onError(String message) {
                 Log.e(TAG, "Error -> getParticipants: " + message);
+                FirebaseCrash.report(new Error("Data request error (participants): " + message));
             }
         });
 
@@ -174,24 +207,14 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
             public void onSuccess(List<Performance> list) {
                 Performance.deleteAll(Performance.class);
                 Performance.saveInTx(list);
+                view.refreshFragmentsData();
             }
 
             @Override
             public void onError(String message) {
                 Log.e(TAG, "Error -> getPerformances: " + message);
-            }
-        });
+                FirebaseCrash.report(new Error("Data request error (performances): " + message));
 
-        dataInteractor.getNews(new DataInteractor.DataCallback<News>() {
-            @Override
-            public void onSuccess(List<News> list) {
-                News.deleteAll(News.class);
-                News.saveInTx(list);
-            }
-
-            @Override
-            public void onError(String message) {
-                Log.e(TAG, "Error -> getNews: " + message);
             }
         });
 

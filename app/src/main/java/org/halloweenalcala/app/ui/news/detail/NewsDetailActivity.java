@@ -7,11 +7,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.squareup.picasso.Picasso;
 
 import org.halloweenalcala.app.App;
@@ -20,7 +25,7 @@ import org.halloweenalcala.app.base.BaseActivity;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.News;
 
-public class NewsDetailActivity extends BaseActivity implements View.OnClickListener {
+public class NewsDetailActivity extends BaseActivity implements View.OnClickListener, YouTubePlayer.OnInitializedListener {
 
     private static final String EXTRA_NEWS = "extra_participant";
     private News news;
@@ -28,6 +33,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     private AppCompatImageView imgNews;
     private TextView tvNewsDescription;
     private AppCompatButton btnLink;
+    private YouTubePlayerSupportFragment youtubePlayerFragment;
 
     private void findViews() {
         tvNewsTitle = (TextView) findViewById(R.id.tv_news_title);
@@ -61,6 +67,14 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
 
         news = (News) getIntent().getSerializableExtra(EXTRA_NEWS);
 
+        youtubePlayerFragment = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_youtube_player);
+
+        if (news.hasValidYoutubeVideo()) {
+            youtubePlayerFragment.initialize(getString(R.string.google_maps_key), this);
+        } else {
+            youtubePlayerFragment.getView().setVisibility(View.GONE);
+        }
+
         loadData();
     }
 
@@ -76,7 +90,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         setToolbarTitle(R.string.news);
 
         tvNewsTitle.setText(news.getTitle());
-        tvNewsDescription.setText(news.getText());
+        tvNewsDescription.setText(Html.fromHtml(news.getText()));
 
         if (news.hasImage()) {
             Picasso.with(this)
@@ -143,4 +157,17 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+
+        youTubePlayer.cueVideo(news.getYoutube_video_ID());
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+//        toast("Error en Youtube Player");
+        youtubePlayerFragment.getView().setVisibility(View.GONE);
+        Log.e(TAG, "onInitializationFailure: ");
+    }
 }

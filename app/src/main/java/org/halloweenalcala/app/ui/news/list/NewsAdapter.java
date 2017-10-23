@@ -59,7 +59,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 .load(newsList.getImage_url())
                 //                .placeholder(R.mipmap.img_default_grid)
 //                         .error(R.mipmap.ic_mes_v2_144)
-                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
+//                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
                 .into(holder.imgNews);
 
         addClickListener(holder.rootView, safePosition);

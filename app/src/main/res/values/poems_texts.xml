@@ -2,13 +2,13 @@
 <resources>
     <string name="poem_title_manual_supervivencia">Manual de supervivencia</string>
     <string name="poem_text_manual_supervivencia">
-Un día,supuestamente,\n
+Un día, supuestamente,\n
 suena una estúpida alarma,\n
 el mundo se apaga y arma\n
 y despierta diferente.\n
-Corra,peligra su mente,\n
+Corra, peligra su mente,\n
 escóndase en su agujero.\n
-Dispare, si usted, primero,\n
+Dispare, sí usted, primero,\n
 vaya al cercado y la torre,\n
 si el monstruo le sigue y corre,\n
 no pare, corra ligero.
@@ -22,7 +22,7 @@ la vista es la que engaña,\n
 presente está el futuro.\n
 El mundo no es tan oscuro.\n
 ¿No queda convencido?\n
-Dispense,¿no es fingido?\n
+Dispense, ¿no es fingido?\n
 es sobrenatural,\n
 la página final,\n
 ¿su miedo? – En el olvido.
@@ -33,12 +33,12 @@ la página final,\n
     Por las calles. ¡Qué alucine!\n
 Saltan desde la pantalla,\n
 los iconos en batalla.\n
-¡Viva el cine!.\n
+¡Viva el cine!\n
 Vampiros, mujeres loba,\n
 ogros, monstruos y falsarios,\n
 esos mismos que a diario\n
 recogen la sopa boba.\n
-Tantas cosas hay quever\n
+Tantas cosas hay que ver\n
 ¡No se lo pueden perder!
         </string>
 
@@ -65,8 +65,8 @@ y automotor impaciente,\n
 humor gráfico y potente\n
 a todo gas y sin rienda.\n
 Sorprende por estupenda,\n
-veloz; ¡relámpagos!, ¡rayos!.\n
-¡No me pise usted los callos!.\n
+veloz; ¡relámpagos!, ¡rayos!\n
+¡No me pise usted los callos!\n
 Corra, pues, que yo celebro\n
 que aquí nos sobre el cerebro\n
 y nos falle un dos caballos.
@@ -89,11 +89,11 @@ en un sueño artificial.
     <string name="poem_title_indiana_jones">Indiana Jones</string>
     <string name="poem_text_indiana_jones">
         Del Nepal a las Pitusas\n
-y del Cairo hasta Indochina\n
+y de El Cairo hasta Indochina\n
 el profesor imagina\n
 látigos y cornamusas.\n
 Idolillos y confusas\n
-lides con nazis del Mundo\n
+lides con nazis del mundo\n
 lo persiguen y al segundo\n
 son habas mal descontadas\n
 sus aventuras pasadas\n
@@ -121,8 +121,8 @@ y en el fondo el ataúd.
 La máquina verdadera,\n
 la escoba que escupe fuego,\n
 aunque la vida es un juego\n
-la razón sólo es quimera.\n
-Tropa infame,ruda y fiera,\n
+la razón solo es quimera.\n
+Tropa infame, ruda y fiera,\n
 de las tinieblas se lanza.\n
 Cruda y cara la mudanza\n
 del ejército infernal\n
@@ -137,7 +137,7 @@ Hora en punto al avanzar,\n
 es simétrico el mensaje\n
 cuando aparece el pasaje\n
 en medio del avatar.\n
-Dos y dos, suman al par\n
+Dos y dos suman al par\n
 un sendero de obsesión.\n
 Esquina a la salvación\n
 se pierde la perspectiva\n
@@ -146,14 +146,14 @@ en ambivalente acción.
 </string>
 
 
-    <string name="poem_title_truco_trato">Truco o Trato</string>
+    <string name="poem_title_truco_trato">Truco o trato</string>
     <string name="poem_text_truco_trato">
 Te pretendo reparar\n
 ya que estás escacharrado,\n
 otoño medio pasado\n
 deja ya de estornudar.\n
-¿Qué me vas a regalar?.\n
-¿Nada?. ¡Te llevas un susto!.\n
+¿Qué me vas a regalar?\n
+¿Nada? ¡Te llevas un susto!\n
 A fecha tal, tanto gusto\n
 de dulces y caramelos,\n
 muñeco con malos pelos,\n
@@ -169,8 +169,8 @@ un zombie, ¿está muerto o vivo?\n
 Mundo participativo\n
 en las máquinas rodantes.\n
 ¿Te siguen los replicantes?\n
-Corra usted,una vez más.\n
-Vienes aquí después vas,\n
+Corra usted, una vez más.\n
+Vienes aquí, después vas,\n
 ¿son humanos o mutantes?
         </string>
 
@@ -182,7 +182,7 @@ Bolso, paraguas, sombrero\n
 de mágico novilunio,\n
 la niñera el mes de junio\n
 da vueltas a un mundo entero.\n
-¿Canta usted buen caballero?\n
+¿Canta usted, buen caballero?\n
 "Si usted conmigo pasea"\n
 La más peregrina idea\n
 acaso es la más sutil,\n
@@ -245,9 +245,9 @@ y ese tumulto torero\n
 de pasada y en porciones.\n
 México viva patrones\n
 del rancho y terráqueo globo.\n
-A veces Coyote y Lobo\n
+A veces coyote y lobo\n
 y relator de la vida\n
-en esta página huída\n
+en esta página huida\n
 del ají puesto en adobo.
         </string>
 
@@ -294,7 +294,7 @@ del pulcro grumete replicante.\n
 Un bergantín navegante\n
 por las aguas más remotas\n
 persigue con velas rotas\n
-siempre al Holandés errante.
+siempre al holandés errante.
         </string>
 
     <string name="poem_title_joker">The Joker</string>
@@ -304,7 +304,7 @@ trepidante artificial,\n
 tremebundo natural\n
 del tráfico divertido.\n
 Cuatro caras y es fingido\n
-y siempre encontradicción.\n
+y siempre en contradicción.\n
 Contrario a la dirección\n
 abriendo mucho la boca\n
 porque quien calla y no toca\n
@@ -316,10 +316,10 @@ no juega en esta función.
     <string name="poem_text_walked_zombies">
 Noches de muertos vivientes\n
 en el tórrido verano\n
-¡sal de la tierra gusano!\n
+¡sal de la tierra, gusano!\n
 ven a asustar a la gente.\n
 En la materia corriente\n
-si me debes obediencia.\n
+sí me debes obediencia.\n
 Yo que no tengo conciencia\n
 voy a ser tu compañero\n
 y juntos por el sendero\n

@@ -13,8 +13,12 @@
     <TextView
         android:id="@+id/tv_news_title"
         style="@style/TextBase.White"
-        android:layout_marginTop="10dp"
-        android:textSize="28sp" />
+        android:layout_width="match_parent"
+        app:fontPath="fonts/typewriter.ttf"
+        android:gravity="center_horizontal"
+        android:background="@color/red_halloween"
+        android:textSize="24sp"
+        android:padding="10dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,23 +30,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
 
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/img_news"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:adjustViewBounds="true" />
 
             <TextView
                 android:id="@+id/tv_news_description"
                 style="@style/TextBase.White"
-                app:fontPath="fonts/typewriter.ttf"
                 android:layout_marginTop="10dp"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:padding="10dp" />
+
+            <fragment
+                android:id="@+id/fragment_youtube_player"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                android:layout_marginTop="15dp"/>
 
         </LinearLayout>
 

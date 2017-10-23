@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="8dp">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/img_participant"
@@ -14,7 +15,7 @@
 
     <View
         android:id="@+id/view_filter"
-        android:background="#9F00"
+        android:background="#9a410f0f"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/img_participant"
@@ -25,6 +26,6 @@
         style="@style/TextBase.White"
         android:layout_centerInParent="true"
         app:fontPath="fonts/ZombieQueen.ttf"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:gravity="center"/>
 </RelativeLayout>

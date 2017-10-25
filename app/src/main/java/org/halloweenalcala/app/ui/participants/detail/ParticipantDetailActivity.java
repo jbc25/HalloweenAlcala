@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 import com.squareup.picasso.Picasso;
 
 import org.halloweenalcala.app.R;
@@ -83,8 +86,19 @@ public class ParticipantDetailActivity extends BaseActivity implements View.OnCl
             youtubePlayerFragment.getView().setVisibility(View.GONE);
         }
 
+        sendAnalyticsParticipant();
+
 
         loadData();
+    }
+
+    private void sendAnalyticsParticipant() {
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, participant.getId_server());
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, participant.getName());
+
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.VIEW_ITEM+"_participant", bundle);
     }
 
     private void loadData() {
@@ -92,7 +106,7 @@ public class ParticipantDetailActivity extends BaseActivity implements View.OnCl
         setToolbarTitle(participant.getName());
 
         tvParticipantModality.setText(participant.getArtistic_modality());
-        tvParticipantDescription.setText(participant.getDescription());
+        tvParticipantDescription.setText(Html.fromHtml(participant.getDescription()));
 
         if (participant.hasImage1()) {
             Picasso.with(this)
@@ -149,13 +163,15 @@ public class ParticipantDetailActivity extends BaseActivity implements View.OnCl
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
 //        youTubePlayer.addFullscreenControlFlag();
+        youTubePlayer.setShowFullscreenButton(false);
         youTubePlayer.cueVideo(participant.getYoutube_video_ID());
     }
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
-        toast("Error en Youtube Player");
+//        toast("Error en Youtube Player");
+        FirebaseCrash.report(new Error("Error en Youtube player"));
         youtubePlayerFragment.getView().setVisibility(View.GONE);
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 import com.orm.SugarApp;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
@@ -45,7 +47,10 @@ public class App extends SugarApp {
 //                .setFontAttrId(R.attr.fontPath)
 //                .build());
 
-//        FirebaseCrash.setCrashCollectionEnabled(false);
+        if (BuildConfig.DEBUG) {
+            FirebaseCrash.setCrashCollectionEnabled(false);
+            FirebaseAnalytics.getInstance(this).setAnalyticsCollectionEnabled(false);
+        }
 
 //        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
 

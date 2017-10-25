@@ -112,7 +112,11 @@ public class Participant extends SugarRecord<Participant> implements Serializabl
     }
 
     public String getDescription() {
-        return description;
+        if (!description.contains("<")) {
+            return description.replace("\n\n", "<p>").replace("\n", "<br>");
+        } else {
+            return description;
+        }
     }
 
     public void setDescription(String description) {

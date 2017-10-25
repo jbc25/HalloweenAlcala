@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +16,8 @@ import android.widget.TextView;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 import com.squareup.picasso.Picasso;
 
 import org.halloweenalcala.app.App;
@@ -76,7 +77,19 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         }
 
         loadData();
+
+        sendAnalyticsNews();
     }
+
+    private void sendAnalyticsNews() {
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, news.getId_server());
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, news.getTitle());
+
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.VIEW_ITEM+"_news", bundle);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,6 +173,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
 
+        youTubePlayer.setShowFullscreenButton(false);
         youTubePlayer.cueVideo(news.getYoutube_video_ID());
     }
 
@@ -167,7 +181,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
 //        toast("Error en Youtube Player");
+        FirebaseCrash.report(new Error("Error en Youtube player"));
         youtubePlayerFragment.getView().setVisibility(View.GONE);
-        Log.e(TAG, "onInitializationFailure: ");
     }
 }

@@ -12,5 +12,5 @@ public interface MainView extends BaseView {
 
     void refreshFragmentsData();
 
-    void showNewNewsMessage();
+    void showNewNewsIcon(boolean show);
 }

@@ -106,12 +106,13 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Ma
         mMap.setIndoorEnabled(false);
 
         mMap.setOnMarkerClickListener(this);
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                toast(marker.getTag().toString());
-            }
-        });
+//        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+//            @Override
+//            public void onInfoWindowClick(Marker marker) {
+////                toast(marker.getTag().toString());
+//                toastHalloween(R.string.hurry_no_time);
+//            }
+//        });
 
 
         presenter.onMapReady();

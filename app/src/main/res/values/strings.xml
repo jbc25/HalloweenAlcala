@@ -42,7 +42,7 @@
         · Concurso de fotografía\n
         · Sorteo solidario\n\n
 
-        Toda la información, bases e inscripciones en la web de la Marcha Zombie
+        Toda la información, bases e inscripciones en la web de la Marcha Zombie\n
         ¡Te esperamos!
     </string>
     <string name="go_to_web_contest">Ir a la web</string>
@@ -70,6 +70,7 @@
     <string name="return_back">Volver</string>
     <string name="social_networks">Redes sociales</string>
     <string name="credits">Créditos</string>
+    <string name="hurry_no_time">¡Corre! Te quedas sin tiempo</string>
 
 
 </resources>

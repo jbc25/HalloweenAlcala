@@ -110,8 +110,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
     private void checkNewNews(int lastNewsIdServer) {
         int lastNewsIdLocal = getPrefs().getInt(App.SHARED_LAST_NEWS_ID_LOCAL, 1);
         if (lastNewsIdLocal < lastNewsIdServer) {
-            view.showNewNewsMessage();
-            getPrefs().edit().putInt(App.SHARED_LAST_NEWS_ID_LOCAL, lastNewsIdServer).commit();
+            view.showNewNewsIcon(true);
         }
     }
 
@@ -232,4 +231,14 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
     }
 
 
+    public void onNewsButtonClick() {
+
+        int lastNewsIdServer = 0;
+        List<News> newsList = News.listAll(News.class);
+        for (News news : newsList) {
+            lastNewsIdServer = Math.max(news.getId_server(), lastNewsIdServer);
+        }
+        getPrefs().edit().putInt(App.SHARED_LAST_NEWS_ID_LOCAL, lastNewsIdServer).commit();
+        view.showNewNewsIcon(false);
+    }
 }

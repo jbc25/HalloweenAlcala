@@ -5,17 +5,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.firebase.crash.FirebaseCrash;
 
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseActivity;
@@ -41,6 +47,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ImageView btnCloseUpdateApp;
     private MainPresenter presenter;
     private Place placeToSelect;
+    private View iconNewNewsBadge;
 
     @Override
     public BasePresenter getPresenter() {
@@ -74,11 +81,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         configureToolbar();
         configureDrawerLayout();
+        configureBottomNavView();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content, new PerformancesFragment()).commit();
 
         presenter.onCreate();
 
+    }
+
+    private void configureBottomNavView() {
+
+        View v = bottomNavView.findViewById(R.id.navigation_news);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
+
+        iconNewNewsBadge = LayoutInflater.from(this)
+                .inflate(R.layout.view_new_news_badge, bottomNavView, false);
+
+        itemView.addView(iconNewNewsBadge);
+
+//        showNewNewsMessage();
     }
 
     // CONFIGURATIONS
@@ -129,6 +150,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     setToolbarTitle(R.string.zinemazombies);
                     return true;
                 case R.id.navigation_news:
+                    presenter.onNewsButtonClick();
                     showSection(new NewsFragment());
                     setToolbarTitle(R.string.news);
                     return true;
@@ -230,22 +252,48 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void refreshFragmentsData() {
-        showSection(new PerformancesFragment());
+
+        if (bottomNavView.getSelectedItemId() == R.id.navigation_agenda) {
+            showSection(new PerformancesFragment());
+        }
     }
 
     @Override
-    public void showNewNewsMessage() {
-        AlertDialog.Builder ab = new AlertDialog.Builder(this);
-        ab.setTitle(R.string.fresh_news);
-        ab.setMessage(R.string.fresh_news_message);
-        ab.setPositiveButton(R.string.go_to_news, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                bottomNavView.setSelectedItemId(R.id.navigation_news);
+    public void showNewNewsIcon(boolean show) {
+//        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+//        ab.setTitle(R.string.fresh_news);
+//        ab.setMessage(R.string.fresh_news_message);
+//        ab.setPositiveButton(R.string.go_to_news, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                bottomNavView.setSelectedItemId(R.id.navigation_news);
+//            }
+//        });
+//        ab.setNegativeButton(R.string.no_thanks, null);
+//        ab.show();
+
+        if (show) {
+
+            iconNewNewsBadge.setVisibility(View.VISIBLE);
+
+            try {
+                Animation anim = new ScaleAnimation(
+                        1, 2, // Start and end values for the X axis scaling
+                        1, 2, // Start and end values for the Y axis scaling
+                        Animation.RELATIVE_TO_SELF, 1f, // Pivot point of X scaling
+                        Animation.RELATIVE_TO_SELF, 0f); // Pivot point of Y scaling
+//        anim.setFillAfter(true); // Needed to keep the result of the animation
+                anim.setDuration(300);
+                anim.setRepeatCount(3);
+                anim.setRepeatMode(Animation.REVERSE);
+                iconNewNewsBadge.startAnimation(anim);
+            } catch (Exception e) {
+                FirebaseCrash.report(e);
             }
-        });
-        ab.setNegativeButton(R.string.no_thanks, null);
-        ab.show();
+        } else {
+            iconNewNewsBadge.setVisibility(View.GONE);
+        }
+
     }
 
 }

@@ -55,12 +55,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.tvNewsText.setText(newsList.getText());
         holder.tvNewsDate.setText(newsList.getDatetimeHumanFormat());
 
-        Picasso.with(context)
-                .load(newsList.getImage_url())
-                //                .placeholder(R.mipmap.img_default_grid)
+        if (newsList.hasImage()) {
+            Picasso.with(context)
+                    .load(newsList.getImage_url())
+                    //                .placeholder(R.mipmap.img_default_grid)
 //                         .error(R.mipmap.ic_mes_v2_144)
 //                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-                .into(holder.imgNews);
+                    .into(holder.imgNews);
+        }
 
         addClickListener(holder.rootView, safePosition);
 

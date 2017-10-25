@@ -1,6 +1,7 @@
 package org.halloweenalcala.app.model;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.webkit.URLUtil;
 
 import com.orm.SugarRecord;
@@ -15,7 +16,7 @@ import static org.halloweenalcala.app.model.Performance.stripAccents;
  * Created by julio on 17/10/17.
  */
 
-public class News extends SugarRecord<News> implements Serializable {
+public class News extends SugarRecord<News> implements Serializable, Comparable {
 
     private int id_server;
     private String datetime, title, text, image_url, btn_text, btn_link, link_youtube;
@@ -60,6 +61,29 @@ public class News extends SugarRecord<News> implements Serializable {
         }
 
         return null;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        try {
+            Date datetime = getDate();
+            Date datetimeOther = ((News) o).getDate();
+            return datetimeOther.compareTo(datetime);
+        } catch (NullPointerException e) {
+        }
+        return 0;
+    }
+
+    public Date getDate() {
+
+        try {
+            Date dateTime = Performance.dateTimeFormatApi.parse(getDatetime());
+            return dateTime;
+        } catch (ParseException e) {
+            e.printStackTrace();
+
+            return null;
+        }
     }
 
     // -------------------
@@ -135,4 +159,5 @@ public class News extends SugarRecord<News> implements Serializable {
     public void setLink_youtube(String link_youtube) {
         this.link_youtube = link_youtube;
     }
+
 }

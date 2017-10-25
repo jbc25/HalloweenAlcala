@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crash.FirebaseCrash;
 import com.orm.query.Condition;
 import com.orm.query.Select;
@@ -228,7 +229,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
                 if (!name.contains(wordPart)) {
                     continue Response;
                 } else if (j == wordsParts.length - 1) {
-                    FirebaseCrash.log("Poem guess: " + getString(poemCharacter.getPoemTitleId()) + ". Success: true");
+                    sendPoemGuessResult(name, true);
                     return true;
                 }
 
@@ -236,7 +237,18 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
 
         }
 
-        FirebaseCrash.log("Poem guess: " + getString(poemCharacter.getPoemTitleId()) + ". Success: false");
+        sendPoemGuessResult(name, false);
         return false;
+    }
+
+    private void sendPoemGuessResult(String name, boolean success) {
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, poemCharacter.getId());
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(poemCharacter.getPoemTitleId()));
+        bundle.putBoolean(FirebaseAnalytics.Param.SCORE, success);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_VARIANT, name);
+
+        FirebaseAnalytics.getInstance(getActivity()).logEvent(FirebaseAnalytics.Event.POST_SCORE, bundle);
     }
 }

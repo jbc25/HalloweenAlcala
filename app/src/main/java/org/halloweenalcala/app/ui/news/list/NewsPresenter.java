@@ -7,6 +7,7 @@ import org.halloweenalcala.app.model.News;
 import org.halloweenalcala.app.ui.news.detail.NewsDetailActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,6 +47,9 @@ import java.util.List;
 
          newsList.clear();
          newsList.addAll(News.listAll(News.class));
+
+         Collections.sort(newsList);
+
          view.showNews(newsList);
      }
 

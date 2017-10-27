@@ -55,7 +55,7 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapte
         if (participant.hasImage1()) {
             Picasso.with(context)
                     .load(participant.getImage1())
-                    .placeholder(R.mipmap.ic_launcher)
+                    .placeholder(R.mipmap.ic_app)
 //                        .error(R.mipmap.ic_mes_v2_144)
 //                .resizeDimen(R.dimen.width_image_small, -1)
                     .into(holder.imgParticipant);

@@ -50,8 +50,7 @@
                 android:id="@+id/fragment_youtube_player"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
-                android:layout_marginTop="15dp"/>
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"/>
 
         </LinearLayout>
 

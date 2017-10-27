@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,6 +102,8 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     private void loadData() {
 
         setToolbarTitle(R.string.news);
+
+        tvNewsDescription.setMovementMethod(LinkMovementMethod.getInstance());
 
         tvNewsTitle.setText(news.getTitle());
         tvNewsDescription.setText(Html.fromHtml(news.getText()));

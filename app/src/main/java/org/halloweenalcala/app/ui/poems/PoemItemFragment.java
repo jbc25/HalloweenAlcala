@@ -246,7 +246,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
         Bundle bundle = new Bundle();
         bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, poemCharacter.getId());
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(poemCharacter.getPoemTitleId()));
-        bundle.putBoolean(FirebaseAnalytics.Param.SCORE, success);
+        bundle.putInt(FirebaseAnalytics.Param.SCORE, success ? 1 : -1);
         bundle.putString(FirebaseAnalytics.Param.ITEM_VARIANT, name);
 
         FirebaseAnalytics.getInstance(getActivity()).logEvent(FirebaseAnalytics.Event.POST_SCORE, bundle);

@@ -179,11 +179,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.menu_about_alcala_halloween:
-                TextHtmlActivity.start(this, WebViewActivity.TYPE_ALCALA_HALLOWEEN);
+                TextHtmlActivity.start(this, TextHtmlActivity.TYPE_ALCALA_HALLOWEEN);
                 break;
 
             case R.id.menu_about_marcha_zombie:
-                TextHtmlActivity.start(this, WebViewActivity.TYPE_7MZ);
+                TextHtmlActivity.start(this, TextHtmlActivity.TYPE_7MZ);
                 break;
 
             case R.id.menu_contest_and_raffle:

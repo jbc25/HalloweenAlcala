@@ -2,6 +2,7 @@ package org.halloweenalcala.app.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.util.Log;
 
@@ -119,7 +120,12 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         try {
             String csvPlaces = Util.getStringFromAssets(context, "data/places.csv");
             List<Place> places = new CsvConverter<>(Place.class).convert(csvPlaces);
-            Place.deleteAll(Place.class);
+            try {
+                Place.deleteAll(Place.class);
+            } catch (SQLiteException e) {
+                e.printStackTrace();
+            }
+
             Place.saveInTx(places);
         } catch (IOException e) {
             Log.e(TAG, "Failed to read places.csv", e);
@@ -129,7 +135,12 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         try {
             String csvParticipants = Util.getStringFromAssets(context, "data/participants.csv");
             List<Participant> participants = new CsvConverter<>(Participant.class).convert(csvParticipants);
-            Participant.deleteAll(Participant.class);
+            try {
+                Participant.deleteAll(Participant.class);
+            } catch (SQLiteException e) {
+                e.printStackTrace();
+            }
+
             Participant.saveInTx(participants);
         } catch (IOException e) {
             Log.e(TAG, "Failed to read participants.csv", e);
@@ -140,7 +151,13 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         try {
             String csvPerformances = Util.getStringFromAssets(context, "data/performances.csv");
             List<Performance> performances = new CsvConverter<>(Performance.class).convert(csvPerformances);
-            Performance.deleteAll(Performance.class);
+
+            try {
+                Performance.deleteAll(Performance.class);
+            } catch (SQLiteException e) {
+                e.printStackTrace();
+            }
+
             Performance.saveInTx(performances);
         } catch (IOException e) {
             Log.e(TAG, "Failed to read performances.csv", e);

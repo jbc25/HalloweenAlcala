@@ -87,6 +87,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         presenter.onCreate();
 
+//        WebViewActivity.start(this, "https://www.loomio.org/p/PsUuLI1p/nota-de-prensa-para-solidarizarse");
+
     }
 
     private void configureBottomNavView() {
@@ -191,7 +193,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.menu_credits:
-                WebViewActivity.start(this, "http://www.marchazombiealcala.es/creditos");
+                WebViewActivity.start(this, "http://www.marchazombiealcala.es/creditos");https://www.loomio.org/
                 break;
         }
 

@@ -3,7 +3,6 @@ package org.halloweenalcala.app.ui.static_info;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.PluginState;
@@ -96,7 +95,7 @@ public class WebViewActivity extends BaseActivity  {
 
     private void configWebView() {
 
-        webView.setBackgroundColor(Color.TRANSPARENT);
+//        webView.setBackgroundColor(Color.TRANSPARENT);
 
         WebSettings webviewSettings = webView.getSettings();
 

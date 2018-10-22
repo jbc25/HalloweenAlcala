@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.firebase.crash.FirebaseCrash;
+import com.crashlytics.android.Crashlytics;
 
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseActivity;
@@ -290,7 +290,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 anim.setRepeatMode(Animation.REVERSE);
                 iconNewNewsBadge.startAnimation(anim);
             } catch (Exception e) {
-                FirebaseCrash.report(e);
+                Crashlytics.logException(e);
             }
         } else {
             iconNewNewsBadge.setVisibility(View.GONE);

@@ -12,11 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.crash.FirebaseCrash;
 import com.squareup.picasso.Picasso;
 
 import org.halloweenalcala.app.R;
@@ -109,13 +109,13 @@ public class ParticipantDetailActivity extends BaseActivity implements View.OnCl
         tvParticipantDescription.setText(Html.fromHtml(participant.getDescription()));
 
         if (participant.hasImage1()) {
-            Picasso.with(this)
+            Picasso.get()
                     .load(participant.getImage1())
                     .into(imgParticipantBackground);
         }
 
         if (participant.hasImage2()) {
-            Picasso.with(this)
+            Picasso.get()
                     .load(participant.getImage2())
                     .into(imgParticipant);
         }
@@ -171,7 +171,7 @@ public class ParticipantDetailActivity extends BaseActivity implements View.OnCl
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
 //        toast("Error en Youtube Player");
-        FirebaseCrash.report(new Error("Error en Youtube player"));
+        Crashlytics.logException(new Error("Error en Youtube player"));
         youtubePlayerFragment.getView().setVisibility(View.GONE);
     }
 }

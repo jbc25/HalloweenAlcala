@@ -1,7 +1,7 @@
 package org.halloweenalcala.app.api.common;
 
 
-import org.halloweenalcala.app.api.ApiClient;
+import org.halloweenalcala.app.api.retrofit.ApiClient;
 import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;

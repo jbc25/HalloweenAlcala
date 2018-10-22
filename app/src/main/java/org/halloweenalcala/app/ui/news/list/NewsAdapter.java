@@ -56,7 +56,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.tvNewsDate.setText(newsList.getDatetimeHumanFormat());
 
         if (newsList.hasImage()) {
-            Picasso.with(context)
+            Picasso.get()
                     .load(newsList.getImage_url())
                     //                .placeholder(R.mipmap.img_default_grid)
 //                         .error(R.mipmap.ic_mes_v2_144)

@@ -72,7 +72,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void onError(String message) {
-                toast(message);
+//                toast(message);
             }
         });
     }

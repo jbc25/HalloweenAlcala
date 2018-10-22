@@ -13,10 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.crash.FirebaseCrash;
-import com.orm.query.Condition;
-import com.orm.query.Select;
 
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
@@ -137,7 +135,8 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
                     break;
 
                 case PoemCharacter.TYPE_PLACE:
-                    Place place = (Place) Select.from(Place.class).where(Condition.prop("idserver").eq(poemCharacter.getIdPlaceServer())).first();
+                    Place place = App.getDB().placeDao().getById(poemCharacter.getIdPlaceServer());
+//                    Place place = (Place) Select.from(Place.class).where(Condition.prop("idserver").eq(poemCharacter.getIdPlaceServer())).first();
                     tvPoemUnlockDescription.setText(Html.fromHtml(String.format(getString(R.string.place_unlock_description), place.getName())));
                     String title = getString(poemCharacter.getPoemTitleId());
                     tvHiddenPoemName.setText(title);
@@ -165,7 +164,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
                 break;
 
             case R.id.btn_go_to_map:
-                Place place = (Place) Select.from(Place.class).where(Condition.prop("idserver").eq(poemCharacter.getIdPlaceServer())).first();
+                Place place = App.getDB().placeDao().getById(poemCharacter.getIdPlaceServer());
                 ((MainActivity)getActivity()).onGoToMapButtonClick(place);
                 break;
 
@@ -209,7 +208,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
         String correctCode = PoemBook.codesPlaces.get(poemCharacter.getIdPlaceServer());
         boolean success = code.toLowerCase().equals(correctCode.toLowerCase());
 
-        FirebaseCrash.log("Poem guess: " + getString(poemCharacter.getPoemTitleId()) + ". Success: " + success);
+        Crashlytics.logException(new Exception("Poem guess: " + getString(poemCharacter.getPoemTitleId()) + ". Success: " + success));
         return success;
     }
 

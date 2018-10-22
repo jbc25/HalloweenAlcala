@@ -2,11 +2,10 @@ package org.halloweenalcala.app.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.util.Log;
 
-import com.google.firebase.crash.FirebaseCrash;
+import com.crashlytics.android.Crashlytics;
 
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.BuildConfig;
@@ -82,7 +81,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
              @Override
              public void onError(String message) {
 //                 view.toast(message);
-                    FirebaseCrash.report(new Error("Data request error (configuration): " + message));
+                    Crashlytics.logException(new Error("Data request error (configuration): " + message));
 
              }
          });
@@ -90,8 +89,9 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
          dataInteractor.getNews(new DataInteractor.DataCallback<News>() {
              @Override
              public void onSuccess(List<News> list) {
-                 News.deleteAll(News.class);
-                 News.saveInTx(list);
+
+                 App.getDB().newsDao().deleteAll();
+                 App.getDB().newsDao().insertAll(list);
 
                  if (!list.isEmpty()) {
                      int lastNewsId = list.get(list.size() - 1).getId_server();
@@ -102,7 +102,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
              @Override
              public void onError(String message) {
                  Log.e(TAG, "Error -> getNews: " + message);
-                 FirebaseCrash.report(new Error("Data request error (news): " + message));
+                 Crashlytics.logException(new Error("Data request error (news): " + message));
              }
          });
 
@@ -120,13 +120,10 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         try {
             String csvPlaces = Util.getStringFromAssets(context, "data/places.csv");
             List<Place> places = new CsvConverter<>(Place.class).convert(csvPlaces);
-            try {
-                Place.deleteAll(Place.class);
-            } catch (SQLiteException e) {
-                e.printStackTrace();
-            }
 
-            Place.saveInTx(places);
+            App.getDB().placeDao().deleteAll();
+            App.getDB().placeDao().insertAll(places);
+
         } catch (IOException e) {
             Log.e(TAG, "Failed to read places.csv", e);
             return false;
@@ -135,13 +132,10 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         try {
             String csvParticipants = Util.getStringFromAssets(context, "data/participants.csv");
             List<Participant> participants = new CsvConverter<>(Participant.class).convert(csvParticipants);
-            try {
-                Participant.deleteAll(Participant.class);
-            } catch (SQLiteException e) {
-                e.printStackTrace();
-            }
 
-            Participant.saveInTx(participants);
+            App.getDB().participantDao().deleteAll();
+            App.getDB().participantDao().insertAll(participants);
+
         } catch (IOException e) {
             Log.e(TAG, "Failed to read participants.csv", e);
 //            view.toast("Failed to read participants.csv");
@@ -152,13 +146,8 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
             String csvPerformances = Util.getStringFromAssets(context, "data/performances.csv");
             List<Performance> performances = new CsvConverter<>(Performance.class).convert(csvPerformances);
 
-            try {
-                Performance.deleteAll(Performance.class);
-            } catch (SQLiteException e) {
-                e.printStackTrace();
-            }
-
-            Performance.saveInTx(performances);
+            App.getDB().performanceDao().deleteAll();
+            App.getDB().performanceDao().insertAll(performances);
         } catch (IOException e) {
             Log.e(TAG, "Failed to read performances.csv", e);
 //            view.toast("Failed to read performances.csv");
@@ -192,14 +181,14 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         dataInteractor.getPlaces(new DataInteractor.DataCallback<Place>() {
             @Override
             public void onSuccess(List<Place> list) {
-                Place.deleteAll(Place.class);
-                Place.saveInTx(list);
+                App.getDB().placeDao().deleteAll();
+                App.getDB().placeDao().insertAll(list);
             }
 
             @Override
             public void onError(String message) {
 
-                FirebaseCrash.report(new Error("Data request error (places): " + message));
+                Crashlytics.logException(new Error("Data request error (places): " + message));
                 Log.e(TAG, "Error -> getPlaces: " + message);
             }
         });
@@ -207,29 +196,29 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         dataInteractor.getParticipants(new DataInteractor.DataCallback<Participant>() {
             @Override
             public void onSuccess(List<Participant> list) {
-                Participant.deleteAll(Participant.class);
-                Participant.saveInTx(list);
+                App.getDB().participantDao().deleteAll();
+                App.getDB().participantDao().insertAll(list);
             }
 
             @Override
             public void onError(String message) {
                 Log.e(TAG, "Error -> getParticipants: " + message);
-                FirebaseCrash.report(new Error("Data request error (participants): " + message));
+                Crashlytics.logException(new Error("Data request error (participants): " + message));
             }
         });
 
         dataInteractor.getPerformances(new DataInteractor.DataCallback<Performance>() {
             @Override
             public void onSuccess(List<Performance> list) {
-                Performance.deleteAll(Performance.class);
-                Performance.saveInTx(list);
+                App.getDB().performanceDao().deleteAll();
+                App.getDB().performanceDao().insertAll(list);
                 view.refreshFragmentsData();
             }
 
             @Override
             public void onError(String message) {
                 Log.e(TAG, "Error -> getPerformances: " + message);
-                FirebaseCrash.report(new Error("Data request error (performances): " + message));
+                Crashlytics.logException(new Error("Data request error (performances): " + message));
 
             }
         });
@@ -251,7 +240,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
     public void onNewsButtonClick() {
 
         int lastNewsIdServer = 0;
-        List<News> newsList = News.listAll(News.class);
+        List<News> newsList = App.getDB().newsDao().getAll();
         for (News news : newsList) {
             lastNewsIdServer = Math.max(news.getId_server(), lastNewsIdServer);
         }

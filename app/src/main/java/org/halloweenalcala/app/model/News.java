@@ -1,10 +1,10 @@
 package org.halloweenalcala.app.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.webkit.URLUtil;
-
-import com.orm.SugarRecord;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -16,8 +16,10 @@ import static org.halloweenalcala.app.model.Performance.stripAccents;
  * Created by julio on 17/10/17.
  */
 
-public class News extends SugarRecord<News> implements Serializable, Comparable {
+@Entity(tableName = "NEWS")
+public class News implements Serializable, Comparable {
 
+    @PrimaryKey
     private int id_server;
     private String datetime, title, text, image_url, btn_text, btn_link, link_youtube;
 

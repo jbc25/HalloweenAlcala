@@ -53,7 +53,7 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapte
         holder.tvParticipantName.setText(participant.getName());
 
         if (participant.hasImage1()) {
-            Picasso.with(context)
+            Picasso.get()
                     .load(participant.getImage1())
                     .placeholder(R.mipmap.ic_app)
 //                        .error(R.mipmap.ic_mes_v2_144)

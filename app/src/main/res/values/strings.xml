@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Alcalá Halloween 2017</string>
+    <string name="app_name">Alcalá Halloween 2018</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -19,16 +19,15 @@
     <string name="about">Sobre Halloween...</string>
     <string name="contact">Contacto?</string>
     <string name="marcha_zombie">Marcha Zombie</string>
-    <string name="halloween_2017">Halloween 2017</string>
-    <string name="halloween_alcala_17_twitter">#HalloweenAlcala17 en Twitter</string>
-    <string name="hashtag_7mz">#7MZ</string>
-    <string name="hashtag_alcalahalloween">#AlcalaHalloween17</string>
+    <string name="halloween_2017">Halloween 2018</string>
+    <string name="hashtag_7mz">#8MZ</string>
+    <string name="hashtag_alcalahalloween">#AlcalaHalloween18</string>
     <string name="update_available">Actualización disponible</string>
     <string name="update">ACTUALIZAR</string>
     <string name="resurrect">¡RESUCITAR!</string>
     <string name="app_dying">App moribunda</string>
     <string name="cannot_open_link">No se puede abrir este link</string>
-    <string name="zinemazombies">ZinemaZombies</string>
+    <string name="zinemazombies">ZombiePatrimoniales</string>
     <string name="news">Noticias</string>
     <string name="contact_and_social">Contacto y redes</string>
     <string name="alcala_halloween">Alcalá Halloween</string>
@@ -56,14 +55,14 @@
     <string name="place_unlock_description">Para desbloquear este poema debes ir el día 31 a <b>%s</b> y escribir el código que encuentres allí</string>
     <string name="find_code">Encuentra el código</string>
     <string name="share">Compartir</string>
-    <string name="poem_share_message">ZinemaZombies. Poemas de #7MZ\n\n%1$s\n\n%2$s\n\nDisfruta de este y otros poemas descargando la app gratuita de Halloween para Android:\n\n%3$s</string>
+    <string name="poem_share_message">Zombie Patrimoniales. Poemas de #8MZ\n\n%1$s\n\n%2$s\n\nDisfruta de este y otros poemas descargando la app gratuita de Halloween para Android:\n\n%3$s</string>
     <string name="legend">Leyenda</string>
     <string name="public_spaces">Espacios públicos</string>
     <string name="other_spaces">Locales y otros espacios</string>
-    <string name="news_share_message">NOTICIA #AlcalaHalloween17\n\n%1$s\n\n%2$s\n\n¡No te pierdas nada de este gran evento!\nDescarga la app gratuita de Halloween para Android:\n\n%3$s</string>
+    <string name="news_share_message">NOTICIA #AlcalaHalloween18\n\n%1$s\n\n%2$s\n\n¡No te pierdas nada de este gran evento!\nDescarga la app gratuita de Halloween para Android:\n\n%3$s</string>
     <string name="contests">Concursos</string>
     <string name="fresh_news">¡Noticias frescas!</string>
-    <string name="fresh_news_message">Hay novedades de #AlcalaHalloween17. Si quieres sobrevivir tendrás que estar muy al tanto de todo lo que se cuece. Para verlas ahora pulsa el botón de aquí abajo</string>
+    <string name="fresh_news_message">Hay novedades de #AlcalaHalloween18. Si quieres sobrevivir tendrás que estar muy al tanto de todo lo que se cuece. Para verlas ahora pulsa el botón de aquí abajo</string>
     <string name="go_to_news">Ir a noticias</string>
     <string name="no_thanks">No gracias, prefiero morir</string>
     <string name="contests_and_raffle">Concursos y sorteo</string>

@@ -1,8 +1,8 @@
 package org.halloweenalcala.app.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.net.Uri;
-
-import com.orm.SugarRecord;
 
 import java.io.Serializable;
 
@@ -10,8 +10,10 @@ import java.io.Serializable;
  * Created by julio on 7/10/17.
  */
 
-public class Participant extends SugarRecord<Participant> implements Serializable {
+@Entity(tableName = "PARTICIPANT")
+public class Participant implements Serializable {
 
+    @PrimaryKey
     private int id_server;
     private String name;
     private String artistic_modality;

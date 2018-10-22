@@ -3,9 +3,7 @@ package org.halloweenalcala.app.ui.performances.list;
 import android.app.AlertDialog;
 import android.content.Context;
 
-import com.orm.query.Condition;
-import com.orm.query.Select;
-
+import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.Performance;
@@ -13,7 +11,6 @@ import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.ui.performances.detail.PerformanceDetailActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -48,13 +45,13 @@ import java.util.List;
      public void refreshData() {
 
          performances.clear();
-         List<Performance> performanceList = Performance.listAll(Performance.class);
-         Collections.sort(performanceList);
+         List<Performance> performanceList = App.getDB().performanceDao().getAll();
+//         Collections.sort(performanceList);
 
          for (Performance performance : performanceList) {
 
              // Fucking Sugar orm. No more. https://stackoverflow.com/a/30192363/1365440
-             Place place = (Place) Select.from(Place.class).where(Condition.prop("idserver").eq(performance.getId_place())).first();
+             Place place = App.getDB().placeDao().getById(performance.getId_place());
              performance.setPlace(place);
          }
 

@@ -1,6 +1,8 @@
 package org.halloweenalcala.app.model;
 
-import com.orm.SugarRecord;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
 import org.halloweenalcala.app.R;
 
@@ -12,11 +14,13 @@ import java.util.List;
  * Created by julio on 7/10/17.
  */
 
-public class Place extends SugarRecord implements Serializable {
+@Entity(tableName = "PLACE")
+public class Place implements Serializable {
 
     public static final String TYPE_MAIN = "MAIN";
     public static final String TYPE_OTHERS = "OTHERS";
 
+    @PrimaryKey
     private int id_server;
     private String name;
     private String name_halloween;
@@ -24,6 +28,7 @@ public class Place extends SugarRecord implements Serializable {
     private double lng;
     private String type;
 
+    @Ignore
     private List<Performance> performances = new ArrayList<>();
 
     public int getMarkerIcon() {
@@ -77,7 +82,7 @@ public class Place extends SugarRecord implements Serializable {
 
     @Override
     public String toString() {
-        return "id: " + id + ", name: " + name + ", id_server:" + id_server;
+        return "name: " + name + ", id_server:" + id_server;
     }
 
     public String getName_halloween() {
@@ -100,4 +105,7 @@ public class Place extends SugarRecord implements Serializable {
         this.performances = performances;
     }
 
+    public String getType() {
+        return type;
+    }
 }

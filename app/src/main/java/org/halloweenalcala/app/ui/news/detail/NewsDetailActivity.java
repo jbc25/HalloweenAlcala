@@ -14,11 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.crash.FirebaseCrash;
 import com.squareup.picasso.Picasso;
 
 import org.halloweenalcala.app.App;
@@ -109,7 +109,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         tvNewsDescription.setText(Html.fromHtml(news.getText()));
 
         if (news.hasImage()) {
-            Picasso.with(this)
+            Picasso.get()
                     .load(news.getImage_url())
                     .into(imgNews);
         }
@@ -184,7 +184,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
 //        toast("Error en Youtube Player");
-        FirebaseCrash.report(new Error("Error en Youtube player"));
+        Crashlytics.logException(new Error("Error en Youtube player"));
         youtubePlayerFragment.getView().setVisibility(View.GONE);
     }
 }

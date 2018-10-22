@@ -1,9 +1,11 @@
 package org.halloweenalcala.app.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import com.google.firebase.crash.FirebaseCrash;
-import com.orm.SugarRecord;
+import com.crashlytics.android.Crashlytics;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -19,16 +21,19 @@ import static org.halloweenalcala.app.util.DateUtils.formatDateApi;
  * Created by julio on 6/10/17.
  */
 
-public class Performance extends SugarRecord<Performance> implements Comparable, Serializable {
+@Entity(tableName = "PERFORMANCE")
+public class Performance implements Comparable, Serializable {
 
     public static final int ID_MARCHA_ZOMBIE = 20;
 
+    @Ignore
     DateFormat dateFormatFriendlyText = new SimpleDateFormat("EEEE, dd MMMM");
-    static SimpleDateFormat dateFormatApi = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat timeFormatApi = new SimpleDateFormat("HH:mm");
-    static DateFormat dateTimeFormatApi = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    static DateFormat dateTimeFormatHuman = new SimpleDateFormat("dd/MM HH:mm");
+    @Ignore static SimpleDateFormat dateFormatApi = new SimpleDateFormat("yyyy-MM-dd");
+    @Ignore DateFormat timeFormatApi = new SimpleDateFormat("HH:mm");
+    @Ignore static DateFormat dateTimeFormatApi = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    @Ignore static DateFormat dateTimeFormatHuman = new SimpleDateFormat("dd/MM HH:mm");
 
+    @PrimaryKey
     private int id_server;
     private String date;
     private String time_begin;
@@ -41,7 +46,7 @@ public class Performance extends SugarRecord<Performance> implements Comparable,
     private int highlight;
     private String place_text; // optional for place exceptions without id_place
 
-    private Place place;
+    @Ignore private Place place;
 //    private String participants;
 //    private int durationMins;
 
@@ -73,7 +78,7 @@ public class Performance extends SugarRecord<Performance> implements Comparable,
             Date dateTime = dateTimeFormatApi.parse(getDateTime());
             return dateTimeFormatHuman.format(dateTime);
         } catch (ParseException e) {
-            FirebaseCrash.report(e);
+            Crashlytics.logException(e);
         }
 
         return getTime_begin();
@@ -89,7 +94,7 @@ public class Performance extends SugarRecord<Performance> implements Comparable,
             return (long) dayInt;
         } catch (ParseException e) {
             e.printStackTrace();
-            FirebaseCrash.report(e);
+            Crashlytics.logException(e);
             throw new IllegalStateException("wrong date");
         }
     }
@@ -131,7 +136,7 @@ public class Performance extends SugarRecord<Performance> implements Comparable,
             return dateTime;
         } catch (ParseException e) {
             e.printStackTrace();
-            FirebaseCrash.report(e);
+            Crashlytics.logException(e);
         }
 
         return null;

@@ -2,6 +2,7 @@ package org.halloweenalcala.app.ui.news.list;
 
 import android.content.Context;
 
+import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.News;
 import org.halloweenalcala.app.ui.news.detail.NewsDetailActivity;
@@ -46,7 +47,7 @@ import java.util.List;
 
 
          newsList.clear();
-         newsList.addAll(News.listAll(News.class));
+         newsList.addAll(App.getDB().newsDao().getAll());
 
          Collections.sort(newsList);
 

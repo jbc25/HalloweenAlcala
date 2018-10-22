@@ -3,6 +3,7 @@ package org.halloweenalcala.app.ui.participants.list;
 import android.content.Context;
 import android.content.Intent;
 
+import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.Participant;
 import org.halloweenalcala.app.ui.participants.detail.ParticipantDetailActivity;
@@ -52,7 +53,7 @@ import java.util.List;
      public void refreshData() {
 
          participants.clear();
-         participants.addAll(Participant.listAll(Participant.class));
+         participants.addAll(App.getDB().participantDao().getAll());
          view.showParticipants(participants);
 
      }

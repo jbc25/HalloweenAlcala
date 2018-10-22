@@ -66,7 +66,7 @@ public class PerformancesAdapter extends RecyclerView.Adapter<PerformancesAdapte
             holder.tvTitlePerformance.setTextColor(ContextCompat.getColor(context, R.color.white));
         }
 
-//        Picasso.with(context)
+//        Picasso.get()
 //                .load(band.getImageLogoUrlFull())
 //                .placeholder(R.mipmap.img_default_grid)
 //                .error(R.mipmap.img_default_grid)

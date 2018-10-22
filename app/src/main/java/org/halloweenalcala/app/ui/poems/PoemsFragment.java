@@ -3,6 +3,7 @@ package org.halloweenalcala.app.ui.poems;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -36,6 +37,12 @@ public class PoemsFragment extends BaseFragment implements ViewPager.OnPageChang
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        PoemBook.initialize(getActivity());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +57,6 @@ public class PoemsFragment extends BaseFragment implements ViewPager.OnPageChang
 
         viewpagerPoems.setPageTransformer(true, new BookPageTransformer2());
         viewpagerPoems.addOnPageChangeListener(this);
-
 
         return layout;
     }

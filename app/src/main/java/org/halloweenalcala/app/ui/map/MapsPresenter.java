@@ -4,9 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.orm.query.Condition;
-import com.orm.query.Select;
-
+import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.Performance;
@@ -62,11 +60,11 @@ public class MapsPresenter extends BasePresenter {
 
     public void onMapReady() {
 
-        List<Place> placeList = Place.listAll(Place.class);
+        List<Place> placeList = App.getDB().placeDao().getAll();
 
         for (Place place : placeList) {
-            List<Performance> performanceList = Select.from(Performance.class).where(Condition.prop("idplace").eq(place.getId_server())).list();
-            Collections.sort(performanceList);
+            List<Performance> performanceList = App.getDB().performanceDao().getPerformancesOfPlace(place.getId_server());
+//            Collections.sort(performanceList);
             place.setPerformances(performanceList);
         }
 

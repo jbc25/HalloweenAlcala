@@ -24,16 +24,15 @@
                 android:text="@string/app_name"
                 app:fontPath="fonts/ZombieQueen.ttf"
                 android:textColor="@color/red_halloween"
-                android:textSize="28sp" />
+                android:textSize="38sp" />
 
             <View
                 android:id="@+id/view_eyes_anim"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/img_roman_zombie"
-                android:layout_alignTop="@+id/img_roman_zombie"
-                android:layout_centerInParent="true"
-                android:layout_margin="80dp"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_alignTop="@id/img_roman_zombie"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
                 android:background="@color/white" />
 
             <ImageView
@@ -42,17 +41,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title_splash"
                 android:adjustViewBounds="true"
-                android:src="@mipmap/img_roman_zombie_no_eyes" />
+                android:src="@mipmap/img_zombie_protest_no_eyes" />
+
 
             <TextView
                 android:id="@+id/tv_splash_message"
                 style="@style/TextBase"
                 android:layout_below="@+id/img_roman_zombie"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/splash_message"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
             <Button
                 android:id="@+id/btn_update_app_splash"

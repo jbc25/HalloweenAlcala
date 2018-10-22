@@ -13,6 +13,7 @@ public class PoemCharacter {
 
     private int id;
     private int poemTitleId;
+    private int poemSubtitleId;
     private int poemTextId;
     private String typeId;
 
@@ -22,10 +23,11 @@ public class PoemCharacter {
     private int idPlaceServer;
 
 
-    public static PoemCharacter newOpenPoem(int id, int poemTitleId, int poemTextId) {
+    public static PoemCharacter newOpenPoem(int id, int poemTitleId, int poemSubtitleId, int poemTextId) {
         PoemCharacter poemCharacter = new PoemCharacter();
         poemCharacter.setId(id);
         poemCharacter.setPoemTitleId(poemTitleId);
+        poemCharacter.setPoemSubtitleId(poemSubtitleId);
         poemCharacter.setPoemTextId(poemTextId);
         poemCharacter.setTypeId(TYPE_OPEN);
         return poemCharacter;
@@ -119,5 +121,13 @@ public class PoemCharacter {
 
     public void setIdPlaceServer(int idPlaceServer) {
         this.idPlaceServer = idPlaceServer;
+    }
+
+    public int getPoemSubtitleId() {
+        return poemSubtitleId;
+    }
+
+    public void setPoemSubtitleId(int poemSubtitleId) {
+        this.poemSubtitleId = poemSubtitleId;
     }
 }

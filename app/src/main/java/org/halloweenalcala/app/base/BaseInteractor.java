@@ -3,7 +3,7 @@ package org.halloweenalcala.app.base;
 import android.content.Context;
 
 import org.halloweenalcala.app.R;
-import org.halloweenalcala.app.api.ApiClient;
+import org.halloweenalcala.app.api.retrofit.ApiClient;
 import org.halloweenalcala.app.util.Util;
 
 import rx.functions.Action0;

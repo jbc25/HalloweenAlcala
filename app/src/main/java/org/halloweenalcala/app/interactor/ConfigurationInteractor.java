@@ -2,8 +2,8 @@ package org.halloweenalcala.app.interactor;
 
 import android.content.Context;
 
-import org.halloweenalcala.app.api.ApiClient;
-import org.halloweenalcala.app.api.GoogleSheetApiCsv;
+import org.halloweenalcala.app.api.retrofit.ApiClient;
+import org.halloweenalcala.app.api.retrofit.GoogleSheetApiCsv;
 import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.base.BaseView;
 import org.halloweenalcala.app.model.Configuration;

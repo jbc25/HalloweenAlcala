@@ -69,7 +69,7 @@ public class PerformanceDetailActivity extends BaseActivity {
         tvDescriptionPerformance.setText(Html.fromHtml(performance.getInfo()));
 
         if (performance.getImage_url() != null && !performance.getImage_url().isEmpty()) {
-            Picasso.with(this)
+            Picasso.get()
                     .load(performance.getImage_url())
                     .placeholder(R.mipmap.img_placeholder_performance)
                     .error(R.mipmap.img_placeholder_performance)

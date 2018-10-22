@@ -83,7 +83,7 @@ public class FirestoreHelper {
         db.collection(COLLECTION_SLOGANS)
 //                .add(slogan);
                 .document(sloganRating.getIdSlogan())
-                .collection(COLLECTION_SLOGAN_RATINGS)
+                .collection(COLLECTION_SLOGAN_RATINGS) // todo change this
                 .add(sloganRating)
                 .addOnCompleteListener(listener);
     }

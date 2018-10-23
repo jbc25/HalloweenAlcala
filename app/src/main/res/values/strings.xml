@@ -71,5 +71,27 @@
     <string name="credits">Créditos</string>
     <string name="hurry_no_time">¡Corre! Te quedas sin tiempo</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="voting">Votación</string>
+    <string name="my_slogans">Mis lemas</string>
+    <string name="slogan_contest">Concurso lemas</string>
+    <string name="send_slogan">Enviar lema</string>
+    <string name="contest_rules">Bases del concurso</string>
+    <string name="must_accept_rules_to_participate">Para participar es necesario aceptar las bases del concurso</string>
+    <string name="enter_email_info">Para participar introduce tu email. Solo lo usaremos para ponernos en contacto contigo en caso de que tus lemas consigan premio!</string>
+    <string name="email">Email</string>
+    <string name="send_email">Enviar email</string>
+    <string name="invalid_email">Email no es válido</string>
+    <string name="sending">Enviando...</string>
+    <string name="slogan_sent_success">¡Lema enviado correctamente!</string>
+    <string name="error_sending">¡Atención! Ha habido un problema con el envío. Inténtelo de nuevo</string>
+    <string name="num_slogans_pending_msg">Todavía puedes enviar %d lemas</string>
+    <string name="all_slogans_sent">Ya has enviado tus %d lemas. ¡Suerte con las votaciones!</string>
+    <string name="send_excl">¡Enviar!</string>
+    <string name="slogan_text_empty">Pon algo en ese cartel ¡Que no se diga!</string>
+    <string name="loading_zombifestacion">Cargando zombiefestación...</string>
+    <string name="already_voted_slogan">Ya has votado este lema</string>
+
 
 </resources>

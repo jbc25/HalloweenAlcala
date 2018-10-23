@@ -7,8 +7,9 @@ import org.halloweenalcala.app.model.News;
 import org.halloweenalcala.app.model.Participant;
 import org.halloweenalcala.app.model.Performance;
 import org.halloweenalcala.app.model.Place;
+import org.halloweenalcala.app.model.cloud.SloganRating;
 
-@Database(entities = {Participant.class, News.class, Performance.class, Place.class}, version = 4, exportSchema = false)
+@Database(entities = {Participant.class, News.class, Performance.class, Place.class, SloganRating.class}, version = 5, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
 
     public abstract ParticipantDao participantDao();
@@ -18,6 +19,8 @@ public abstract class MyDatabase extends RoomDatabase {
     public abstract PerformanceDao performanceDao();
 
     public abstract PlaceDao placeDao();
+
+    public abstract SloganRatingDao sloganRatingDao();
 
 
 //    public static final Migration MIGRATION_1_2 = new Migration(1, 2) {

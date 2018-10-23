@@ -12,6 +12,11 @@
         android:title="@string/map" />
 
     <item
+        android:id="@+id/navigation_contest"
+        android:icon="@mipmap/ic_news"
+        android:title="@string/slogan_contest" />
+
+    <item
         android:id="@+id/navigation_poems"
         android:icon="@mipmap/ic_nav_poem"
         android:title="@string/zinemazombies" />

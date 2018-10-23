@@ -28,8 +28,7 @@ public class ConfigurationInteractor extends BaseInteractor {
     }
 
     public ConfigurationInteractor(Context context, BaseView baseView) {
-        this.baseView = baseView;
-        this.context = context;
+        super(context, baseView);
     }
 
     public void getConfiguration(final ConfigurationCallback callback) {

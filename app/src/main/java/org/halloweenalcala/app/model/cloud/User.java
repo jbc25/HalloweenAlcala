@@ -2,17 +2,19 @@ package org.halloweenalcala.app.model.cloud;
 
 public class User {
 
-    private String id;
+    public static final String FIELD_EMAIL = "email";
+    public static final String FIELD_PENDING_SLOGANS = "pendingSlogans";
+    public static final String FIELD_DEVICE_ID = "idDevice";
+
+    private String idDevice;
     private String alias;
     private String email;
-    private String idDevice;
+    private int pendingSlogans;
+    private String timestamp;
+    private boolean banned;
 
-    public String getId() {
-        return id;
-    }
+    public User() {
 
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getAlias() {
@@ -37,5 +39,29 @@ public class User {
 
     public void setIdDevice(String idDevice) {
         this.idDevice = idDevice;
+    }
+
+    public boolean isBanned() {
+        return banned;
+    }
+
+    public void setBanned(boolean banned) {
+        this.banned = banned;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public int getPendingSlogans() {
+        return pendingSlogans;
+    }
+
+    public void setPendingSlogans(int pendingSlogans) {
+        this.pendingSlogans = pendingSlogans;
     }
 }

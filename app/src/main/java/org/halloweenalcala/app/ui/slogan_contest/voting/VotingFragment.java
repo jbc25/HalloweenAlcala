@@ -1,0 +1,101 @@
+package org.halloweenalcala.app.ui.slogan_contest.voting;
+
+
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
+
+import org.halloweenalcala.app.R;
+import org.halloweenalcala.app.base.BaseFragment;
+import org.halloweenalcala.app.base.BasePresenter;
+import org.halloweenalcala.app.model.cloud.Slogan;
+
+import java.util.List;
+
+
+public class VotingFragment extends BaseFragment implements VotingView, ViewPager.OnPageChangeListener, BrainRatingView.OnRatingChangeListener {
+
+    private ViewPager viewpagerSlogans;
+    private BrainRatingView brainRatingView;
+    private VotingPresenter presenter;
+    private SlogansPagerAdapter adapterViewPager;
+
+    private void findViews(View layout) {
+        viewpagerSlogans = (ViewPager)layout.findViewById( R.id.viewpager_slogans );
+        brainRatingView = (BrainRatingView)layout.findViewById( R.id.brain_rating_view );
+    }
+
+
+    public VotingFragment() {
+
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        presenter = VotingPresenter.newInstance(this, getActivity());
+        View layout = inflater.inflate(R.layout.fragment_voting, container, false);
+        findViews(layout);
+
+        viewpagerSlogans.setPageTransformer(false, new RotateUpTransformer());
+        viewpagerSlogans.addOnPageChangeListener(this);
+
+        brainRatingView.setOnRatingChangeListener(this);
+
+        presenter.onCreate();
+
+        return layout;
+    }
+
+    // INTERACTIONS
+
+    // Viewpager
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        presenter.onSloganPageSelected(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
+    }
+
+
+    // PRESENTER CALLBACKS
+
+    @Override
+    public void showSlogans(List<Slogan> slogans) {
+        if (adapterViewPager == null) {
+            adapterViewPager = new SlogansPagerAdapter(getChildFragmentManager(), slogans);
+            viewpagerSlogans.setAdapter(adapterViewPager);
+        } else {
+            adapterViewPager.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
+    public void showRating(int rating) {
+        brainRatingView.setRating(rating);
+    }
+
+    @Override
+    public void onRatingChange(int rating) {
+        presenter.onRatingChange(rating);
+    }
+}

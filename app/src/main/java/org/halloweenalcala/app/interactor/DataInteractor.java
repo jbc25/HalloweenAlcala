@@ -31,8 +31,7 @@ public class DataInteractor extends BaseInteractor {
     }
 
     public DataInteractor(Context context, BaseView baseView) {
-        this.baseView = baseView;
-        this.context = context;
+        super(context, baseView);
     }
 
     public void getPlaces(final DataCallback<Place> callback) {

@@ -1,22 +1,27 @@
 package org.halloweenalcala.app.model.cloud;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Entity
 public class SloganRating {
 
-    private String id;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String idSlogan;
+    private String idDevice;
     private int rating;
-    private Map<String, String> extras = new HashMap<>();
+    private boolean reported;
+    private String timestamp;
+    @Ignore private Map<String, String> extras = new HashMap<>();
 
 
-    public String getId() {
-        return id;
-    }
+    public SloganRating() {
 
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getIdSlogan() {
@@ -42,5 +47,37 @@ public class SloganRating {
 
     public void setExtras(Map<String, String> extras) {
         this.extras = extras;
+    }
+
+    public boolean isReported() {
+        return reported;
+    }
+
+    public void setReported(boolean reported) {
+        this.reported = reported;
+    }
+
+    public String getIdDevice() {
+        return idDevice;
+    }
+
+    public void setIdDevice(String idDevice) {
+        this.idDevice = idDevice;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -6,6 +6,8 @@ import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.api.retrofit.ApiClient;
 import org.halloweenalcala.app.util.Util;
 
+import java.util.List;
+
 import rx.functions.Action0;
 
 /**
@@ -17,6 +19,11 @@ public class BaseInteractor {
 
     public Context context;
     public BaseView baseView;
+
+    public BaseInteractor(Context context, BaseView baseView) {
+        this.context = context;
+        this.baseView = baseView;
+    }
 
     public <T> T getApi(Class<T> service) {
         return ApiClient.getInstance().create(service);
@@ -34,6 +41,24 @@ public class BaseInteractor {
 
         }
     };
+
+
+    public interface CallbackGetList<T> {
+        void onListReceived(List<T> list);
+
+        void onError(String error);
+    }
+
+    public interface CallbackGetEntity<T> {
+        void onEntityReceived(T entity);
+
+        void onError(String error);
+    }
+
+    public interface CallbackPost {
+        void onSuccess(String id);
+        void onError(String error);
+    }
 
 
     public boolean isConnected() {

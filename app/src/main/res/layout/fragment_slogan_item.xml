@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="org.halloweenalcala.app.ui.slogan_contest.voting.SloganItemFragment">
+
+    <TextView
+        android:id="@+id/tv_slogan"
+        style="@style/TextBase.White"
+        android:textSize="30sp"
+        android:background="@color/red_halloween"
+        android:padding="20dp"/>
+
+</LinearLayout>

@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorAccent">@color/red_halloween</color>
 
+    <color name="green_2018">#69fe20</color>
 
     <color name="red_halloween">#C81832</color>
+    <color name="red_halloween_light">#f11434</color>
     <color name="grey_halloween">#766d6d</color>
 
     <color name="colorAccentTransp">#90be2e45</color>

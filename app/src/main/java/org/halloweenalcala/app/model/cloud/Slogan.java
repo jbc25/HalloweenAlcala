@@ -1,14 +1,28 @@
 package org.halloweenalcala.app.model.cloud;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Slogan {
+public class Slogan implements Serializable {
 
     private String id;
     private String text;
     private String type;
     private String idDevice;
+    private boolean deleted;
+    private String timestamp;
+
+    public Slogan() {
+
+    }
+
+    public Slogan (String idDevice, String text, String timestamp) {
+        this.idDevice = idDevice;
+        this.text = text;
+        this.timestamp = timestamp;
+    }
+
     private Map<String, String> extras = new HashMap<>();
 
     public String getId() {
@@ -49,5 +63,21 @@ public class Slogan {
 
     public void setIdDevice(String idDevice) {
         this.idDevice = idDevice;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }

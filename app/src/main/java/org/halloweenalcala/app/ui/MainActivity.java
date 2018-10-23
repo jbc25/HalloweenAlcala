@@ -33,8 +33,10 @@ import org.halloweenalcala.app.ui.news.list.NewsFragment;
 import org.halloweenalcala.app.ui.participants.list.ParticipantsPresenter;
 import org.halloweenalcala.app.ui.performances.list.PerformancesFragment;
 import org.halloweenalcala.app.ui.poems.PoemsFragment;
+import org.halloweenalcala.app.ui.slogan_contest.SloganContestFragment;
 import org.halloweenalcala.app.ui.static_info.TextHtmlActivity;
 import org.halloweenalcala.app.ui.static_info.WebViewActivity;
+import org.halloweenalcala.app.util.SoftKeyboardManager;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainView, BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -86,6 +88,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         getSupportFragmentManager().beginTransaction().replace(R.id.content, new PerformancesFragment()).commit();
 
         presenter.onCreate();
+
+        SoftKeyboardManager.newInstance().configureSoftKeyboardVisibilityBehaviour(this, new SoftKeyboardManager.OnSoftKeyboardChangedListener() {
+            @Override
+            public void onSoftKeyboardVisible(boolean visible) {
+                bottomNavView.setVisibility(visible ? View.GONE : View.VISIBLE);
+            }
+        });
 
 //        WebViewActivity.start(this, "https://www.loomio.org/p/PsUuLI1p/nota-de-prensa-para-solidarizarse");
 
@@ -146,6 +155,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 case R.id.navigation_map:
                     showSection(MapsPresenter.newFragment(placeToSelect));
                     setToolbarTitle(R.string.app_name);
+                    return true;
+                case R.id.navigation_contest:
+                    showSection(new SloganContestFragment());
+                    setToolbarTitle(R.string.slogan_contest);
                     return true;
                 case R.id.navigation_poems:
                     showSection(new PoemsFragment());

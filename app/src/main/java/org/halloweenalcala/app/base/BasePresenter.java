@@ -57,6 +57,9 @@ public class BasePresenter {
     }
 
 
+    public String getString(int stringResId) {
+        return context.getString(stringResId);
+    }
 
 
     // ------- COMMON METHODS --------------

@@ -4,10 +4,12 @@ package org.halloweenalcala.app.ui.slogan_contest.voting;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseFragment;
 import org.halloweenalcala.app.base.BasePresenter;
@@ -24,6 +26,7 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
     private SlogansPagerAdapter adapterViewPager;
     private TextView tvSloganCounter;
     private View btnDenounceSlogan;
+    private View imgTutoBanners;
 
     private void findViews(View layout) {
         viewpagerSlogans = (ViewPager)layout.findViewById( R.id.viewpager_slogans );
@@ -31,6 +34,16 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
         tvSloganCounter = (TextView) layout.findViewById(R.id.tv_slogan_counter);
         btnDenounceSlogan = layout.findViewById(R.id.btn_denounce_slogan);
         btnDenounceSlogan.setOnClickListener(this);
+
+        imgTutoBanners = layout.findViewById(R.id.img_tuto_banners);
+        imgTutoBanners.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                imgTutoBanners.setVisibility(View.GONE);
+                getPrefs().edit().putBoolean(App.SHARED_SHOW_TUTO_BANNERS, false).commit();
+                return false;
+            }
+        });
     }
 
 
@@ -57,6 +70,10 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
         brainRatingView.setOnRatingChangeListener(this);
 
         presenter.onCreate(getArguments());
+
+        if (getPrefs().getBoolean(App.SHARED_SHOW_TUTO_BANNERS, true)) {
+            imgTutoBanners.setVisibility(View.VISIBLE);
+        }
 
         return layout;
     }

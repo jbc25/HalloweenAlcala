@@ -53,6 +53,19 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_slogan_denounced"
+            style="@style/TextBase"
+            android:text="@string/slogan_denounced"
+            android:background="@color/white_semitransp"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:padding="10dp"
+            android:textColor="@color/red_halloween"
+            android:textAllCaps="true"
+            android:gravity="center"/>
+
     </LinearLayout>
 
 

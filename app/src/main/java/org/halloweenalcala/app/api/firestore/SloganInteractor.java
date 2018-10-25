@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import retrofit.Response;
+import retrofit2.Response;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -103,7 +103,9 @@ public class SloganInteractor extends BaseInteractor {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Query query = db.collection(COLLECTION_SLOGANS)
-                .whereEqualTo(Slogan.FIELD_DENOUNCED, true);
+                .whereEqualTo(Slogan.FIELD_DENOUNCED, true)
+                .whereEqualTo(Slogan.FIELD_DELETED, false)
+                ;
 
         launchQuerySlogans(query, callback);
 
@@ -246,9 +248,30 @@ public class SloganInteractor extends BaseInteractor {
     }
 
 
-    public void denounceSlogan(String sloganId, final CallbackPost callback) {
+    public void setSloganDenounced(String sloganId, boolean denounced, final CallbackPost callback) {
         Map<String, Object> data = new HashMap<>();
-        data.put(Slogan.FIELD_DENOUNCED, true);
+        data.put(Slogan.FIELD_DENOUNCED, denounced);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(COLLECTION_SLOGANS).document(sloganId)
+                .set(data, SetOptions.merge())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        baseView.hideProgressDialog();
+                        if (task.isSuccessful()) {
+                            callback.onSuccess(null);
+                        } else {
+                            callback.onError(task.getException().getMessage());
+                        }
+                    }
+                });
+    }
+
+
+    public void setSloganDeleted(String sloganId, boolean deleted, final CallbackPost callback) {
+        Map<String, Object> data = new HashMap<>();
+        data.put(Slogan.FIELD_DELETED, deleted);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(COLLECTION_SLOGANS).document(sloganId)

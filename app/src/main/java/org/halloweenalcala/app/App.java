@@ -37,7 +37,9 @@ public class App extends MultiDexApplication {
     public static final String SHARED_USER_ADDED_FIRESTORE = PREFIX + "shared_user_added_firestore";
     public static final String SHARED_USER_EMAIL = PREFIX + "shared_user_email";
     public static final String SHARED_NUMBER_SLOGANS_PENDING = PREFIX + "shared_number_slogans_pending";
+    public static final String SHARED_USER_BANNED = PREFIX + "shared_user_banned";
     public static final String SHARED_USER_INITIALIZED_FIRST_TIME = PREFIX + "shared_user_initialized_first_time";
+    public static final String SHARED_SHOW_TUTO_BANNERS = PREFIX + "shared_show_tuto_banners";
 
     public static final String URL_GOOGLE_PLAY_APP = "https://play.google.com/store/apps/details?id=org.halloweenalcala.app";
     public static final String URL_DIRECT_GOOGLE_PLAY_APP = "market://details?id=org.halloweenalcala.app";

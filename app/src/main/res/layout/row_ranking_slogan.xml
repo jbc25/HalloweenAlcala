@@ -28,33 +28,6 @@
             app:autoSizeTextType="uniform"
             app:fontFamily="@font/nosifer" />
 
-        <LinearLayout
-            android:id="@+id/btn_promote_slogan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_pressed_common"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:visibility="gone">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_share"
-                app:tint="@color/red_halloween"/>
-
-            <TextView
-                style="@style/TextBase.White"
-                android:textColor="@color/red_halloween"
-                android:layout_marginLeft="7dp"
-                android:text="@string/promote_slogan"
-                android:textSize="14sp"
-                app:fontFamily="@font/eater" />
-
-
-        </LinearLayout>
     </LinearLayout>
 
 

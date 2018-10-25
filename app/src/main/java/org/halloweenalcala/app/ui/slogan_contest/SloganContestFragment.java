@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 
 import org.halloweenalcala.app.App;
+import org.halloweenalcala.app.BuildConfig;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.api.firestore.UserInteractor;
 import org.halloweenalcala.app.base.BaseFragment;
@@ -23,6 +24,7 @@ import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.errors.UserNotAddedError;
 import org.halloweenalcala.app.model.cloud.User;
+import org.halloweenalcala.app.ui.slogan_contest.denounces.DenouncesFragment;
 import org.halloweenalcala.app.ui.slogan_contest.my_slogans.MySlogansFragment;
 import org.halloweenalcala.app.ui.slogan_contest.ranking.RankingSlogansFragment;
 import org.halloweenalcala.app.ui.slogan_contest.send_slogan.SendSloganFragment;
@@ -46,6 +48,7 @@ public class SloganContestFragment extends BaseFragment implements TabLayout.Bas
     private int currentSection = -1;
     private MySlogansFragment mySlogansFragment;
     private RankingSlogansFragment rankingSloganFragment;
+    private DenouncesFragment denouncesFragment;
 
     private void findViews(View layout) {
         tabsContest = (TabLayout) layout.findViewById(R.id.tabs_contest);
@@ -87,15 +90,21 @@ public class SloganContestFragment extends BaseFragment implements TabLayout.Bas
         rankingSloganFragment = new RankingSlogansFragment();
         sendSloganFragment = new SendSloganFragment();
         mySlogansFragment = new MySlogansFragment();
+        denouncesFragment = new DenouncesFragment();
 
         sections.add(votingFragment);
         sections.add(rankingSloganFragment);
         sections.add(sendSloganFragment);
         sections.add(mySlogansFragment);
+        sections.add(denouncesFragment);
 
         boolean firstSloganSent = getPrefs().getInt(App.SHARED_NUMBER_SLOGANS_PENDING, App.NUM_SLOGANS) < App.NUM_SLOGANS;
         if (firstSloganSent) {
             tabsContest.addTab(tabsContest.newTab().setText(R.string.my_slogans));
+        }
+
+        if (BuildConfig.DEBUG) {
+            tabsContest.addTab(tabsContest.newTab().setText(R.string.denounces));
         }
 
 //        getPrefs().edit().putBoolean(App.SHARED_ACCEPTED_CONTEST_RULES, false).apply();

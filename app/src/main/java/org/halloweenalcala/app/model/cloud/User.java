@@ -8,6 +8,7 @@ public class User {
     public static final String FIELD_EMAIL = "email";
     public static final String FIELD_PENDING_SLOGANS = "pendingSlogans";
     public static final String FIELD_DEVICE_ID = "idDevice";
+    public static final String FIELD_BANNED = "banned";
 
     private String idDevice;
     private String alias;

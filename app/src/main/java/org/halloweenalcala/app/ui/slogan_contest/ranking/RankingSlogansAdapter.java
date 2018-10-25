@@ -64,7 +64,6 @@ public class RankingSlogansAdapter extends RecyclerView.Adapter<RankingSlogansAd
         private final TextView tvSloganText;
         private final TextView tvSloganRating;
         private final TextView tvSloganNumVotes;
-        private final View btnPromoteSlogan;
         public View rootView;
 
         public ViewHolder(View itemView) {
@@ -74,18 +73,9 @@ public class RankingSlogansAdapter extends RecyclerView.Adapter<RankingSlogansAd
             tvSloganText = (TextView) itemView.findViewById(R.id.tv_slogan_text);
             tvSloganRating = (TextView) itemView.findViewById(R.id.tv_slogan_rating);
             tvSloganNumVotes = (TextView) itemView.findViewById(R.id.tv_slogan_num_votes);
-            btnPromoteSlogan = itemView.findViewById(R.id.btn_promote_slogan);
 
             rootView = itemView;
 
-            btnPromoteSlogan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (itemClickListener != null) {
-                        itemClickListener.onPromoteSloganClick(getAdapterPosition());
-                    }
-                }
-            });
 
         }
 

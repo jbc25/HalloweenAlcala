@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 //        WebViewActivity.start(this, "https://www.loomio.org/p/PsUuLI1p/nota-de-prensa-para-solidarizarse");
 
-//        showSection(new RankingSlogansFragment());
+//        showSection(new SloganContestFragment());
     }
 
     private void configureBottomNavView() {

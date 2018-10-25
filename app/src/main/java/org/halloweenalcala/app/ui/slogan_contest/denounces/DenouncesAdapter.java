@@ -1,4 +1,4 @@
-package org.halloweenalcala.app.ui.slogan_contest.my_slogans;
+package org.halloweenalcala.app.ui.slogan_contest.denounces;
 
 
 import android.content.Context;
@@ -13,7 +13,7 @@ import org.halloweenalcala.app.model.cloud.Slogan;
 
 import java.util.List;
 
-public class MySlogansAdapter extends RecyclerView.Adapter<MySlogansAdapter.ViewHolder> {
+public class DenouncesAdapter extends RecyclerView.Adapter<DenouncesAdapter.ViewHolder> {
 
 
     private List<Slogan> slogans;
@@ -21,7 +21,7 @@ public class MySlogansAdapter extends RecyclerView.Adapter<MySlogansAdapter.View
     private OnItemClickListener itemClickListener;
 
 
-    public MySlogansAdapter(Context context, List<Slogan> slogans) {
+    public DenouncesAdapter(Context context, List<Slogan> slogans) {
         this.context = context;
         this.slogans = slogans;
     }
@@ -29,7 +29,7 @@ public class MySlogansAdapter extends RecyclerView.Adapter<MySlogansAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View contactView = LayoutInflater.from(context).inflate(R.layout.row_my_slogan, parent, false);
+        View contactView = LayoutInflater.from(context).inflate(R.layout.row_denounced_slogan, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -43,11 +43,7 @@ public class MySlogansAdapter extends RecyclerView.Adapter<MySlogansAdapter.View
         final Slogan slogan = getItemAtPosition(holder.getAdapterPosition());
 
         holder.tvSloganText.setText(slogan.getText());
-        holder.tvSloganRating.setText(slogan.getAvgRatingFormatted());
-        holder.tvSloganNumVotes.setText(String.format(context.getString(R.string.votes_format), slogan.getNumRatings()));
 
-        holder.btnPromoteSlogan.setVisibility(slogan.isDenounced() ? View.GONE : View.VISIBLE);
-        holder.tvSloganDenounced.setVisibility(slogan.isDenounced() ? View.VISIBLE : View.GONE);
 
     }
 
@@ -64,10 +60,9 @@ public class MySlogansAdapter extends RecyclerView.Adapter<MySlogansAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvSloganText;
-        private final TextView tvSloganRating;
-        private final TextView tvSloganNumVotes;
-        private final View btnPromoteSlogan;
-        private final View tvSloganDenounced;
+        private final View btnDeleteSlogan;
+        private final View btnBanUser;
+        private final View btnValidateSlogan;
         public View rootView;
 
         public ViewHolder(View itemView) {
@@ -75,18 +70,35 @@ public class MySlogansAdapter extends RecyclerView.Adapter<MySlogansAdapter.View
             super(itemView);
 
             tvSloganText = (TextView) itemView.findViewById(R.id.tv_slogan_text);
-            tvSloganRating = (TextView) itemView.findViewById(R.id.tv_slogan_rating);
-            tvSloganNumVotes = (TextView) itemView.findViewById(R.id.tv_slogan_num_votes);
-            btnPromoteSlogan = itemView.findViewById(R.id.btn_promote_slogan);
-            tvSloganDenounced = itemView.findViewById(R.id.tv_slogan_denounced);
+            btnValidateSlogan = itemView.findViewById(R.id.btn_validate_slogan);
+            btnDeleteSlogan = itemView.findViewById(R.id.btn_delete_slogan);
+            btnBanUser = itemView.findViewById(R.id.btn_ban_user);
 
             rootView = itemView;
 
-            btnPromoteSlogan.setOnClickListener(new View.OnClickListener() {
+            btnValidateSlogan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (itemClickListener != null) {
-                        itemClickListener.onPromoteSloganClick(getAdapterPosition());
+                        itemClickListener.onValidateClick(getAdapterPosition());
+                    }
+                }
+            });
+
+            btnDeleteSlogan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        itemClickListener.onDeleteSloganClick(getAdapterPosition());
+                    }
+                }
+            });
+
+            btnBanUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        itemClickListener.onBanUserClick(getAdapterPosition());
                     }
                 }
             });
@@ -101,8 +113,9 @@ public class MySlogansAdapter extends RecyclerView.Adapter<MySlogansAdapter.View
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-        void onPromoteSloganClick(int position);
+        void onValidateClick(int position);
+        void onDeleteSloganClick(int position);
+        void onBanUserClick(int position);
     }
 }
 

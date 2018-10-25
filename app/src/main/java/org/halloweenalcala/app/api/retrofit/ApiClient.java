@@ -13,6 +13,7 @@ import javax.net.ssl.SSLSession;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ApiClient {
@@ -38,6 +39,7 @@ public class ApiClient {
             sharedInstance = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(new CsvConverterFactory())
+                    .addConverterFactory(GsonConverterFactory.create())
                     .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();

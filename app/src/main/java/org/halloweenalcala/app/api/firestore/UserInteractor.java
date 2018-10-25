@@ -100,4 +100,25 @@ public class UserInteractor extends BaseInteractor {
         db.collection(COLLECTION_USERS).document(deviceId)
                 .set(data, SetOptions.merge());
     }
+
+
+    public void setUserBanned(String deviceId, final CallbackPost callback) {
+        Map<String, Object> data = new HashMap<>();
+        data.put(User.FIELD_BANNED, true);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(COLLECTION_USERS).document(deviceId)
+                .set(data, SetOptions.merge())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        baseView.hideProgressDialog();
+                        if (task.isSuccessful()) {
+                            callback.onSuccess(null);
+                        } else {
+                            callback.onError(task.getException().getMessage());
+                        }
+                    }
+                });
+    }
 }

@@ -103,11 +103,22 @@
     <string name="counter_format">%d de %d</string>
     <string name="ranking">Ranking</string>
     <string name="slogan_not_found">No se encuentra esta pancarta</string>
-    <string name="slogan_denounced">Lema denunciado. Oculto hasta revisión. Gracias por tu colaboración</string>
+    <string name="slogan_denounced_thanks">Lema denunciado. Oculto hasta revisión. Gracias por tu colaboración</string>
     <string name="denouncing_slogan">Marcando para revisión...</string>
     <string name="denounce_slogan">Denunciar frase</string>
     <string name="denounce_slogan_message">Según las bases de este concurso no se admiten mensajes de odio ni en contra de los Derechos Humanos (y Zombies).\n\nSi esta frase consideras que no cumple con las bases, puedes denunciarla pulsando el siguiente botón y permanecerá oculta temporalmente hasta que sea revisada y se decida si se oculta definitivamente.</string>
     <string name="denounce">Denunciar</string>
+    <string name="user_banned">Usuario baneado</string>
+    <string name="banning_user">Baneando usuario...</string>
+    <string name="deleting_slogan">Eliminando eslogan...</string>
+    <string name="slogan_deleted">Eslogan eliminado</string>
+    <string name="you_are_banned">Estás inhabilitado para publicar frases por una denuncia de frase que no cumple con las bases del concurso. Si crees que ha sido un error, ponte en contacto en el correo: julio@triskelapps.com</string>
+    <string name="delete">Eliminar</string>
+    <string name="ban_user">Banear usuario</string>
+    <string name="denounces">Denuncias</string>
+    <string name="slogan_denounced">Lema denunciado</string>
+    <string name="slogan_validated">Eslogan validado</string>
+    <string name="is_valid">Es válido</string>
 
 
 </resources>

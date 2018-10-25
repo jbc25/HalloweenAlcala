@@ -1,6 +1,5 @@
 package org.halloweenalcala.app.csv;
 
-import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -12,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
 /**

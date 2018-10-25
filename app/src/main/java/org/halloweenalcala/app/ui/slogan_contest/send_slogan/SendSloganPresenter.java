@@ -12,6 +12,7 @@ import org.halloweenalcala.app.api.firestore.UserInteractor;
 import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.cloud.Slogan;
+import org.halloweenalcala.app.model.cloud.User;
 import org.halloweenalcala.app.util.Util;
 
 import java.util.regex.Pattern;
@@ -88,19 +89,57 @@ public class SendSloganPresenter extends BasePresenter {
             return;
         }
 
-        Slogan slogan = new Slogan(Util.getDeviceId(context), sloganText, Util.getCurrentDateTime());
+        final Slogan slogan = new Slogan(Util.getDeviceId(context), sloganText, Util.getCurrentDateTime());
         view.showProgressDialog(getString(R.string.sending));
-        new SloganInteractor(context, view).addSlogan(slogan, new BaseInteractor.CallbackPost() {
+
+        checkUserNotBanned(new Runnable() {
             @Override
-            public void onSuccess(String id) {
-                view.toast(R.string.slogan_sent_success);
-                view.clearSloganText();
-                updateAndRefreshSlogansPending();
+            public void run() {
+                new SloganInteractor(context, view).addSlogan(slogan, new BaseInteractor.CallbackPost() {
+                    @Override
+                    public void onSuccess(String id) {
+                        view.toast(R.string.slogan_sent_success);
+                        view.clearSloganText();
+                        updateAndRefreshSlogansPending();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        view.toast(R.string.error_sending);
+                    }
+                });
+            }
+        });
+    }
+
+    private void checkUserNotBanned(final Runnable runnable) {
+        if (getPrefs().getBoolean(App.SHARED_USER_BANNED, false)) {
+            view.alert(getString(R.string.you_are_banned));
+            view.hideProgressDialog();
+            return;
+        }
+
+        String deviceId = Util.getDeviceId(context);
+        new UserInteractor(null, null).getUser(deviceId, new BaseInteractor.CallbackGetEntity<User>() {
+            @Override
+            public void onEntityReceived(User userReceived) {
+                if (userReceived != null) {
+                    if (userReceived.isBanned()) {
+                        getPrefs().edit().putBoolean(App.SHARED_USER_BANNED, true).commit();
+                        view.alert(getString(R.string.you_are_banned));
+                    } else {
+                        runnable.run();
+                    }
+                } else {
+                    view.toast(R.string.error_retrieving_data);
+                }
+                view.hideProgressDialog();
             }
 
             @Override
             public void onError(String error) {
-                view.toast(R.string.error_sending);
+                view.hideProgressDialog();
+                view.toast(error);
             }
         });
     }

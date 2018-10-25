@@ -203,10 +203,10 @@ public class VotingPresenter extends BasePresenter {
         view.showProgressDialog(getString(R.string.denouncing_slogan));
 
         if (currentSlogan != null) {
-            sloganInteractor.denounceSlogan(currentSlogan.getId(), new BaseInteractor.CallbackPost() {
+            sloganInteractor.setSloganDenounced(currentSlogan.getId(), true, new BaseInteractor.CallbackPost() {
                 @Override
                 public void onSuccess(String id) {
-                    view.toast(R.string.slogan_denounced);
+                    view.toast(R.string.slogan_denounced_thanks);
                     refreshData();
                 }
 
@@ -219,7 +219,7 @@ public class VotingPresenter extends BasePresenter {
     }
 
     private void sendNotificationToManagers() {
-        String to = "topics/" + App.FIREBASE_TOPIC_REPORT_SLOGAN;
+        String to = "/topics/" + App.FIREBASE_TOPIC_REPORT_SLOGAN;
         String title = "¡Frase denunciada!";
         String body = currentSlogan != null ? currentSlogan.getText() : "slogan null";
         NotificationPush notificationPush = NotificationPush.createNotification(to, title, body);

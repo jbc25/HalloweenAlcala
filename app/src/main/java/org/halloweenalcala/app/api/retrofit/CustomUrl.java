@@ -1,15 +1,11 @@
 package org.halloweenalcala.app.api.retrofit;
 
-import com.squareup.okhttp.HttpUrl;
-
 import org.halloweenalcala.app.DebugHelper;
-
-import retrofit.BaseUrl;
 
 /**
  * Created by julio on 3/03/16.
  */
-public class CustomUrl implements BaseUrl {
+public class CustomUrl /*implements BaseUrl*/ {
 
     private static final String TAG = "CustomUrl";
 
@@ -27,17 +23,17 @@ public class CustomUrl implements BaseUrl {
     }
 
 
-    @Override
-    public HttpUrl url() {
-
-        String baseUrl = getBaseUrl();
-        return HttpUrl.parse(baseUrl);
-
-    }
-
-    public static String getBaseUrl() {
-
-        return BASE_URL;
-    }
+//    @Override
+//    public HttpUrl url() {
+//
+//        String baseUrl = getBaseUrl();
+//        return HttpUrl.parse(baseUrl);
+//
+//    }
+//
+//    public static String getBaseUrl() {
+//
+//        return BASE_URL;
+//    }
 
 }

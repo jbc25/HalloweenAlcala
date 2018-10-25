@@ -9,7 +9,7 @@ import org.halloweenalcala.app.model.Performance;
 import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.model.cloud.SloganRating;
 
-@Database(entities = {Participant.class, News.class, Performance.class, Place.class, SloganRating.class}, version = 5, exportSchema = false)
+@Database(entities = {Participant.class, News.class, Performance.class, Place.class, SloganRating.class}, version = 7, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
 
     public abstract ParticipantDao participantDao();

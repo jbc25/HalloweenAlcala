@@ -4,12 +4,12 @@ package org.halloweenalcala.app.api.retrofit;
 import org.halloweenalcala.app.model.Configuration;
 import org.halloweenalcala.app.model.News;
 import org.halloweenalcala.app.model.Participant;
-import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.model.Performance;
+import org.halloweenalcala.app.model.Place;
 
 import java.util.List;
 
-import retrofit.http.GET;
+import retrofit2.http.GET;
 import rx.Observable;
 
 public interface GoogleSheetApiCsv {

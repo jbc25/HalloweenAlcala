@@ -61,7 +61,7 @@ public class RankingSlogansPresenter extends BasePresenter {
 
             @Override
             public void onError(String error) {
-
+                view.toast(error);
             }
         });
 

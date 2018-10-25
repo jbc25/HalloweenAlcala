@@ -1,31 +1,31 @@
 package org.halloweenalcala.app.api.retrofit;
 
 
-import android.util.Log;
-
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
+import org.halloweenalcala.app.DebugHelper;
 import org.halloweenalcala.app.csv.CsvConverterFactory;
 
 import java.io.IOException;
-import java.security.cert.CertificateException;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
 
 public class ApiClient {
     private static final String TAG = "ApiClient";
+
+    public static final String BASE_URL_PRODUCTION = "https://docs.google.com/";
+    public static final String BASE_URL_DEBUG = "https://docs.google.com/";
+    //Internal: http://192.168.200.219:8080/halapp_api/service/
+
+
+
+    public static final String BASE_URL =
+            DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_PRODUCTION : BASE_URL_DEBUG;
 
     // Tutorial Retrofit 2.0
     // http://inthecheesefactory.com/blog/retrofit-2.0/en
@@ -36,9 +36,9 @@ public class ApiClient {
         if (sharedInstance == null) {
 
             sharedInstance = new Retrofit.Builder()
-                    .baseUrl(new CustomUrl())
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(new CsvConverterFactory())
-                    .client(getUnsafeOkHttpClient())
+                    .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
 
@@ -48,162 +48,66 @@ public class ApiClient {
         return sharedInstance;
     }
 
+    private static okhttp3.OkHttpClient getOkHttpClient() {
 
-    private static OkHttpClient getUnsafeOkHttpClient() {
-        try {
-            // Create a trust manager that does not validate certificate chains
-            final TrustManager[] trustAllCerts = new TrustManager[]{
-                    new X509TrustManager() {
-                        @Override
-                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                        }
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-                        @Override
-                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                        }
+        okhttp3.Interceptor headersInterceptor = new okhttp3.Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
 
-                        @Override
-                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                            return null;
-                        }
-                    }
-            };
+                okhttp3.Request original = chain.request();
 
-            // Install the all-trusting trust manager
-            final SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-            // Create an ssl socket factory with our all-trusting manager
-            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+                okhttp3.Request.Builder requestBuilder = original.newBuilder();
+                requestBuilder.header("Content-Type", "application/json");
 
-            OkHttpClient okHttpClient = new OkHttpClient();
-            okHttpClient.setSslSocketFactory(sslSocketFactory);
-            okHttpClient.setHostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
-
-
-            okHttpClient.interceptors().add(new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-
-
-                    Request original = chain.request();
-
-                    Request.Builder requestBuilder = original.newBuilder();
-//                    requestBuilder.header("Content-Type", "application/vnd.api+json");
-
-//                    if (App.getToken() != null) {
-//                        requestBuilder.header("Authorization", "Bearer " + App.getToken());
-//                    }
-
-                    requestBuilder.method(original.method(), original.body());
-                    Request request = requestBuilder.build();
-
-
-                    try {
-                        return chain.proceed(request);
-                    } catch (IOException e) {
-                        Log.e(TAG, "intercept: error api", e);
-                        throw new IOException("Network error");
-                    }
+//                requestBuilder.header("Token", TOKEN);
 //
-//                    return null;
-                }
-            });
+//                if (Auth.token != null) {
+//                    requestBuilder.header("nonce", Auth.token);
+//                }
 
-            // LOGGIN INTERCEPTOR
-//            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//// set your desired log level
-//            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-//            okHttpClient.interceptors().add(logging);
+                requestBuilder.method(original.method(), original.body());
+                okhttp3.Request request = requestBuilder.build();
 
 
-            return okHttpClient;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+                okhttp3.Response response = chain.proceed(request);
+
+//                int tryCount = 0;
+//                while (!response.isSuccessful() && tryCount < 3) {
+//
+//                    Log.d("intercept", "Request is not successful - " + tryCount);
+//
+//                    tryCount++;
+//
+//                    // retry the request
+//                    response = chain.proceed(request);
+//                }
+
+                // otherwise just pass the original response on
+                return response;
+            }
+        };
+
+
+        okhttp3.OkHttpClient client = new okhttp3.OkHttpClient().newBuilder()
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(headersInterceptor)
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+//                .sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0])
+                .hostnameVerifier(new HostnameVerifier() {
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+//                        return hostname.equals("triskelapps.com");
+                    }
+                })
+                .build();
+
+        return client;
+
     }
-
-//    private static OkHttpClient getSSLClient(Context context) {
-//
-//
-//        SchemeRegistry schemeRegistry = new SchemeRegistry();
-//        schemeRegistry.register(new Scheme("http", PlainSocketFactory
-//                .getSocketFactory(), 80));
-//        schemeRegistry.register(new Scheme("https", new EasySSLSocketFactory(),
-//                443));
-//
-//        HttpParams params = new BasicHttpParams();
-//        params.setParameter(ConnManagerPNames.MAX_TOTAL_CONNECTIONS, 30);
-//        params.setParameter(ConnManagerPNames.MAX_CONNECTIONS_PER_ROUTE,
-//                new ConnPerRouteBean(30));
-//        params.setParameter(HttpProtocolParams.USE_EXPECT_CONTINUE, false);
-//        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-//
-//        ClientConnectionManager cm = new SingleClientConnManager(params,
-//                schemeRegistry);
-//        DefaultHttpClient httpClient = new DefaultHttpClient(cm, params);
-//
-//        OkHttpClient client = new OkHttpClient();
-//
-//        return null;
-//
-//    }
-//
-//
-//    private static OkHttpClient getSSLClientTrusted(Context context) {
-//
-//        try {
-//            OkHttpClient client = new OkHttpClient();
-//            KeyStore keyStore = readKeyStore(context); //your method to obtain KeyStore
-//
-//            SSLContext sslContext = SSLContext.getInstance("SSL");
-//
-//            TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-//            trustManagerFactory.init(keyStore);
-//            KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-//            keyManagerFactory.init(keyStore, "keystore_pass".toCharArray());
-//            sslContext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), new SecureRandom());
-//            client.setSslSocketFactory(sslContext.getSocketFactory());
-//
-//            return client;
-//
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//        } catch (UnrecoverableKeyException e) {
-//            e.printStackTrace();
-//        } catch (KeyStoreException e) {
-//            e.printStackTrace();
-//        } catch (KeyManagementException e) {
-//            e.printStackTrace();
-//        } catch (CertificateException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        throw new RuntimeException("Unable to configure SSL client");
-//
-//    }
-//
-//    static KeyStore readKeyStore(Context context) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException {
-//        KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-//
-//        // get user password and file input stream
-//        char[] password = getPassword();
-//
-//        FileInputStream fis = null;
-//        try {
-//            fis = context.getResources().openRawResource(R.raw.your_keystore_filename);
-//            ks.load(fis, password);
-//        } finally {
-//            if (fis != null) {
-//                fis.close();
-//            }
-//        }
-//        return ks;
-//    }
 }

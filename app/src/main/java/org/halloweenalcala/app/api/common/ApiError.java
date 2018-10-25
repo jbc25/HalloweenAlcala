@@ -1,15 +1,17 @@
 package org.halloweenalcala.app.api.common;
 
 
-import org.halloweenalcala.app.api.retrofit.ApiClient;
 import com.squareup.okhttp.ResponseBody;
+
+import org.halloweenalcala.app.api.retrofit.ApiClient;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 
-import retrofit.Converter;
-import retrofit.HttpException;
-import retrofit.Response;
+import retrofit2.Converter;
+import retrofit2.HttpException;
+import retrofit2.Response;
+
 
 /**
  * Created by julio on 7/07/16.

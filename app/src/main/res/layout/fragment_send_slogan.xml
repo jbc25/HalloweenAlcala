@@ -73,7 +73,7 @@
             <TextView
                 android:id="@+id/tv_num_slogans_pending"
                 style="@style/TextBase"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/red_halloween_light"
                 android:gravity="center"
                 android:textSize="18sp"
@@ -81,8 +81,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -102,6 +102,7 @@
                         android:layout_centerInParent="true"
                         android:background="@mipmap/img_banner"
                         android:lineSpacingMultiplier="0.7"
+                        android:maxHeight="120dp"
                         android:paddingLeft="20dp"
                         android:paddingTop="30dp"
                         android:paddingRight="20dp"
@@ -116,7 +117,9 @@
                 style="@style/ButtonHalloween"
                 android:textSize="18dp"
                 android:padding="15dp"
-                android:text="@string/send_excl" />
+                android:text="@string/send_excl"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
     </ScrollView>
 

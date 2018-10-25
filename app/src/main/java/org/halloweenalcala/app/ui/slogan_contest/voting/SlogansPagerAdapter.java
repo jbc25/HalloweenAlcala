@@ -1,8 +1,9 @@
 package org.halloweenalcala.app.ui.slogan_contest.voting;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import org.halloweenalcala.app.model.cloud.Slogan;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by julio on 6/10/17.
  */
 
-public class SlogansPagerAdapter extends FragmentPagerAdapter {
+public class SlogansPagerAdapter extends FragmentStatePagerAdapter {
 
     private final List<Slogan> slogans;
 
@@ -21,6 +22,10 @@ public class SlogansPagerAdapter extends FragmentPagerAdapter {
         this.slogans = slogans;
     }
 
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
+    }
 
     @Override
     public Fragment getItem(int position) {

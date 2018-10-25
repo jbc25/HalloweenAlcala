@@ -16,18 +16,21 @@ import org.halloweenalcala.app.model.cloud.Slogan;
 import java.util.List;
 
 
-public class VotingFragment extends BaseFragment implements VotingView, ViewPager.OnPageChangeListener, BrainRatingView.OnRatingChangeListener {
+public class VotingFragment extends BaseFragment implements VotingView, ViewPager.OnPageChangeListener, BrainRatingView.OnRatingChangeListener, View.OnClickListener {
 
     private ViewPager viewpagerSlogans;
     private BrainRatingView brainRatingView;
     private VotingPresenter presenter;
     private SlogansPagerAdapter adapterViewPager;
     private TextView tvSloganCounter;
+    private View btnDenounceSlogan;
 
     private void findViews(View layout) {
         viewpagerSlogans = (ViewPager)layout.findViewById( R.id.viewpager_slogans );
         brainRatingView = (BrainRatingView)layout.findViewById( R.id.brain_rating_view );
         tvSloganCounter = (TextView) layout.findViewById(R.id.tv_slogan_counter);
+        btnDenounceSlogan = layout.findViewById(R.id.btn_denounce_slogan);
+        btnDenounceSlogan.setOnClickListener(this);
     }
 
 
@@ -58,6 +61,12 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
         return layout;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        presenter.onHiddenChanged(hidden);
+    }
+
     // INTERACTIONS
 
     // Viewpager
@@ -76,6 +85,16 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
 
     }
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.btn_denounce_slogan:
+                presenter.onDenounceSloganButtonClick();
+                break;
+        }
+
+    }
 
     // PRESENTER CALLBACKS
 
@@ -87,6 +106,7 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
             onPageSelected(0);
         } else {
             adapterViewPager.notifyDataSetChanged();
+
         }
 
     }
@@ -110,4 +130,5 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
     public void showSloganCounter(int current, int total) {
         tvSloganCounter.setText(String.format(getString(R.string.counter_format), current, total));
     }
+
 }

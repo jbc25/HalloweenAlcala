@@ -17,18 +17,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="60dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="60dp"
             android:rotation="10">
 
             <android.support.v7.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/tv_slogan"
-                android:src="@mipmap/img_stick"
-                android:layout_marginTop="-20dp"/>
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-20dp"
+                android:src="@mipmap/img_stick" />
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/img_banner"
@@ -36,35 +36,35 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/img_banner"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_slogan"
-                style="@style/TextBase"
-                android:maxHeight="120dp"
-                android:maxWidth="270dp"
-                android:gravity="center"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true"
-                android:background="@mipmap/img_banner"
-                app:autoSizeMaxTextSize="100sp"
-                app:autoSizeMinTextSize="10sp"
-                android:lineSpacingMultiplier="0.7"
-                app:autoSizeStepGranularity="2sp"
-                android:padding="15dp"
-                app:autoSizeTextType="uniform"
-                app:fontFamily="@font/nosifer" />
 
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_slogan"
+                    style="@style/TextBase"
+                    android:background="@mipmap/img_banner"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="0.7"
+                    android:maxWidth="270dp"
+                    android:maxHeight="140dp"
+                    android:layout_centerHorizontal="true"
+                    android:padding="15dp"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform"
+                    app:fontFamily="@font/nosifer" />
         </RelativeLayout>
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/img_turba"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="130dp"
             android:layout_alignParentBottom="true"
             android:adjustViewBounds="true"
+            android:maxHeight="120dp"
             android:src="@mipmap/img_turba_1" />
     </RelativeLayout>
 </LinearLayout>

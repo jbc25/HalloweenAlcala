@@ -9,12 +9,15 @@ public class Slogan implements Serializable {
 
     public static final String FIELD_TIMESTAMP = "timestamp";
     public static final String FIELD_RATING = "avgRating";
+    public static final String FIELD_DENOUNCED = "denounced";
+    public static final String FIELD_DELETED = "deleted";
 
 
     private String id;
     private String text;
     private String type;
     private String idDevice;
+    private boolean denounced;
     private boolean deleted;
     private String timestamp;
 
@@ -79,12 +82,12 @@ public class Slogan implements Serializable {
         this.idDevice = idDevice;
     }
 
-    public boolean isDeleted() {
-        return deleted;
+    public boolean isDenounced() {
+        return denounced;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setDenounced(boolean denounced) {
+        this.denounced = denounced;
     }
 
     public String getTimestamp() {
@@ -111,4 +114,11 @@ public class Slogan implements Serializable {
         this.avgRating = avgRating;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

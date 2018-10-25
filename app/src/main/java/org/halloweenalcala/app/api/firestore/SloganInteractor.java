@@ -14,16 +14,27 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Transaction;
 
+import org.halloweenalcala.app.R;
+import org.halloweenalcala.app.api.retrofit.FirebasePushNotificationApi;
 import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.base.BaseView;
 import org.halloweenalcala.app.model.cloud.Slogan;
 import org.halloweenalcala.app.model.cloud.SloganRating;
 import org.halloweenalcala.app.model.cloud.User;
+import org.halloweenalcala.app.model.notifications.NotificationPush;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit.Response;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static org.halloweenalcala.app.api.firestore.FirestoreHelper.COLLECTION_SLOGANS;
 import static org.halloweenalcala.app.api.firestore.FirestoreHelper.COLLECTION_SLOGAN_RATINGS;
@@ -37,18 +48,24 @@ public class SloganInteractor extends BaseInteractor {
 
     public void getSlogans(final CallbackGetList<Slogan> callback) {
 
-        final List<Slogan> slogans = new ArrayList<>();
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection(COLLECTION_SLOGANS)
+        Query query = db.collection(COLLECTION_SLOGANS)
                 .orderBy(Slogan.FIELD_TIMESTAMP, Query.Direction.DESCENDING)
-                .get()
+                .whereEqualTo(Slogan.FIELD_DENOUNCED, false);
+
+        launchQuerySlogans(query, callback);
+
+    }
+
+    private void launchQuerySlogans(Query query, final CallbackGetList<Slogan> callback) {
+        query.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            final List<Slogan> slogans = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Slogan slogan = document.toObject(Slogan.class);
                                 slogan.setId(document.getId());
@@ -65,39 +82,30 @@ public class SloganInteractor extends BaseInteractor {
 
                     }
                 });
-
     }
 
     public void getRankingSlogans(final CallbackGetList<Slogan> callback) {
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Query query = db.collection(COLLECTION_SLOGANS)
+                .orderBy(Slogan.FIELD_RATING, Query.Direction.DESCENDING)
+                .whereEqualTo(Slogan.FIELD_DENOUNCED, false);
+
+        launchQuerySlogans(query, callback);
+    }
+
+
+    public void getSlogansDenounced(final CallbackGetList<Slogan> callback) {
+
         final List<Slogan> slogans = new ArrayList<>();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection(COLLECTION_SLOGANS)
-                .orderBy(Slogan.FIELD_RATING, Query.Direction.DESCENDING)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Query query = db.collection(COLLECTION_SLOGANS)
+                .whereEqualTo(Slogan.FIELD_DENOUNCED, true);
 
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Slogan slogan = document.toObject(Slogan.class);
-                                slogan.setId(document.getId());
-                                slogans.add(slogan);
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                            callback.onListReceived(slogans);
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                            callback.onError("Error getting documents." + task.getException().getMessage());
-                        }
-
-                        baseView.hideProgressDialog();
-
-                    }
-                });
+        launchQuerySlogans(query, callback);
 
     }
 
@@ -235,5 +243,60 @@ public class SloganInteractor extends BaseInteractor {
                         }
                     }
                 });
+    }
+
+
+    public void denounceSlogan(String sloganId, final CallbackPost callback) {
+        Map<String, Object> data = new HashMap<>();
+        data.put(Slogan.FIELD_DENOUNCED, true);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(COLLECTION_SLOGANS).document(sloganId)
+                .set(data, SetOptions.merge())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        baseView.hideProgressDialog();
+                        if (task.isSuccessful()) {
+                            callback.onSuccess(null);
+                        } else {
+                            callback.onError(task.getException().getMessage());
+                        }
+                    }
+                });
+    }
+
+
+    public void sendNotification(NotificationPush notificationPush, final CallbackPost callback) {
+
+        String authKeyHeader = "key=" + context.getString(R.string.firebase_sender_id);
+
+        getApi(FirebasePushNotificationApi.class).sendNotification(authKeyHeader, notificationPush)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Void>>() {
+
+                               @Override
+                               public void onCompleted() {
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+
+                                   callback.onError(e.getMessage());
+                               }
+
+                               @Override
+                               public void onNext(Response<Void> apiResponse) {
+
+                                   // Only one row in configuration
+                                   callback.onSuccess(null);
+                               }
+                           }
+
+
+                );
+
     }
 }

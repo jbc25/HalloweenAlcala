@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import retrofit.Converter;
+import retrofit2.Converter;
 
 /**
  * Created by julio on 9/03/17.

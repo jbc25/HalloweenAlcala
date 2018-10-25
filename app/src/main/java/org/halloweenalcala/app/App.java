@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
 
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.RemoteMessage;
 
 import org.halloweenalcala.app.api.firestore.UserInteractor;
 import org.halloweenalcala.app.base.BaseInteractor;
@@ -47,7 +46,7 @@ public class App extends MultiDexApplication {
     public static final String URL_PROMOTE_SLOGAN = "http://www.marchazombiealcala.com/?" + URL_QUERY_PROMOTE + "=%s";
 
 
-    private static final String FIREBASE_TOPIC_REPORT_SLOGAN = "firebase_topic_report_slogan";
+    public static final String FIREBASE_TOPIC_REPORT_SLOGAN = "slogan_denounce";
 
 
     private static MyDatabase db;
@@ -90,13 +89,8 @@ public class App extends MultiDexApplication {
         if (BuildConfig.DEBUG) {
             FirebaseMessaging.getInstance().subscribeToTopic(FIREBASE_TOPIC_REPORT_SLOGAN);
 
-            RemoteMessage remoteMessage = new RemoteMessage.Builder(SENDER_ID + "@gcm.googleapis.com")
-                    .setMessageId(Integer.toString(msgId.incrementAndGet()))
-                    .addData("my_message", "Hello World")
-                    .addData("my_action", "SAY_HELLO")
-                    .setTtl("Titulo prueba")
-                    .build();
-            FirebaseMessaging.getInstance().send(remoteMessage);
+            String senderId = getString(R.string.firebase_sender_id);
+
         }
 
     }

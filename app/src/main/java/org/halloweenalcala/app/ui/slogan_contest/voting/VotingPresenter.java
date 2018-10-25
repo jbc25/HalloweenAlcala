@@ -2,8 +2,11 @@ package org.halloweenalcala.app.ui.slogan_contest.voting;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
@@ -12,6 +15,7 @@ import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.cloud.Slogan;
 import org.halloweenalcala.app.model.cloud.SloganRating;
+import org.halloweenalcala.app.model.notifications.NotificationPush;
 import org.halloweenalcala.app.util.Util;
 
 import java.util.ArrayList;
@@ -61,6 +65,13 @@ public class VotingPresenter extends BasePresenter {
         refreshData();
     }
 
+
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            refreshData();
+        }
+    }
+
     private void showMockData() {
 
         Slogan slogan = new Slogan();
@@ -104,16 +115,13 @@ public class VotingPresenter extends BasePresenter {
                     view.goToSloganPosition(i);
                     currentSlogan = slogans.get(i);
                     view.showSloganCounter(i+1, slogans.size());
-                    break;
+                    return;
                 }
             }
+
+            view.toast(R.string.slogan_not_found);
         }
     }
-
-    private void refreshSloganCounter() {
-
-    }
-
 
     public void onSloganPageSelected(int position) {
         if (slogans.isEmpty()) {
@@ -170,5 +178,61 @@ public class VotingPresenter extends BasePresenter {
             });
 
         }
+    }
+
+    public void onDenounceSloganButtonClick() {
+
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.denounce_slogan)
+                .setMessage(R.string.denounce_slogan_message)
+                .setPositiveButton(R.string.denounce, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        denounceSlogan();
+                        sendNotificationToManagers();
+                    }
+
+                })
+                .setNeutralButton(R.string.return_back, null)
+                .show();
+
+    }
+
+    private void denounceSlogan() {
+
+        view.showProgressDialog(getString(R.string.denouncing_slogan));
+
+        if (currentSlogan != null) {
+            sloganInteractor.denounceSlogan(currentSlogan.getId(), new BaseInteractor.CallbackPost() {
+                @Override
+                public void onSuccess(String id) {
+                    view.toast(R.string.slogan_denounced);
+                    refreshData();
+                }
+
+                @Override
+                public void onError(String error) {
+                    view.toast(error);
+                }
+            });
+        }
+    }
+
+    private void sendNotificationToManagers() {
+        String to = "topics/" + App.FIREBASE_TOPIC_REPORT_SLOGAN;
+        String title = "¡Frase denunciada!";
+        String body = currentSlogan != null ? currentSlogan.getText() : "slogan null";
+        NotificationPush notificationPush = NotificationPush.createNotification(to, title, body);
+        sloganInteractor.sendNotification(notificationPush, new BaseInteractor.CallbackPost() {
+            @Override
+            public void onSuccess(String id) {
+                Log.i(TAG, "onSuccess: sendNotificationToManagers");
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.i(TAG, "onError: sendNotificationToManagers");
+            }
+        });
     }
 }

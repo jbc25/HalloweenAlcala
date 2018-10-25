@@ -1,5 +1,8 @@
 package org.halloweenalcala.app.model.cloud;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     public static final String FIELD_EMAIL = "email";
@@ -12,6 +15,7 @@ public class User {
     private int pendingSlogans;
     private String timestamp;
     private boolean banned;
+    private List<String> mySlogansIds = new ArrayList<>();
 
     public User() {
 
@@ -63,5 +67,13 @@ public class User {
 
     public void setPendingSlogans(int pendingSlogans) {
         this.pendingSlogans = pendingSlogans;
+    }
+
+    public List<String> getMySlogansIds() {
+        return mySlogansIds;
+    }
+
+    public void setMySlogansIds(List<String> mySlogansIds) {
+        this.mySlogansIds = mySlogansIds;
     }
 }

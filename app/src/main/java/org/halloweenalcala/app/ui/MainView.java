@@ -13,4 +13,6 @@ public interface MainView extends BaseView {
     void refreshFragmentsData();
 
     void showNewNewsIcon(boolean show);
+
+    void showSlogan(String idSlogan);
 }

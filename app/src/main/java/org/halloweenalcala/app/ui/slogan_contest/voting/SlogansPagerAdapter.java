@@ -24,7 +24,7 @@ public class SlogansPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return SloganItemFragment.newInstance(slogans.get(position));
+        return SloganItemFragment.newInstance(position, slogans.get(position));
     }
 
     @Override

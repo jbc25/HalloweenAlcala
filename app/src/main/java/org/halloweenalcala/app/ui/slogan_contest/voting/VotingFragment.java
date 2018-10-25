@@ -6,8 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
+import android.widget.TextView;
 
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseFragment;
@@ -23,10 +22,12 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
     private BrainRatingView brainRatingView;
     private VotingPresenter presenter;
     private SlogansPagerAdapter adapterViewPager;
+    private TextView tvSloganCounter;
 
     private void findViews(View layout) {
         viewpagerSlogans = (ViewPager)layout.findViewById( R.id.viewpager_slogans );
         brainRatingView = (BrainRatingView)layout.findViewById( R.id.brain_rating_view );
+        tvSloganCounter = (TextView) layout.findViewById(R.id.tv_slogan_counter);
     }
 
 
@@ -47,12 +48,12 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
         View layout = inflater.inflate(R.layout.fragment_voting, container, false);
         findViews(layout);
 
-        viewpagerSlogans.setPageTransformer(false, new RotateUpTransformer());
+        viewpagerSlogans.setPageTransformer(true, new ZombieProtestTransformer());
         viewpagerSlogans.addOnPageChangeListener(this);
 
         brainRatingView.setOnRatingChangeListener(this);
 
-        presenter.onCreate();
+        presenter.onCreate(getArguments());
 
         return layout;
     }
@@ -83,6 +84,7 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
         if (adapterViewPager == null) {
             adapterViewPager = new SlogansPagerAdapter(getChildFragmentManager(), slogans);
             viewpagerSlogans.setAdapter(adapterViewPager);
+            onPageSelected(0);
         } else {
             adapterViewPager.notifyDataSetChanged();
         }
@@ -97,5 +99,15 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
     @Override
     public void onRatingChange(int rating) {
         presenter.onRatingChange(rating);
+    }
+
+    @Override
+    public void goToSloganPosition(int position) {
+        viewpagerSlogans.setCurrentItem(position, true);
+    }
+
+    @Override
+    public void showSloganCounter(int current, int total) {
+        tvSloganCounter.setText(String.format(getString(R.string.counter_format), current, total));
     }
 }

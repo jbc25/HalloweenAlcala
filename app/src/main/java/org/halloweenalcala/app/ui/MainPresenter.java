@@ -59,7 +59,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
      }
 
-     public void onCreate() {
+     public void onCreate(Intent intent) {
 
 //         if (true) {
 //             return;
@@ -106,7 +106,24 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
              }
          });
 
+         checkIntentUriReceived(intent);
      }
+
+
+    private void checkIntentUriReceived(Intent intent) {
+
+//        view.showSlogan("nPBWmTYuRJOqWFVwSpLy");
+
+        String appLinkAction = intent.getAction();
+        Uri appLinkData = intent.getData();
+        if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
+
+            String idSlogan = appLinkData.getQueryParameter(App.URL_QUERY_PROMOTE);
+            view.showSlogan(idSlogan);
+
+        }
+    }
+
 
     private void checkNewNews(int lastNewsIdServer) {
         int lastNewsIdLocal = getPrefs().getInt(App.SHARED_LAST_NEWS_ID_LOCAL, 1);

@@ -1,10 +1,15 @@
 package org.halloweenalcala.app.model.cloud;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Slogan implements Serializable {
+
+    public static final String FIELD_TIMESTAMP = "timestamp";
+    public static final String FIELD_RATING = "avgRating";
+
 
     private String id;
     private String text;
@@ -12,6 +17,10 @@ public class Slogan implements Serializable {
     private String idDevice;
     private boolean deleted;
     private String timestamp;
+
+    // agregation
+    private int numRatings;
+    private float avgRating;
 
     public Slogan() {
 
@@ -21,6 +30,11 @@ public class Slogan implements Serializable {
         this.idDevice = idDevice;
         this.text = text;
         this.timestamp = timestamp;
+    }
+
+    public String getAvgRatingFormatted() {
+        DecimalFormat df = new DecimalFormat("0.0");
+        return df.format(getAvgRating());
     }
 
     private Map<String, String> extras = new HashMap<>();
@@ -80,4 +94,21 @@ public class Slogan implements Serializable {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
+
+    public int getNumRatings() {
+        return numRatings;
+    }
+
+    public void setNumRatings(int numRatings) {
+        this.numRatings = numRatings;
+    }
+
+    public float getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(float avgRating) {
+        this.avgRating = avgRating;
+    }
+
 }

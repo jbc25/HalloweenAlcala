@@ -1,0 +1,125 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="org.halloweenalcala.app.ui.slogan_contest.send_slogan.SendSloganFragment">
+
+
+    <LinearLayout
+        android:id="@+id/view_enter_email"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextBase.White"
+            android:gravity="center_horizontal"
+            android:text="@string/enter_email_info" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_email"
+            style="@style/TextBase.White"
+            android:layout_margin="5dp"
+            android:ems="8"
+            android:gravity="center_horizontal"
+            android:hint="@string/email"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/white_semitransp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_send_email"
+            style="@style/ButtonHalloween"
+            android:text="@string/send_email" />
+
+
+        <TextView
+            android:id="@+id/tv_see_contest_rules"
+            style="@style/TextBase"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/background_pressed_common"
+            android:padding="10dp"
+            android:text="@string/see_contest_rules_again"
+            android:textColor="@color/red_halloween_light"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/view_enter_slogan"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_email"
+                style="@style/TextBase.White" />
+
+            <TextView
+                android:id="@+id/tv_num_slogans_pending"
+                style="@style/TextBase"
+                android:layout_margin="10dp"
+                android:textColor="@color/red_halloween_light"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/view_banner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:rotation="10">
+
+                    <org.halloweenalcala.app.util.AutoResizeEditText
+                        android:id="@+id/edit_slogan"
+                        style="@style/TextEditSlogan"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/img_banner"
+                        android:lineSpacingMultiplier="0.7"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="30dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_send_slogan"
+                style="@style/ButtonHalloween"
+                android:textSize="18dp"
+                android:padding="15dp"
+                android:text="@string/send_excl" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
+

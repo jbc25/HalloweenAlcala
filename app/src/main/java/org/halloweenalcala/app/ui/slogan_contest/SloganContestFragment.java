@@ -24,7 +24,11 @@ import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.errors.UserNotAddedError;
 import org.halloweenalcala.app.model.cloud.User;
 import org.halloweenalcala.app.ui.slogan_contest.my_slogans.MySlogansFragment;
+import org.halloweenalcala.app.ui.slogan_contest.ranking.RankingSlogansFragment;
+import org.halloweenalcala.app.ui.slogan_contest.send_slogan.SendSloganFragment;
 import org.halloweenalcala.app.ui.slogan_contest.voting.VotingFragment;
+import org.halloweenalcala.app.ui.slogan_contest.voting.VotingPresenter;
+import org.halloweenalcala.app.util.SoftKeyboardManager;
 import org.halloweenalcala.app.util.Util;
 
 import java.util.ArrayList;
@@ -37,9 +41,11 @@ public class SloganContestFragment extends BaseFragment implements TabLayout.Bas
     private TabLayout tabsContest;
     private FrameLayout frameContest;
     private VotingFragment votingFragment;
-    private MySlogansFragment mySlogansFragment;
+    private SendSloganFragment sendSloganFragment;
     private ArrayList<Fragment> sections = new ArrayList<>();
     private int currentSection = -1;
+    private MySlogansFragment mySlogansFragment;
+    private RankingSlogansFragment rankingSloganFragment;
 
     private void findViews(View layout) {
         tabsContest = (TabLayout) layout.findViewById(R.id.tabs_contest);
@@ -48,6 +54,13 @@ public class SloganContestFragment extends BaseFragment implements TabLayout.Bas
         tabsContest.addOnTabSelectedListener(this);
     }
 
+    public static SloganContestFragment newFragment(String idSlogan) {
+        SloganContestFragment fragment = new SloganContestFragment();
+        Bundle args = new Bundle();
+        args.putString(VotingPresenter.ARG_ID_SLOGAN, idSlogan);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public SloganContestFragment() {
         // Required empty public constructor
@@ -65,17 +78,40 @@ public class SloganContestFragment extends BaseFragment implements TabLayout.Bas
         View layout = inflater.inflate(R.layout.fragment_slogan_contest, container, false);
         findViews(layout);
 
-        votingFragment = new VotingFragment();
+        String idSloganToGo = null;
+        if (getArguments() != null) {
+            idSloganToGo = getArguments().getString(VotingPresenter.ARG_ID_SLOGAN);
+        }
+
+        votingFragment = VotingPresenter.newFragment(idSloganToGo);
+        rankingSloganFragment = new RankingSlogansFragment();
+        sendSloganFragment = new SendSloganFragment();
         mySlogansFragment = new MySlogansFragment();
 
         sections.add(votingFragment);
+        sections.add(rankingSloganFragment);
+        sections.add(sendSloganFragment);
         sections.add(mySlogansFragment);
+
+        boolean firstSloganSent = getPrefs().getInt(App.SHARED_NUMBER_SLOGANS_PENDING, App.NUM_SLOGANS) < App.NUM_SLOGANS;
+        if (firstSloganSent) {
+            tabsContest.addTab(tabsContest.newTab().setText(R.string.my_slogans));
+        }
 
 //        getPrefs().edit().putBoolean(App.SHARED_ACCEPTED_CONTEST_RULES, false).apply();
 
         addUserToFirestoreIfNotExists();
 
         show(0);
+
+
+        SoftKeyboardManager.newInstance().configureSoftKeyboardVisibilityBehaviour(
+                getActivity(), new SoftKeyboardManager.OnSoftKeyboardChangedListener() {
+                    @Override
+                    public void onSoftKeyboardVisible(boolean visible) {
+                        tabsContest.setVisibility(visible ? View.GONE : View.VISIBLE);
+                    }
+                });
 
         return layout;
     }
@@ -163,7 +199,7 @@ public class SloganContestFragment extends BaseFragment implements TabLayout.Bas
     // INTERACTIONS
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        if (tab.getPosition() == 1) {
+        if (tab.getPosition() == 2) {
             if (!getPrefs().getBoolean(App.SHARED_ACCEPTED_CONTEST_RULES, false)) {
                 showContestRules();
             }

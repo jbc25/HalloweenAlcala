@@ -2,82 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:gravity="center"
+    android:padding="5dp"
     tools:context="org.halloweenalcala.app.ui.slogan_contest.my_slogans.MySlogansFragment">
 
-
-    <LinearLayout
-        android:id="@+id/view_enter_email"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            style="@style/TextBase.White"
-            android:gravity="center_horizontal"
-            android:text="@string/enter_email_info" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/edit_email"
-            style="@style/TextBase.White"
-            android:layout_margin="5dp"
-            android:ems="8"
-            android:gravity="center_horizontal"
-            android:hint="@string/email"
-            android:imeOptions="actionDone"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/white_semitransp" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_send_email"
-            style="@style/ButtonHalloween"
-            android:text="@string/send_email" />
-
-
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/tv_email"
-        style="@style/TextBase.White" />
+        style="@style/TextBase.White"
+        android:text="@string/avg_rating_message"
+        android:gravity="center"
+        android:layout_marginBottom="15dp"/>
 
-    <TextView
-        android:id="@+id/tv_num_slogans_pending"
-        style="@style/TextBase"
-        android:textColor="@color/red_halloween_light"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_margin="10dp"/>
-
-    <LinearLayout
-        android:id="@+id/view_enter_slogan"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_my_slogans"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/edit_slogan"
-            style="@style/TextBase.White"
-            android:gravity="center"
-            android:imeOptions="actionDone"
-            android:inputType="textCapSentences|textMultiLine"
-            android:lines="2"
-            android:minWidth="200dp" />
-
-        <View style="@style/XpansorVert" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_send_slogan"
-            style="@style/ButtonHalloween"
-            android:text="@string/send_slogan" />
-
-    </LinearLayout>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

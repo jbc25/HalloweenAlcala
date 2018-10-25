@@ -15,7 +15,6 @@ public class SloganRating {
     private String idSlogan;
     private String idDevice;
     private int rating;
-    private boolean reported;
     private String timestamp;
     @Ignore private Map<String, String> extras = new HashMap<>();
 
@@ -47,14 +46,6 @@ public class SloganRating {
 
     public void setExtras(Map<String, String> extras) {
         this.extras = extras;
-    }
-
-    public boolean isReported() {
-        return reported;
-    }
-
-    public void setReported(boolean reported) {
-        this.reported = reported;
     }
 
     public String getIdDevice() {

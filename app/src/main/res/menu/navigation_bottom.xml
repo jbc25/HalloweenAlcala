@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/navigation_contest"
-        android:icon="@mipmap/ic_news"
+        android:icon="@mipmap/ic_banner_stick_rotated"
         android:title="@string/slogan_contest" />
 
     <item

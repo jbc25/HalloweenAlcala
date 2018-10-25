@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
+
 import org.halloweenalcala.app.api.firestore.UserInteractor;
 import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.database.MyDatabase;
@@ -39,6 +42,14 @@ public class App extends MultiDexApplication {
 
     public static final String URL_GOOGLE_PLAY_APP = "https://play.google.com/store/apps/details?id=org.halloweenalcala.app";
     public static final String URL_DIRECT_GOOGLE_PLAY_APP = "market://details?id=org.halloweenalcala.app";
+
+    public static final String URL_QUERY_PROMOTE = "share-slogan";
+    public static final String URL_PROMOTE_SLOGAN = "http://www.marchazombiealcala.com/?" + URL_QUERY_PROMOTE + "=%s";
+
+
+    private static final String FIREBASE_TOPIC_REPORT_SLOGAN = "firebase_topic_report_slogan";
+
+
     private static MyDatabase db;
 
     public static final String DB_NAME = "halloween_alcala_17.db";
@@ -75,6 +86,18 @@ public class App extends MultiDexApplication {
 
 
 //        Crashlytics.logException(new Exception("My first Android non-fatal error"));
+
+        if (BuildConfig.DEBUG) {
+            FirebaseMessaging.getInstance().subscribeToTopic(FIREBASE_TOPIC_REPORT_SLOGAN);
+
+            RemoteMessage remoteMessage = new RemoteMessage.Builder(SENDER_ID + "@gcm.googleapis.com")
+                    .setMessageId(Integer.toString(msgId.incrementAndGet()))
+                    .addData("my_message", "Hello World")
+                    .addData("my_action", "SAY_HELLO")
+                    .setTtl("Titulo prueba")
+                    .build();
+            FirebaseMessaging.getInstance().send(remoteMessage);
+        }
 
     }
 

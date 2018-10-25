@@ -30,6 +30,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="www.marchazombiealcala.com" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.participants.list.ParticipantsActivity"
@@ -57,7 +68,7 @@
         <!-- [END firebase_iid_service] -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@mipmap/ic_marker_zombie2" />
+            android:resource="@mipmap/ic_banner_stick_rotated" />
         <meta-data android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/red_halloween" />
 

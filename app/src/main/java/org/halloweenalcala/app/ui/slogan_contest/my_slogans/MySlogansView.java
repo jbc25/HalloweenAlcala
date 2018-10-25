@@ -6,14 +6,5 @@ import org.halloweenalcala.app.model.cloud.Slogan;
 import java.util.List;
 
 public interface MySlogansView extends BaseView {
-
-    void setActiveAndshowEmail(String email);
-
-    void showMySlogans(List<Slogan> slogans);
-
-    void showInvalidEmailMessage(String errorMessage);
-
-    void clearSloganText();
-
-    void showSlogansPending(int numSlogansPending);
+    void showSlogans(List<Slogan> slogans);
 }

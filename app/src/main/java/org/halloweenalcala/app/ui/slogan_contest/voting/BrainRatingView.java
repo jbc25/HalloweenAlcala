@@ -52,10 +52,10 @@ public class BrainRatingView extends LinearLayout implements View.OnClickListene
     public void onClick(View v) {
 
         int position = Integer.parseInt(v.getTag().toString());
-        showRating(position);
+        showRating(position, true);
     }
 
-    private void showRating(int rating) {
+    private void showRating(int rating, boolean fromUser) {
 
         this.rating = rating;
 
@@ -67,8 +67,10 @@ public class BrainRatingView extends LinearLayout implements View.OnClickListene
 
         invalidate();
 
-        if (onRatingChangeListener != null) {
-            onRatingChangeListener.onRatingChange(rating);
+        if (fromUser) {
+            if (onRatingChangeListener != null) {
+                onRatingChangeListener.onRatingChange(rating);
+            }
         }
     }
 
@@ -87,7 +89,7 @@ public class BrainRatingView extends LinearLayout implements View.OnClickListene
 
     public void setRating(int rating) {
         this.rating = rating;
-        showRating(rating);
+        showRating(rating, false);
     }
 
     public interface OnRatingChangeListener {

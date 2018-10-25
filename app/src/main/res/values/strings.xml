@@ -87,11 +87,21 @@
     <string name="slogan_sent_success">¡Lema enviado correctamente!</string>
     <string name="error_sending">¡Atención! Ha habido un problema con el envío. Inténtelo de nuevo</string>
     <string name="num_slogans_pending_msg">Todavía puedes enviar %d lemas</string>
-    <string name="all_slogans_sent">Ya has enviado tus %d lemas. ¡Suerte con las votaciones!</string>
+    <string name="all_slogans_sent">Ya has enviado tus %d lemas.\n¡Suerte con las votaciones!</string>
     <string name="send_excl">¡Enviar!</string>
     <string name="slogan_text_empty">Pon algo en ese cartel ¡Que no se diga!</string>
     <string name="loading_zombifestacion">Cargando zombiefestación...</string>
     <string name="already_voted_slogan">Ya has votado este lema</string>
+    <string name="see_contest_rules_again">Volver a ver las bases del concurso</string>
+    <string name="your_slogans">Tus lemas</string>
+    <string name="avg_rating">Puntuación media:</string>
+    <string name="avg_rating_message">Estos son los eslóganes que has publicado y la puntuación media que te han dado el resto de usuarios (sobre 5)</string>
+    <string name="votes_format">Votos: %d</string>
+    <string name="promote_slogan">¡Promociona tu pancarta!</string>
+    <string name="promote_slogan_default_message">¡La manifestación zombie del año se acerca!\nEsta es una de mis lemas de pancarta:\n\n%s.\n\nPuedes puntuarla para el concurso pulsando este enlace %s.\n\nSi todavía no tienes la app para Android de #HalloweenAlcala2018 descárgala gratuitamente en este enlace y participa en el concurso de pancartas!\n%s</string>
+    <string name="error_sending_voting">Ha habido un error al enviar el voto. Intentelo de nuevo por favor</string>
+    <string name="counter_format">%d de %d</string>
+    <string name="ranking">Ranking</string>
 
 
 </resources>

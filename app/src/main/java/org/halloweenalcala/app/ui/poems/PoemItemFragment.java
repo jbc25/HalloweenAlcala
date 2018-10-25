@@ -49,6 +49,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
     private View viewUnlockedPoem;
     private TextView tvPoemUnlockDescription;
     private TextView tvHiddenPoemName;
+    private TextView tvPoemSubtitle;
 
     @Override
     public BasePresenter getPresenter() {
@@ -62,6 +63,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
     private void findViews(View layout) {
 
         tvPoemTitle = (TextView)layout.findViewById( R.id.tv_poem_title);
+        tvPoemSubtitle = (TextView)layout.findViewById( R.id.tv_poem_subtitle);
         tvPoemText = (TextView)layout.findViewById( R.id.tv_poem_text );
         tvPoemUnlockDescription = (TextView)layout.findViewById( R.id.tv_poem_unlock_description );
         tvHiddenPoemName = (TextView)layout.findViewById( R.id.tv_hidden_poem_name );
@@ -120,6 +122,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
         if (isUnlocked) {
             viewLockedPoem.setVisibility(View.GONE);
             tvPoemTitle.setText(getString(poemCharacter.getPoemTitleId()));
+            tvPoemSubtitle.setText(getString(poemCharacter.getPoemSubtitleId()));
             tvPoemText.setText(getString(poemCharacter.getPoemTextId()));
             imgCharacter.setImageResource(poemCharacter.getCharacterDrawableId());
             viewUnlockedPoem.setVisibility(View.VISIBLE);

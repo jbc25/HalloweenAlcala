@@ -100,9 +100,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_notification_roman)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_notification_roman))
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "") // TODO FOR CUSTOM NOTIFS
+                .setSmallIcon(R.mipmap.ic_banner_stick_rotated)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_app_2018))
                 .setContentTitle(title != null ? title : getString(R.string.app_name))
                 .setContentText(text)
                 .setAutoCancel(true)

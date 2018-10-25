@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_slogan_text"
+            style="@style/TextBase"
+            android:gravity="center"
+            android:background="@mipmap/img_banner"
+            android:textSize="16sp"
+            android:padding="15dp"
+            android:maxHeight="150dp"
+            app:autoSizeTextType="uniform"
+            app:fontFamily="@font/nosifer" />
+
+        <LinearLayout
+            android:id="@+id/btn_promote_slogan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white_semitransp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:padding="5dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_share"
+                app:tint="@color/red_halloween"/>
+
+            <TextView
+                style="@style/TextBase.White"
+                android:textColor="@color/red_halloween"
+                android:layout_marginLeft="7dp"
+                android:text="@string/promote_slogan"
+                android:textSize="14sp"
+                app:fontFamily="@font/eater" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_slogan_rating"
+            style="@style/TextBase.White"
+            android:background="@mipmap/img_banner_stick_small"
+            android:rotation="10"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/nosifer" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_slogan_num_votes"
+            style="@style/TextBase.White" />
+    </LinearLayout>
+</LinearLayout>

@@ -25,7 +25,17 @@
         <android.support.design.widget.TabItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/ranking"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/send_excl"/>
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/your_slogans"/>-->
 
     </android.support.design.widget.TabLayout>
 

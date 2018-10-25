@@ -50,6 +50,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private MainPresenter presenter;
     private Place placeToSelect;
     private View iconNewNewsBadge;
+    private String idSloganToGo;
 
     @Override
     public BasePresenter getPresenter() {
@@ -87,7 +88,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content, new PerformancesFragment()).commit();
 
-        presenter.onCreate();
+        presenter.onCreate(getIntent());
 
         SoftKeyboardManager.newInstance().configureSoftKeyboardVisibilityBehaviour(this, new SoftKeyboardManager.OnSoftKeyboardChangedListener() {
             @Override
@@ -98,6 +99,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 //        WebViewActivity.start(this, "https://www.loomio.org/p/PsUuLI1p/nota-de-prensa-para-solidarizarse");
 
+//        showSection(new RankingSlogansFragment());
     }
 
     private void configureBottomNavView() {
@@ -157,8 +159,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     setToolbarTitle(R.string.app_name);
                     return true;
                 case R.id.navigation_contest:
-                    showSection(new SloganContestFragment());
+                    showSection(SloganContestFragment.newFragment(idSloganToGo));
                     setToolbarTitle(R.string.slogan_contest);
+                    idSloganToGo = null;
                     return true;
                 case R.id.navigation_poems:
                     showSection(new PoemsFragment());
@@ -311,4 +314,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
+    @Override
+    public void showSlogan(String idSlogan) {
+        idSloganToGo = idSlogan;
+        bottomNavView.setSelectedItemId(R.id.navigation_contest);
+    }
 }

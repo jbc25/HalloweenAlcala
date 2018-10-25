@@ -10,4 +10,8 @@ public interface VotingView extends BaseView {
     void showSlogans(List<Slogan> slogans);
 
     void showRating(int rating);
+
+    void goToSloganPosition(int position);
+
+    void showSloganCounter(int current, int total);
 }

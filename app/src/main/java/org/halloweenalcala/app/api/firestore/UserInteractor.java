@@ -47,6 +47,33 @@ public class UserInteractor extends BaseInteractor {
 
     }
 
+
+    public void getUserByEmail(String email, final CallbackGetEntity<User> callback) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(COLLECTION_USERS)
+                .whereEqualTo(User.FIELD_EMAIL, email)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                            if (documents.isEmpty()) {
+                                callback.onEntityReceived(null);
+                            } else {
+                                callback.onEntityReceived(documents.get(0).toObject(User.class));
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                            callback.onError("Error getting documents." + task.getException().getMessage());
+                        }
+                    }
+                });
+    }
+
+
     public void getUser(String deviceId, final CallbackGetEntity<User> callback) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();

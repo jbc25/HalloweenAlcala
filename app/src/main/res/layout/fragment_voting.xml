@@ -29,7 +29,7 @@
             android:id="@+id/tv_slogan_counter"
             style="@style/TextBase"
             android:fontFamily="@font/eater"
-            android:textSize="17sp"
+            android:textSize="@dimen/text_counter_voting"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"/>
 

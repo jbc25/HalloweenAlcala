@@ -1,14 +1,17 @@
 package org.halloweenalcala.app.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.BuildConfig;
+import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.csv.CsvConverter;
 import org.halloweenalcala.app.interactor.ConfigurationInteractor;
@@ -119,9 +122,27 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
 
             String idSlogan = appLinkData.getQueryParameter(App.URL_QUERY_PROMOTE);
-            view.showSlogan(idSlogan);
+            if (idSlogan != null) {
+                view.showSlogan(idSlogan);
+            } else {
+                continueWithLink(appLinkData);
+            }
 
         }
+    }
+
+    private void continueWithLink(final Uri uri) {
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.continue_str)
+                .setMessage(R.string.continue_link_message)
+                .setPositiveButton(R.string.open_in_web, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    }
+                })
+                .setNeutralButton(R.string.remain, null)
+                .show();
     }
 
 

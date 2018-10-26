@@ -2,12 +2,14 @@ package org.halloweenalcala.app.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.Spanned;
@@ -26,6 +28,7 @@ import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 public final class Util {
 
@@ -173,8 +176,20 @@ public final class Util {
 
     public static String getDeviceId(Context context) {
 
-        return Settings.Secure.getString(context.getContentResolver(),
+        String id = Settings.Secure.getString(context.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+
+        if (id == null) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            String uniqueInstallationId = prefs.getString("unique-installation-id", null);
+            if (uniqueInstallationId == null) {
+                uniqueInstallationId = "random-installation-id-" + UUID.randomUUID().toString();
+                prefs.edit().putString("unique-installation-id", uniqueInstallationId).commit();
+            }
+            id = uniqueInstallationId;
+        }
+
+        return id;
     }
 
 

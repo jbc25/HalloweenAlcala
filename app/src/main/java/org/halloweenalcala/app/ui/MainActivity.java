@@ -209,7 +209,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.menu_credits:
-                WebViewActivity.start(this, "http://www.marchazombiealcala.es/creditos");https://www.loomio.org/
+                WebViewActivity.start(this, "http://www.marchazombiealcala.com/creditos");https://www.loomio.org/
                 break;
         }
 
@@ -224,10 +224,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         ab.setTitle(R.string.contests_and_raffle);
         ab.setMessage(R.string.contest_and_raffle_info);
-        ab.setPositiveButton(R.string.go_to_web_contest, new DialogInterface.OnClickListener() {
+        ab.setPositiveButton(R.string.more_info_web_contest, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.marchazombiealcala.es/concursos")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.marchazombiealcala.com/concursos")));
             }
         });
         ab.setNeutralButton(R.string.return_back, null);

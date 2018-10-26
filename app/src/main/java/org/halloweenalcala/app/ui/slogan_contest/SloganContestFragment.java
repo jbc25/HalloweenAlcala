@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 
 import org.halloweenalcala.app.App;
-import org.halloweenalcala.app.BuildConfig;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.api.firestore.UserInteractor;
 import org.halloweenalcala.app.base.BaseFragment;
@@ -103,9 +102,9 @@ public class SloganContestFragment extends BaseFragment implements TabLayout.Bas
             tabsContest.addTab(tabsContest.newTab().setText(R.string.my_slogans));
         }
 
-        if (BuildConfig.DEBUG) {
-            tabsContest.addTab(tabsContest.newTab().setText(R.string.denounces));
-        }
+//        if (BuildConfig.DEBUG) {
+//            tabsContest.addTab(tabsContest.newTab().setText(R.string.denounces));
+//        }
 
 //        getPrefs().edit().putBoolean(App.SHARED_ACCEPTED_CONTEST_RULES, false).apply();
 

@@ -111,7 +111,32 @@ public class SloganInteractor extends BaseInteractor {
 
     }
 
-    public void addSlogan(Slogan slogan, final CallbackPost callback) {
+
+    public void checkSloganDontExistsAndSend(final Slogan slogan, final CallbackPost callback) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection(COLLECTION_SLOGANS)
+                .whereEqualTo(Slogan.FIELD_TEXT_NORMALIZED, slogan.getText_normalized())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().isEmpty()) {
+                                addSlogan(slogan, callback);
+                            } else {
+                                callback.onError(context.getString(R.string.slogan_already_exists));
+                            }
+                        } else {
+                            callback.onError(task.getException().getMessage());
+                        }
+                    }
+                });
+
+    }
+
+    private void addSlogan(Slogan slogan, final CallbackPost callback) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(COLLECTION_SLOGANS)
@@ -129,7 +154,10 @@ public class SloganInteractor extends BaseInteractor {
                     }
                 });
 
+
+
     }
+
 
     public void addSloganRating(final SloganRating sloganRating, final CallbackPost callback) {
 

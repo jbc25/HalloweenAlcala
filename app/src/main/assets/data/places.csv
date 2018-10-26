@@ -1,10 +1,12 @@
 id_server,name,name_halloween,lat,lng,type
 1,Plaza de Cervantes,,40.482688,-3.364384,MAIN
-2,Plaza de los Irlandeses,Mueve tu Esqueleto,40.481450,-3.366658,MAIN
-3,Plaza de los Santos Niños,"1, 2,3... Acción",40.480842,-3.369153,MAIN
-4,Plaza de Palacio,Truco o Trato,40.482225,-3.369309,MAIN
+2,Plaza de los Irlandeses,,40.481450,-3.366658,MAIN
+3,Plaza de los Santos Niños,,40.480842,-3.369153,MAIN
+4,Plaza de Palacio,,40.482225,-3.369309,MAIN
 5,Calle Mayor,,40.482719,-3.365795,MAIN
 6,Casa Tapón,,40.481114,-3.368905,MAIN
-7,Sta María la Rica,Terroríficas charlas,40.480221,-3.367905,MAIN
+7,Sta María la Rica,,40.480221,-3.367905,MAIN
 8,The Green Irish Pub,,40.480979,-3.368652,OTHERS
 9,Mural La Panadería,,40.481274,-3.368498,OTHERS
+10,Capilla del Oidor,,40.481486,-3.363653,MAIN
+-1,,,0,0,

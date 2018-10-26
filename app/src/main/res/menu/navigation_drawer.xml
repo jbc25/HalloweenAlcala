@@ -25,7 +25,8 @@
     <item
         android:id="@+id/menu_credits"
         android:icon="@mipmap/ic_credits"
-        android:title="@string/credits" />
+        android:title="@string/credits"
+        android:visible="false"/>
 
     <item android:title="@string/social_networks">
         <menu>

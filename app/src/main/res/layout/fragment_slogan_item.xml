@@ -16,10 +16,12 @@
             android:id="@+id/view_banner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/img_turba"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="-20dp"
             android:rotation="10">
 
             <android.support.v7.widget.AppCompatImageView
@@ -45,16 +47,18 @@
                     android:background="@mipmap/img_banner"
                     android:gravity="center"
                     android:lineSpacingMultiplier="0.7"
-                    android:maxWidth="270dp"
-                    android:maxHeight="140dp"
+                    android:maxWidth="@dimen/max_width_banner"
+                    android:maxHeight="@dimen/max_height_banner"
                     android:layout_centerHorizontal="true"
-                    android:padding="15dp"
+                    android:padding="20dp"
                     android:textSize="40sp"
                     android:textStyle="bold"
-                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMaxTextSize="60sp"
                     app:autoSizeMinTextSize="10sp"
-                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeStepGranularity="1sp"
                     app:autoSizeTextType="uniform"
+                    android:breakStrategy="balanced"
+                    android:hyphenationFrequency="none"
                     app:fontFamily="@font/nosifer" />
         </RelativeLayout>
 
@@ -65,7 +69,7 @@
             android:layout_alignParentBottom="true"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:maxHeight="120dp"
+            android:maxHeight="@dimen/max_height_turba"
             android:src="@mipmap/img_turba_1" />
     </RelativeLayout>
 </LinearLayout>

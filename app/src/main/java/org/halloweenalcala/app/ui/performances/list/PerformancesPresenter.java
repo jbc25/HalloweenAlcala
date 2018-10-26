@@ -11,6 +11,7 @@ import org.halloweenalcala.app.model.Place;
 import org.halloweenalcala.app.ui.performances.detail.PerformanceDetailActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -46,7 +47,7 @@ import java.util.List;
 
          performances.clear();
          List<Performance> performanceList = App.getDB().performanceDao().getAll();
-//         Collections.sort(performanceList);
+         Collections.sort(performanceList);
 
          for (Performance performance : performanceList) {
 

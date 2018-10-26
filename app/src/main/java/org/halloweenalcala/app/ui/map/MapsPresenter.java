@@ -64,7 +64,7 @@ public class MapsPresenter extends BasePresenter {
 
         for (Place place : placeList) {
             List<Performance> performanceList = App.getDB().performanceDao().getPerformancesOfPlace(place.getId_server());
-//            Collections.sort(performanceList);
+            Collections.sort(performanceList);
             place.setPerformances(performanceList);
         }
 

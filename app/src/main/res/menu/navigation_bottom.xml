@@ -14,12 +14,12 @@
     <item
         android:id="@+id/navigation_contest"
         android:icon="@mipmap/ic_banner_stick_rotated"
-        android:title="@string/slogan_contest" />
+        android:title="@string/contest" />
 
     <item
         android:id="@+id/navigation_poems"
         android:icon="@mipmap/ic_nav_poem"
-        android:title="@string/zinemazombies" />
+        android:title="@string/poems" />
 
     <item
         android:id="@+id/navigation_news"

@@ -36,10 +36,10 @@
     <string name="contest_decoration">Concurso decoración</string>
     <string name="contest_and_raffle_info">
         Hagamos entre tod@s una tarde mucho más divertida participando en los concursos y sorteos que se han preparado para la ocasión:\n\n
-        · Concurso de disfraces\n
         · Concurso de decoración de establecimientos\n
         · Concurso de fotografía\n
-        · Sorteo solidario\n\n
+        · Sorteo solidario\n
+        · Concurso de lemas reivindicativos zombies (en esta misma app)\n\n
 
         Toda la información, bases e inscripciones en la web de la Marcha Zombie\n
         ¡Te esperamos!
@@ -71,8 +71,6 @@
     <string name="credits">Créditos</string>
     <string name="hurry_no_time">¡Corre! Te quedas sin tiempo</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="voting">Votación</string>
     <string name="my_slogans">Mis lemas</string>
     <string name="slogan_contest">Concurso lemas</string>
@@ -119,6 +117,13 @@
     <string name="slogan_denounced">Lema denunciado</string>
     <string name="slogan_validated">Eslogan validado</string>
     <string name="is_valid">Es válido</string>
+    <string name="contest">Concurso</string>
+    <string name="email_already_exists">Este email ya existe</string>
+    <string name="continue_link_message">Vaya, parece que este no es un tipo de link que puedas abrir esta app. Para abrirlo en la web pulsa el botón inferior, y si no siempre puedes quedarte por aquí a puntuar algunas pancartas :P</string>
+    <string name="open_in_web">Abrir en la web</string>
+    <string name="remain">Me quedo</string>
+    <string name="more_info_web_contest">Más info en la web</string>
+    <string name="slogan_already_exists">Este lema ya existe! Seguro que se te ocurre uno mejor ;)</string>
 
 
 </resources>

@@ -27,6 +27,7 @@ public class RankingSlogansFragment extends BaseFragment implements RankingSloga
     private RankingSlogansPresenter presenter;
     private RecyclerView recyclerSlogans;
     private RankingSlogansAdapter adapter;
+    private View viewLoading;
 
     public RankingSlogansFragment() {
         // Required empty public constructor
@@ -34,6 +35,7 @@ public class RankingSlogansFragment extends BaseFragment implements RankingSloga
 
     private void findViews(View layout) {
         recyclerSlogans = (RecyclerView) layout.findViewById(R.id.recycler_my_slogans);
+        viewLoading = layout.findViewById(R.id.view_loading);
     }
 
     @Override
@@ -90,6 +92,8 @@ public class RankingSlogansFragment extends BaseFragment implements RankingSloga
         } else {
             adapter.notifyDataSetChanged();
         }
+
+        viewLoading.setVisibility(slogans.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
 }

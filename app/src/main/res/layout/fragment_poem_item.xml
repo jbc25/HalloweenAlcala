@@ -93,7 +93,7 @@
             android:id="@+id/tv_poem_title"
             style="@style/TextBase"
             app:fontPath="fonts/typewriter.ttf"
-            android:textSize="24sp"
+            android:textSize="@dimen/poem_title"
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -104,7 +104,7 @@
             android:id="@+id/tv_poem_subtitle"
             style="@style/TextBase"
             app:fontPath="fonts/typewriter.ttf"
-            android:textSize="20sp"
+            android:textSize="@dimen/poem_subtitle"
             android:gravity="center"
             android:textAllCaps="false"
             android:layout_centerHorizontal="true"/>
@@ -121,7 +121,7 @@
                 app:fontPath="fonts/typewriter.ttf"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:textSize="16sp"
+                android:textSize="@dimen/poem_text"
                 android:padding="15dp"/>
 
         </ScrollView>

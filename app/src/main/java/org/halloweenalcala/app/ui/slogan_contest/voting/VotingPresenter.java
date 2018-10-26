@@ -74,18 +74,34 @@ public class VotingPresenter extends BasePresenter {
 
     private void showMockData() {
 
-        Slogan slogan = new Slogan();
-        slogan.setText("Que no, que no, que no nos representan");
+        Slogan slogan0 = new Slogan();
+        slogan0.setText("Participa en el concurso de lemas 8MZ a través de la app:");
+
+        Slogan slogan1 = new Slogan();
+        slogan1.setText("Sube tus lemas reivindicativos");
 
         Slogan slogan2 = new Slogan();
-        slogan2.setText("No hay pan para tanto fiambre.");
+        slogan2.setText("por los derechos de los zombies");
 
         Slogan slogan3 = new Slogan();
-        slogan3.setText("YES WE DIE!");
+        slogan3.setText("y vota a los más originales");
 
-        slogans.add(slogan);
+        Slogan slogan4 = new Slogan();
+        slogan4.setText("diviértete y envía los tuyos. ¡Habrá premios para los más votados!");
+
+        Slogan slogan5 = new Slogan();
+        slogan5.setText("Descárgala gratuitamente en Google Play");
+
+        Slogan slogan6 = new Slogan();
+        slogan6.setText("#8MZ");
+
+        slogans.add(slogan0);
+        slogans.add(slogan1);
         slogans.add(slogan2);
         slogans.add(slogan3);
+        slogans.add(slogan4);
+        slogans.add(slogan5);
+        slogans.add(slogan6);
         view.showSlogans(slogans);
     }
 
@@ -115,6 +131,7 @@ public class VotingPresenter extends BasePresenter {
                     view.goToSloganPosition(i);
                     currentSlogan = slogans.get(i);
                     view.showSloganCounter(i+1, slogans.size());
+                    idSlogan = null;
                     return;
                 }
             }
@@ -125,6 +142,9 @@ public class VotingPresenter extends BasePresenter {
 
     public void onSloganPageSelected(int position) {
         if (slogans.isEmpty()) {
+            currentSlogan = null;
+            view.showSloganCounter(0, 0);
+            view.showRating(0);
             return;
         }
 
@@ -156,6 +176,19 @@ public class VotingPresenter extends BasePresenter {
             sloganRating.setTimestamp(Util.getCurrentDateTime());
 
             view.showProgressDialog(getString(R.string.sending));
+
+//            if (true) {
+//
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        view.hideProgressDialog();
+//                    }
+//                }, 2000);
+//
+//                return;
+//            }
+
             sloganInteractor.addSloganRating(sloganRating, new BaseInteractor.CallbackPost() {
                 @Override
                 public void onSuccess(String id) {

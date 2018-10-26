@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 public class SendSloganPresenter extends BasePresenter {
 
     private final SendSloganView view;
+    private final UserInteractor userInteractor;
 
     public static SendSloganPresenter newInstance(SendSloganView view, Context context) {
 
@@ -31,6 +32,8 @@ public class SendSloganPresenter extends BasePresenter {
         super(context, view);
 
         this.view = view;
+
+        userInteractor = new UserInteractor(context, view);
 
     }
 
@@ -57,8 +60,35 @@ public class SendSloganPresenter extends BasePresenter {
 
         view.showProgressDialog(getString(R.string.sending));
 
+        userInteractor.getUserByEmail(email, new BaseInteractor.CallbackGetEntity<User>() {
+            @Override
+            public void onEntityReceived(User entity) {
+                if (entity == null) {
+                    sendEmail(email);
+                } else {
+                    String deviceId = Util.getDeviceId(context);
+                    if (TextUtils.equals(deviceId, entity.getIdDevice())) {
+                        sendEmail(email);
+                    } else {
+                        view.toast(R.string.email_already_exists);
+                    }
+                }
+                view.hideProgressDialog();
+            }
+
+            @Override
+            public void onError(String error) {
+                view.toast(error);
+                view.hideProgressDialog();
+            }
+        });
+
+    }
+
+    private void sendEmail(final String email) {
+
         String deviceId = Util.getDeviceId(context);
-        new UserInteractor(context, view).setUserEmail(deviceId, email, new BaseInteractor.CallbackPost() {
+        userInteractor.setUserEmail(deviceId, email, new BaseInteractor.CallbackPost() {
             @Override
             public void onSuccess(String id) {
                 getPrefs().edit().putString(App.SHARED_USER_EMAIL, email).apply();
@@ -75,7 +105,7 @@ public class SendSloganPresenter extends BasePresenter {
 
     private void updatePendingSlogansCloud() {
         String deviceId = Util.getDeviceId(context);
-        new UserInteractor(context, view).setUserPendingSlogans(deviceId, getNumSlogansPending());
+        userInteractor.setUserPendingSlogans(deviceId, getNumSlogansPending());
     }
 
     public void onHiddenChanged(boolean hidden) {
@@ -92,10 +122,12 @@ public class SendSloganPresenter extends BasePresenter {
         final Slogan slogan = new Slogan(Util.getDeviceId(context), sloganText, Util.getCurrentDateTime());
         view.showProgressDialog(getString(R.string.sending));
 
+        slogan.normalizeText();
+
         checkUserNotBanned(new Runnable() {
             @Override
             public void run() {
-                new SloganInteractor(context, view).addSlogan(slogan, new BaseInteractor.CallbackPost() {
+                new SloganInteractor(context, view).checkSloganDontExistsAndSend(slogan, new BaseInteractor.CallbackPost() {
                     @Override
                     public void onSuccess(String id) {
                         view.toast(R.string.slogan_sent_success);
@@ -105,7 +137,8 @@ public class SendSloganPresenter extends BasePresenter {
 
                     @Override
                     public void onError(String error) {
-                        view.toast(R.string.error_sending);
+                        view.toast(error);
+//                        view.toast(R.string.error_sending);
                     }
                 });
             }

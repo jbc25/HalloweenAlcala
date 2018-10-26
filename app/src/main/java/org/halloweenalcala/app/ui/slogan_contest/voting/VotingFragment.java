@@ -123,7 +123,7 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
             onPageSelected(0);
         } else {
             adapterViewPager.notifyDataSetChanged();
-
+            onPageSelected(viewpagerSlogans.getCurrentItem());
         }
 
     }

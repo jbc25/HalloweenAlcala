@@ -24,7 +24,7 @@ public class CsvConverter<T> implements Converter<ResponseBody, List<T>> {
 
     public CsvConverter(Type type) {
         this.type = type;
-        itemClass = (Class<T>) ((ParameterizedType)type).getActualTypeArguments()[0];
+        itemClass = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];
     }
 
     public CsvConverter(Class<T> itemClass) {
@@ -44,7 +44,7 @@ public class CsvConverter<T> implements Converter<ResponseBody, List<T>> {
 
     public List<T> convert(CSVReader csvReader) throws IOException {
 
-        String [] nextLine;
+        String[] nextLine;
 
         List<T> result = new ArrayList<>();
         String[] titles = csvReader.readNext();
@@ -63,7 +63,7 @@ public class CsvConverter<T> implements Converter<ResponseBody, List<T>> {
     private T createModel(String[] nextLine, List<Field> fields) throws IOException {
         try {
             T model = itemClass.newInstance();
-            for(int i = 0; i<nextLine.length; ++i){
+            for (int i = 0; i < nextLine.length; ++i) {
                 Field attribute = fields.get(i);
                 setValue(model, attribute, nextLine[i]);
 
@@ -78,6 +78,7 @@ public class CsvConverter<T> implements Converter<ResponseBody, List<T>> {
 
     /**
      * Sets the value to the field of the model. It will do necessary conversions from String.
+     *
      * @param model
      * @param field
      * @param value
@@ -86,34 +87,41 @@ public class CsvConverter<T> implements Converter<ResponseBody, List<T>> {
     private void setValue(T model, Field field, String value) throws IllegalAccessException {
         field.setAccessible(true);
         Class<?> attributeClass = field.getType();
-        field.set(model, getValue(value, attributeClass));
+        try {
+            field.set(model, getValue(value, attributeClass));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Converts a String to a desired class, using default conversions.
+     *
      * @param value
      * @param desiredClass
      * @param <K>
      * @return
      */
-    private <K> K getValue(String value, Class<K> desiredClass){
-        if(desiredClass.isAssignableFrom(String.class)){
-            return (K) value;
-        } else if(isInt(desiredClass)){
-            return (K) Integer.valueOf(value);
-        } else  if(isBoolean(desiredClass)) {
-            return (K) Boolean.valueOf(value);
-        } else  if(isDouble(desiredClass)) {
-            return (K) Double.valueOf(value);
-        } else  if(isLong(desiredClass)) {
-            return (K) Long.valueOf(value);
-        } else if(desiredClass.isAssignableFrom(Calendar.class)){
-            throw new UnsupportedOperationException();//Todo implement
-        } else if(desiredClass.isAssignableFrom(Date.class)){
-            throw new UnsupportedOperationException();//Todo implement
-        } else {
-            throw new UnsupportedOperationException();//Todo implement
-        }
+    private <K> K getValue(String value, Class<K> desiredClass) throws NumberFormatException {
+
+            if (desiredClass.isAssignableFrom(String.class)) {
+                return (K) value;
+            } else if (isInt(desiredClass)) {
+                return (K) Integer.valueOf(value);
+            } else if (isBoolean(desiredClass)) {
+                return (K) Boolean.valueOf(value);
+            } else if (isDouble(desiredClass)) {
+                return (K) Double.valueOf(value);
+            } else if (isLong(desiredClass)) {
+                return (K) Long.valueOf(value);
+            } else if (desiredClass.isAssignableFrom(Calendar.class)) {
+                throw new UnsupportedOperationException();//Todo implement
+            } else if (desiredClass.isAssignableFrom(Date.class)) {
+                throw new UnsupportedOperationException();//Todo implement
+            } else {
+                throw new UnsupportedOperationException();//Todo implement
+            }
+
     }
 
     /**
@@ -121,7 +129,7 @@ public class CsvConverter<T> implements Converter<ResponseBody, List<T>> {
      */
     private List<Field> processFirstLine(String[] titles) throws IOException {
         List<Field> fields = new ArrayList<>();
-        for(int i = 0; i< titles.length; ++i){
+        for (int i = 0; i < titles.length; ++i) {
             try {
                 fields.add(itemClass.getDeclaredField(titles[i]));
             } catch (NoSuchFieldException e) {
@@ -131,19 +139,19 @@ public class CsvConverter<T> implements Converter<ResponseBody, List<T>> {
         return fields;
     }
 
-    public static boolean isInt(Class<?> fieldClass){
+    public static boolean isInt(Class<?> fieldClass) {
         return Integer.class.isAssignableFrom(fieldClass) || int.class.isAssignableFrom(fieldClass);
     }
 
-    public static boolean isDouble(Class<?> fieldClass){
+    public static boolean isDouble(Class<?> fieldClass) {
         return Double.class.isAssignableFrom(fieldClass) || double.class.isAssignableFrom(fieldClass);
     }
 
-    public static boolean isBoolean(Class<?> fieldClass){
+    public static boolean isBoolean(Class<?> fieldClass) {
         return Boolean.class.isAssignableFrom(fieldClass) || boolean.class.isAssignableFrom(fieldClass);
     }
 
-    public static boolean isLong(Class<?> fieldClass){
+    public static boolean isLong(Class<?> fieldClass) {
         return Long.class.isAssignableFrom(fieldClass) || long.class.isAssignableFrom(fieldClass);
     }
 

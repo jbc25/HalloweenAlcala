@@ -11,10 +11,12 @@ public class Slogan implements Serializable {
     public static final String FIELD_RATING = "avgRating";
     public static final String FIELD_DENOUNCED = "denounced";
     public static final String FIELD_DELETED = "deleted";
+    public static final String FIELD_TEXT_NORMALIZED = "text_normalized";
 
 
     private String id;
     private String text;
+    private String text_normalized;
     private String type;
     private String idDevice;
     private boolean denounced;
@@ -27,6 +29,10 @@ public class Slogan implements Serializable {
 
     public Slogan() {
 
+    }
+
+    public void normalizeText() {
+        text_normalized = text.replaceAll("[^A-Za-z0-9]","").toLowerCase().replace(" ", "");
     }
 
     public Slogan (String idDevice, String text, String timestamp) {
@@ -120,5 +126,13 @@ public class Slogan implements Serializable {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getText_normalized() {
+        return text_normalized;
+    }
+
+    public void setText_normalized(String text_normalized) {
+        this.text_normalized = text_normalized;
     }
 }

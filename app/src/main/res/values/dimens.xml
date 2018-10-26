@@ -12,4 +12,11 @@
     <dimen name="text_size_performance_highlight">22sp</dimen>
     <dimen name="text_size_performance_normal">19sp</dimen>
     <dimen name="dp15">15dp</dimen>
+    <dimen name="poem_title">24sp</dimen>
+    <dimen name="poem_subtitle">20sp</dimen>
+    <dimen name="poem_text">16sp</dimen>
+    <dimen name="max_height_turba">120dp</dimen>
+    <dimen name="text_counter_voting">17sp</dimen>
+    <dimen name="max_width_banner">270dp</dimen>
+    <dimen name="max_height_banner">130dp</dimen>
 </resources>

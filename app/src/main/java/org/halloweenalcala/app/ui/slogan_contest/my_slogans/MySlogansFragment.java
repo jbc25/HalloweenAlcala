@@ -27,6 +27,7 @@ public class MySlogansFragment extends BaseFragment implements MySlogansView, My
     private MySlogansPresenter presenter;
     private RecyclerView recyclerSlogans;
     private MySlogansAdapter adapter;
+    private View viewLoading;
 
     public MySlogansFragment() {
         // Required empty public constructor
@@ -34,6 +35,7 @@ public class MySlogansFragment extends BaseFragment implements MySlogansView, My
 
     private void findViews(View layout) {
         recyclerSlogans = (RecyclerView) layout.findViewById(R.id.recycler_my_slogans);
+        viewLoading = layout.findViewById(R.id.view_loading);
     }
 
     @Override
@@ -90,6 +92,7 @@ public class MySlogansFragment extends BaseFragment implements MySlogansView, My
         } else {
             adapter.notifyDataSetChanged();
         }
+        viewLoading.setVisibility(slogans.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
 }

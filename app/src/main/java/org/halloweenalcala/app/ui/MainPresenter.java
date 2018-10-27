@@ -74,6 +74,16 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
              }
          }
 
+
+         checkIntentUriReceived(intent);
+     }
+
+     public void onResume() {
+        refreshData();
+     }
+
+     private void refreshData() {
+
          configurationInteractor.getConfiguration(new ConfigurationInteractor.ConfigurationCallback() {
              @Override
              public void onSuccess(Configuration configuration) {
@@ -84,7 +94,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
              @Override
              public void onError(String message) {
 //                 view.toast(message);
-                    Crashlytics.logException(new Error("Data request error (configuration): " + message));
+                 Crashlytics.logException(new Error("Data request error (configuration): " + message));
 
              }
          });
@@ -108,8 +118,6 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
                  Crashlytics.logException(new Error("Data request error (news): " + message));
              }
          });
-
-         checkIntentUriReceived(intent);
      }
 
 

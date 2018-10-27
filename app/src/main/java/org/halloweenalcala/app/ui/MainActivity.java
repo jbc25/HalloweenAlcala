@@ -102,6 +102,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //        showSection(new SloganContestFragment());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
     private void configureBottomNavView() {
 
         View v = bottomNavView.findViewById(R.id.navigation_news);

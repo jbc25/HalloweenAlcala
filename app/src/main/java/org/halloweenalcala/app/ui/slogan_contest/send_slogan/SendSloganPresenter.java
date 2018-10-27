@@ -5,6 +5,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.crashlytics.android.Crashlytics;
+
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.api.firestore.SloganInteractor;
@@ -138,7 +140,8 @@ public class SendSloganPresenter extends BasePresenter {
                     @Override
                     public void onError(String error) {
                         view.toast(error);
-//                        view.toast(R.string.error_sending);
+
+                        Crashlytics.logException(new Error("Error checkUserNotBanned: " + error));
                     }
                 });
             }
@@ -173,6 +176,7 @@ public class SendSloganPresenter extends BasePresenter {
             public void onError(String error) {
                 view.hideProgressDialog();
                 view.toast(error);
+                Crashlytics.logException(new Error("Error getUser: " + error));
             }
         });
     }

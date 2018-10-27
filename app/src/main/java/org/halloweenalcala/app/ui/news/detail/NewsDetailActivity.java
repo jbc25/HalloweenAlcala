@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +24,7 @@ import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseActivity;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.News;
+import org.halloweenalcala.app.util.Util;
 
 public class NewsDetailActivity extends BaseActivity implements View.OnClickListener, YouTubePlayer.OnInitializedListener {
 
@@ -103,10 +102,8 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
 
         setToolbarTitle(R.string.news);
 
-        tvNewsDescription.setMovementMethod(LinkMovementMethod.getInstance());
-
         tvNewsTitle.setText(news.getTitle());
-        tvNewsDescription.setText(Html.fromHtml(news.getText()));
+        Util.setHtmlLinkableText(tvNewsDescription, news.getText());
 
         if (news.hasImage()) {
             Picasso.get()

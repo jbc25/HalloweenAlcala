@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +23,7 @@ import org.halloweenalcala.app.base.BaseActivity;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.Participant;
 import org.halloweenalcala.app.ui.image_full.ImageFullActivity;
+import org.halloweenalcala.app.util.Util;
 
 public class ParticipantDetailActivity extends BaseActivity implements View.OnClickListener, YouTubePlayer.OnInitializedListener {
 
@@ -106,7 +106,8 @@ public class ParticipantDetailActivity extends BaseActivity implements View.OnCl
         setToolbarTitle(participant.getName());
 
         tvParticipantModality.setText(participant.getArtistic_modality());
-        tvParticipantDescription.setText(Html.fromHtml(participant.getDescription()));
+        Util.setHtmlLinkableText(tvParticipantDescription, participant.getDescription());
+//        tvParticipantDescription.setText(Html.fromHtml(participant.getDescription()));
 
         if (participant.hasImage1()) {
             Picasso.get()

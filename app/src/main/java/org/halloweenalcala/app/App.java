@@ -8,7 +8,7 @@ import android.support.multidex.MultiDexApplication;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import org.halloweenalcala.app.api.firestore.UserInteractor;
+import org.halloweenalcala.app.interactor.firestore.UserInteractor;
 import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.database.MyDatabase;
 import org.halloweenalcala.app.model.cloud.User;

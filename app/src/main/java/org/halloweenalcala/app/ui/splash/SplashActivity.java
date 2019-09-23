@@ -14,7 +14,7 @@ import org.halloweenalcala.app.BuildConfig;
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseActivity;
 import org.halloweenalcala.app.base.BasePresenter;
-import org.halloweenalcala.app.interactor.ConfigurationInteractor;
+import org.halloweenalcala.app.interactor.csv.ConfigurationInteractor;
 import org.halloweenalcala.app.model.Configuration;
 
 import static org.halloweenalcala.app.App.URL_DIRECT_GOOGLE_PLAY_APP;

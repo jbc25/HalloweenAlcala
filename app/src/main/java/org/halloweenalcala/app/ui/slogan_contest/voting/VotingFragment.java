@@ -69,6 +69,8 @@ public class VotingFragment extends BaseFragment implements VotingView, ViewPage
 
         brainRatingView.setOnRatingChangeListener(this);
 
+        getChildFragmentManager();
+
         presenter.onCreate(getArguments());
 
         if (getPrefs().getBoolean(App.SHARED_SHOW_TUTO_BANNERS, true)) {

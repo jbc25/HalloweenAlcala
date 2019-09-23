@@ -13,7 +13,7 @@
         <item name="android:background">@color/red_halloween</item>
         <item name="android:textColor">@color/white</item>
         <item name="fontPath">fonts/Roboto-Light.ttf</item>
-    </style>
+    </style>ha
 
     <style name="TextEditSlogan" parent="TextBase">
         <item name="android:gravity">center</item>

@@ -100,6 +100,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //        WebViewActivity.start(this, "https://www.loomio.org/p/PsUuLI1p/nota-de-prensa-para-solidarizarse");
 
 //        showSection(new SloganContestFragment());
+
+        startActivity(new Intent(this, TestPhotoEditorActivity.class));
     }
 
     @Override

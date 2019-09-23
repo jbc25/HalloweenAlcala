@@ -4,7 +4,6 @@
     package="org.halloweenalcala.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -21,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:icon">
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <activity android:name=".ui.TestPhotoEditorActivity"></activity>
         <activity android:name=".ui.splash.SplashActivity" />
         <activity
             android:name=".ui.MainActivity"
@@ -30,7 +33,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -50,28 +52,24 @@
         <activity android:name=".ui.news.detail.NewsDetailActivity" />
         <activity android:name=".ui.static_info.WebViewActivity" />
         <activity android:name=".ui.performances.detail.PerformanceDetailActivity" />
-        <activity android:name=".ui.static_info.TextHtmlActivity" />
-
-        <!-- [START firebase_service] -->
+        <activity android:name=".ui.static_info.TextHtmlActivity" /> <!-- [START firebase_service] -->
         <service android:name=".messaging.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-        <!-- [END firebase_service] -->
+        </service> <!-- [END firebase_service] -->
         <!-- [START firebase_iid_service] -->
         <service android:name=".messaging.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-        </service>
-        <!-- [END firebase_iid_service] -->
+        </service> <!-- [END firebase_iid_service] -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_marker_zombie2" />
-        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/red_halloween" />
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -95,7 +93,6 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="org.halloweenalcala.app.model" />
-
     </application>
 
 </manifest>

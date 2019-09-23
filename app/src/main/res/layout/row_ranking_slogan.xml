@@ -49,7 +49,7 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_slogan_num_votes"
-            style="@style/TextBase"
-            android:visibility="gone"/>
+            style="@style/TextBase.White"
+            android:visibility="visible"/>
     </LinearLayout>
 </LinearLayout>

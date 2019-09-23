@@ -8,7 +8,7 @@ import android.view.View;
 
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.R;
-import org.halloweenalcala.app.api.firestore.SloganInteractor;
+import org.halloweenalcala.app.interactor.firestore.SloganInteractor;
 import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.base.BasePresenter;
 import org.halloweenalcala.app.model.cloud.Slogan;

@@ -14,5 +14,4 @@ public interface MainView extends BaseView {
 
     void showNewNewsIcon(boolean show);
 
-    void showSlogan(String idSlogan);
 }

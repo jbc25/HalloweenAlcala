@@ -34,7 +34,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
  */
 
 
- public class MainPresenter extends BasePresenter {
+public class MainPresenter extends BasePresenter {
 
     private final MainView view;
     private final ConfigurationInteractor configurationInteractor;
@@ -42,83 +42,83 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
 
     public static Intent newMainActivity(Context context) {
 
-         Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
 
-         return intent;
-     }
+        return intent;
+    }
 
-     public static MainPresenter newInstance(MainView view, Context context) {
+    public static MainPresenter newInstance(MainView view, Context context) {
 
-         return new MainPresenter(view, context);
+        return new MainPresenter(view, context);
 
-     }
+    }
 
-     private MainPresenter(MainView view, Context context) {
-         super(context, view);
+    private MainPresenter(MainView view, Context context) {
+        super(context, view);
 
-         this.view = view;
-         configurationInteractor = new ConfigurationInteractor(context, view);
-         dataInteractor = new DataInteractor(context, view);
+        this.view = view;
+        configurationInteractor = new ConfigurationInteractor(context, view);
+        dataInteractor = new DataInteractor(context, view);
 
-     }
+    }
 
-     public void onCreate(Intent intent) {
+    public void onCreate(Intent intent) {
 
 //         if (true) {
 //             return;
 //         }
 
-         if (getPrefs().getBoolean(App.SHARED_FIRST_TIME, true)) {
-             if (storeDataFirstTime()) {
-                 getPrefs().edit().putBoolean(App.SHARED_FIRST_TIME, false).commit();
-             }
-         }
+        if (getPrefs().getBoolean(App.SHARED_FIRST_TIME, true)) {
+            if (storeDataFirstTime()) {
+                getPrefs().edit().putBoolean(App.SHARED_FIRST_TIME, false).commit();
+            }
+        }
 
 
-         checkIntentUriReceived(intent);
-     }
+        checkIntentUriReceived(intent);
+    }
 
-     public void onResume() {
+    public void onResume() {
         refreshData();
-     }
+    }
 
-     private void refreshData() {
+    private void refreshData() {
 
-         configurationInteractor.getConfiguration(new ConfigurationInteractor.ConfigurationCallback() {
-             @Override
-             public void onSuccess(Configuration configuration) {
-                 checkAppVersion(configuration.getLast_app_version());
-                 checkDataVersion(configuration.getLast_data_version());
-             }
+        configurationInteractor.getConfiguration(new ConfigurationInteractor.ConfigurationCallback() {
+            @Override
+            public void onSuccess(Configuration configuration) {
+                checkAppVersion(configuration.getLast_app_version());
+                checkDataVersion(configuration.getLast_data_version());
+            }
 
-             @Override
-             public void onError(String message) {
+            @Override
+            public void onError(String message) {
 //                 view.toast(message);
-                 Crashlytics.logException(new Error("Data request error (configuration): " + message));
+                Crashlytics.logException(new Error("Data request error (configuration): " + message));
 
-             }
-         });
+            }
+        });
 
-         dataInteractor.getNews(new DataInteractor.DataCallback<News>() {
-             @Override
-             public void onSuccess(List<News> list) {
+        dataInteractor.getNews(new DataInteractor.DataCallback<News>() {
+            @Override
+            public void onSuccess(List<News> list) {
 
-                 App.getDB().newsDao().deleteAll();
-                 App.getDB().newsDao().insertAll(list);
+                App.getDB().newsDao().deleteAll();
+                App.getDB().newsDao().insertAll(list);
 
-                 if (!list.isEmpty()) {
-                     int lastNewsId = list.get(list.size() - 1).getId_server();
-                     checkNewNews(lastNewsId);
-                 }
-             }
+                if (!list.isEmpty()) {
+                    int lastNewsId = list.get(list.size() - 1).getId_server();
+                    checkNewNews(lastNewsId);
+                }
+            }
 
-             @Override
-             public void onError(String message) {
-                 Log.e(TAG, "Error -> getNews: " + message);
-                 Crashlytics.logException(new Error("Data request error (news): " + message));
-             }
-         });
-     }
+            @Override
+            public void onError(String message) {
+                Log.e(TAG, "Error -> getNews: " + message);
+                Crashlytics.logException(new Error("Data request error (news): " + message));
+            }
+        });
+    }
 
 
     private void checkIntentUriReceived(Intent intent) {
@@ -128,14 +128,7 @@ import static org.halloweenalcala.app.App.URL_GOOGLE_PLAY_APP;
         String appLinkAction = intent.getAction();
         Uri appLinkData = intent.getData();
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
-
-            String idSlogan = appLinkData.getQueryParameter(App.URL_QUERY_PROMOTE);
-            if (idSlogan != null) {
-                view.showSlogan(idSlogan);
-            } else {
-                continueWithLink(appLinkData);
-            }
-
+            continueWithLink(appLinkData);
         }
     }
 

@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -102,11 +103,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NotificationHelper.CHANNEL_NOTIFS) // TODO FOR CUSTOM NOTIFS
-                .setSmallIcon(R.mipmap.ic_banner_stick_rotated)
+                .setSmallIcon(R.mipmap.ic_marker_zombie2)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_app))
                 .setContentTitle(title != null ? title : getString(R.string.app_name))
                 .setContentText(text)
                 .setAutoCancel(true)
+                .setColor(ContextCompat.getColor(this, R.color.red_halloween))
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 

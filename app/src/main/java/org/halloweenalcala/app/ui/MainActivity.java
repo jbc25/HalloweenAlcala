@@ -33,7 +33,6 @@ import org.halloweenalcala.app.ui.news.list.NewsFragment;
 import org.halloweenalcala.app.ui.participants.list.ParticipantsPresenter;
 import org.halloweenalcala.app.ui.performances.list.PerformancesFragment;
 import org.halloweenalcala.app.ui.poems.PoemsFragment;
-import org.halloweenalcala.app.ui.slogan_contest.SloganContestFragment;
 import org.halloweenalcala.app.ui.static_info.TextHtmlActivity;
 import org.halloweenalcala.app.ui.static_info.WebViewActivity;
 import org.halloweenalcala.app.util.SoftKeyboardManager;
@@ -50,7 +49,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private MainPresenter presenter;
     private Place placeToSelect;
     private View iconNewNewsBadge;
-    private String idSloganToGo;
 
     @Override
     public BasePresenter getPresenter() {
@@ -164,11 +162,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 case R.id.navigation_map:
                     showSection(MapsPresenter.newFragment(placeToSelect));
                     setToolbarTitle(R.string.app_name);
-                    return true;
-                case R.id.navigation_contest:
-                    showSection(SloganContestFragment.newFragment(idSloganToGo));
-                    setToolbarTitle(R.string.slogan_contest);
-                    idSloganToGo = null;
                     return true;
                 case R.id.navigation_poems:
                     showSection(new PoemsFragment());
@@ -321,9 +314,4 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
-    @Override
-    public void showSlogan(String idSlogan) {
-        idSloganToGo = idSlogan;
-        bottomNavView.setSelectedItemId(R.id.navigation_contest);
-    }
 }

@@ -10,7 +10,8 @@
     <item
         android:id="@+id/menu_about_alcala_halloween"
         android:icon="@mipmap/ic_alcala_halloween"
-        android:title="@string/alcala_halloween" />
+        android:title="@string/alcala_halloween"
+        android:visible="false"/>
 
     <item
         android:id="@+id/menu_about_marcha_zombie"
@@ -33,7 +34,8 @@
             <item
                 android:id="@+id/menu_twitter_halloween_alcala_17"
                 android:icon="@mipmap/ic_nav_twitter"
-                android:title="@string/hashtag_alcalahalloween" />
+                android:title="@string/hashtag_alcalahalloween"
+                android:visible="false"/>
 
             <item
                 android:id="@+id/menu_twitter_7mz"

@@ -8,10 +8,11 @@ import android.support.multidex.MultiDexApplication;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import org.halloweenalcala.app.interactor.firestore.UserInteractor;
 import org.halloweenalcala.app.base.BaseInteractor;
 import org.halloweenalcala.app.database.MyDatabase;
+import org.halloweenalcala.app.interactor.firestore.UserInteractor;
 import org.halloweenalcala.app.model.cloud.User;
+import org.halloweenalcala.app.util.NotificationHelper;
 import org.halloweenalcala.app.util.Util;
 
 /**
@@ -20,12 +21,12 @@ import org.halloweenalcala.app.util.Util;
 
 public class App extends MultiDexApplication {
 
-    public static final String HALLOWEEN_YEAR = "2018";
+    public static final String HALLOWEEN_YEAR = "2019";
     public static final int NUM_SLOGANS = 5;
 
     private static final String TAG = "App";
 
-    public static final String PREFIX = "org.halloweenalcala.app.";
+    public static final String PREFIX = BuildConfig.APPLICATION_ID + ".";
     public static final String SHARED_POEM_UNLOCKED = PREFIX + "shared_poem_unlocked";
     public static final String SHARED_CURRENT_DATA_VERSION = PREFIX + "shared_current_data_version";
     public static final String SHARED_FIRST_TIME = PREFIX + "shared_first_time";
@@ -49,15 +50,18 @@ public class App extends MultiDexApplication {
 
 
     public static final String FIREBASE_TOPIC_REPORT_SLOGAN = "slogan_denounce";
+    public static final String FIREBASE_TOPIC_NEWS = "news";
 
 
     private static MyDatabase db;
 
-    public static final String DB_NAME = "halloween_alcala_17.db";
+    public static final String DB_NAME = "halloween_alcala_19.db";
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        NotificationHelper.with(this).initializeOreoChannelsNotification();
 
         db = Room.databaseBuilder(getApplicationContext(),
                 MyDatabase.class, DB_NAME)
@@ -66,12 +70,15 @@ public class App extends MultiDexApplication {
                 .allowMainThreadQueries()
                 .build();
 
+//        if(true) {
         if (getPrefs(this).getBoolean(SHARED_FIRST_RUN_OF_YEAR_XXXX, true)) {
             getPrefs(this).edit().clear().commit();
             getPrefs(this).edit().putBoolean(SHARED_FIRST_RUN_OF_YEAR_XXXX, false).commit();
         }
 
         initializeUserIfExists();
+
+        FirebaseMessaging.getInstance().subscribeToTopic(FIREBASE_TOPIC_NEWS);
 
 //        Picasso.Builder builder = new Picasso.Builder(this);
 //        builder.downloader(new OkHttpDownloader(this, Integer.MAX_VALUE));
@@ -88,12 +95,12 @@ public class App extends MultiDexApplication {
 
 //        Crashlytics.logException(new Exception("My first Android non-fatal error"));
 
-        if (BuildConfig.DEBUG) {
-            FirebaseMessaging.getInstance().subscribeToTopic(FIREBASE_TOPIC_REPORT_SLOGAN);
-
-            String senderId = getString(R.string.firebase_sender_id);
-
-        }
+//        if (BuildConfig.DEBUG) {
+//            FirebaseMessaging.getInstance().subscribeToTopic(FIREBASE_TOPIC_REPORT_SLOGAN);
+//
+//            String senderId = getString(R.string.firebase_sender_id);
+//
+//        }
 
     }
 

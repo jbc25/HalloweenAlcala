@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class PoemBook {
 
-    public static final int NUMBER_OF_POEMS = 20;
+    public static final int NUMBER_OF_POEMS = 19;
 
     public static final int ID_PZA_CERVANTES = 1;
     public static final int ID_PZA_IRLANDESES = 2;
@@ -37,12 +37,16 @@ public class PoemBook {
 
     public static void initialize(Context context) {
 
+        poemBook.clear();
+
         for (int i = 1; i <= NUMBER_OF_POEMS; i++) {
             int titleId = context.getResources().getIdentifier("poem_title_" + i, "string", context.getPackageName());
             int subtitleId = context.getResources().getIdentifier("poem_subtitle_" + i, "string", context.getPackageName());
             int textId = context.getResources().getIdentifier("poem_text_" + i, "string", context.getPackageName());
 
-            poemBook.add(PoemCharacter.newOpenPoem(i, titleId, subtitleId, textId));
+            int imageId = context.getResources().getIdentifier("img_poem_" + i, "mipmap", context.getPackageName());
+
+            poemBook.add(PoemCharacter.newOpenPoem(i, titleId, subtitleId, textId, imageId));
 
         }
 

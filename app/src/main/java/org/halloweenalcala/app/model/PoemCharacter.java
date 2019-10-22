@@ -15,6 +15,7 @@ public class PoemCharacter {
     private int poemTitleId;
     private int poemSubtitleId;
     private int poemTextId;
+    private int imageId;
     private String typeId;
 
     private int characterDrawableId;
@@ -23,12 +24,13 @@ public class PoemCharacter {
     private int idPlaceServer;
 
 
-    public static PoemCharacter newOpenPoem(int id, int poemTitleId, int poemSubtitleId, int poemTextId) {
+    public static PoemCharacter newOpenPoem(int id, int poemTitleId, int poemSubtitleId, int poemTextId, int imageId) {
         PoemCharacter poemCharacter = new PoemCharacter();
         poemCharacter.setId(id);
         poemCharacter.setPoemTitleId(poemTitleId);
         poemCharacter.setPoemSubtitleId(poemSubtitleId);
         poemCharacter.setPoemTextId(poemTextId);
+        poemCharacter.setImageId(imageId);
         poemCharacter.setTypeId(TYPE_OPEN);
         return poemCharacter;
     }
@@ -129,5 +131,13 @@ public class PoemCharacter {
 
     public void setPoemSubtitleId(int poemSubtitleId) {
         this.poemSubtitleId = poemSubtitleId;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }

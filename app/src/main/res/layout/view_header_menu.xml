@@ -8,6 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:src="@mipmap/img_skyline"/>
+        android:src="@mipmap/img_9mz_cover"/>
 
 </LinearLayout>

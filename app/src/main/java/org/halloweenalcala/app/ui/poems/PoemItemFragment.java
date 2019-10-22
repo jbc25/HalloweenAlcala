@@ -124,7 +124,8 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
             tvPoemTitle.setText(getString(poemCharacter.getPoemTitleId()));
             tvPoemSubtitle.setText(getString(poemCharacter.getPoemSubtitleId()));
             tvPoemText.setText(getString(poemCharacter.getPoemTextId()));
-            imgCharacter.setImageResource(poemCharacter.getCharacterDrawableId());
+//            imgCharacter.setImageResource(poemCharacter.getCharacterDrawableId());
+            imgCharacter.setImageResource(poemCharacter.getImageId());
             viewUnlockedPoem.setVisibility(View.VISIBLE);
         } else {
 

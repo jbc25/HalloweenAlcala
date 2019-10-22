@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Alcalá Halloween 2018</string>
+    <string name="app_name">9MZ-Halloween Alcalá 2019</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -19,8 +19,8 @@
     <string name="about">Sobre Halloween...</string>
     <string name="contact">Contacto?</string>
     <string name="marcha_zombie">Marcha Zombie</string>
-    <string name="halloween_2017">Halloween 2018</string>
-    <string name="hashtag_7mz">#8MZ</string>
+    <string name="halloween_2017">Halloween 2019</string>
+    <string name="hashtag_7mz">#9MZ</string>
     <string name="hashtag_alcalahalloween">#AlcalaHalloween18</string>
     <string name="update_available">Actualización disponible</string>
     <string name="update">ACTUALIZAR</string>
@@ -55,7 +55,7 @@
     <string name="place_unlock_description">Para desbloquear este poema debes ir el día 31 a <b>%s</b> y escribir el código que encuentres allí</string>
     <string name="find_code">Encuentra el código</string>
     <string name="share">Compartir</string>
-    <string name="poem_share_message">Zombie Patrimoniales. Poemas de #8MZ\n\n%1$s\n\n%2$s\n\nDisfruta de este y otros poemas descargando la app gratuita de Halloween para Android:\n\n%3$s</string>
+    <string name="poem_share_message">Zombie Patrimoniales. Poemas de #9MZ\n\n%1$s\n\n%2$s\n\nDisfruta de este y otros poemas descargando la app gratuita de Halloween para Android:\n\n%3$s</string>
     <string name="legend">Leyenda</string>
     <string name="public_spaces">Espacios públicos</string>
     <string name="other_spaces">Locales y otros espacios</string>
@@ -125,5 +125,7 @@
     <string name="more_info_web_contest">Más info en la web</string>
     <string name="slogan_already_exists">Este lema ya existe! Seguro que se te ocurre uno mejor ;)</string>
 
+    <string name="channel_notifs_title">Canal de notificaciones</string>
+    <string name="channel_notifs_description">Notificaciones importantes para el funcionamiento de la app</string>
 
 </resources>

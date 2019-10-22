@@ -101,7 +101,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 //        showSection(new SloganContestFragment());
 
-        startActivity(new Intent(this, TestPhotoEditorActivity.class));
     }
 
     @Override

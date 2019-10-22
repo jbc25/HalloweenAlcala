@@ -1,7 +1,7 @@
 package org.halloweenalcala.app.database;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
 
 import org.halloweenalcala.app.model.News;
 import org.halloweenalcala.app.model.Participant;

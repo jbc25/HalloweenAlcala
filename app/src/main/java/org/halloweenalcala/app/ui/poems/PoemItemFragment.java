@@ -3,9 +3,9 @@ package org.halloweenalcala.app.ui.poems;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;

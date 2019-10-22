@@ -5,7 +5,7 @@
     tools:context="org.halloweenalcala.app.ui.performances.list.PerformancesFragment">
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

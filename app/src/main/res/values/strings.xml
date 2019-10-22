@@ -39,7 +39,7 @@
         · Concurso de decoración de establecimientos\n
         · Concurso de fotografía\n
         · Sorteo solidario\n
-        · Concurso de lemas reivindicativos zombies (en esta misma app)\n\n
+        · Concurso ZombiSelfie. Crea un cuadro del Prado en esta app y compártela en instagram con los hastags #9MZ #MarchaZombiedAlcala #ZombiSelfie\n\n
 
         Toda la información, bases e inscripciones en la web de la Marcha Zombie\n
         ¡Te esperamos!
@@ -71,59 +71,10 @@
     <string name="credits">Créditos</string>
     <string name="hurry_no_time">¡Corre! Te quedas sin tiempo</string>
 
-    <string name="voting">Votación</string>
-    <string name="my_slogans">Mis lemas</string>
-    <string name="slogan_contest">Concurso lemas</string>
-    <string name="send_slogan">Enviar lema</string>
-    <string name="contest_rules">Bases del concurso</string>
-    <string name="must_accept_rules_to_participate">Para participar es necesario aceptar las bases del concurso</string>
-    <string name="enter_email_info">Para participar introduce tu email. Solo lo usaremos para ponernos en contacto contigo en caso de que tus lemas consigan premio!</string>
-    <string name="email">Email</string>
-    <string name="send_email">Enviar email</string>
-    <string name="invalid_email">Email no es válido</string>
-    <string name="sending">Enviando...</string>
-    <string name="slogan_sent_success">¡Lema enviado correctamente!</string>
-    <string name="error_sending">¡Atención! Ha habido un problema con el envío. Inténtelo de nuevo</string>
-    <string name="num_slogans_pending_msg">Todavía puedes enviar %d lemas</string>
-    <string name="all_slogans_sent">Ya has enviado tus %d lemas.\n¡Suerte con las votaciones!</string>
-    <string name="send_excl">¡Enviar!</string>
-    <string name="slogan_text_empty">Pon algo en ese cartel ¡Que no se diga!</string>
-    <string name="loading_zombifestacion">Cargando zombiefestación...</string>
-    <string name="already_voted_slogan">Ya has votado este lema</string>
-    <string name="see_contest_rules_again">Volver a ver las bases del concurso</string>
-    <string name="your_slogans">Tus lemas</string>
-    <string name="avg_rating">Puntuación media:</string>
-    <string name="avg_rating_message">Estos son los eslóganes que has publicado y la puntuación media que te han dado el resto de usuarios (sobre 5)</string>
-    <string name="votes_format">Votos: %d</string>
-    <string name="promote_slogan">¡Promociona tu pancarta!</string>
-    <string name="promote_slogan_default_message">¡La manifestación zombie del año se acerca!\nEsta es una de mis lemas de pancarta:\n\n%s.\n\nPuedes puntuarla para el concurso pulsando este enlace %s.\n\nSi todavía no tienes la app para Android de #HalloweenAlcala2018 descárgala gratuitamente en este enlace y participa en el concurso de pancartas!\n%s</string>
-    <string name="error_sending_voting">Ha habido un error al enviar el voto. Intentelo de nuevo por favor</string>
-    <string name="counter_format">%d de %d</string>
-    <string name="ranking">Ranking</string>
-    <string name="slogan_not_found">No se encuentra esta pancarta</string>
-    <string name="slogan_denounced_thanks">Lema denunciado. Oculto hasta revisión. Gracias por tu colaboración</string>
-    <string name="denouncing_slogan">Marcando para revisión...</string>
-    <string name="denounce_slogan">Denunciar frase</string>
-    <string name="denounce_slogan_message">Según las bases de este concurso no se admiten mensajes de odio ni en contra de los Derechos Humanos (y Zombies).\n\nSi esta frase consideras que no cumple con las bases, puedes denunciarla pulsando el siguiente botón y permanecerá oculta temporalmente hasta que sea revisada y se decida si se oculta definitivamente.</string>
-    <string name="denounce">Denunciar</string>
-    <string name="user_banned">Usuario baneado</string>
-    <string name="banning_user">Baneando usuario...</string>
-    <string name="deleting_slogan">Eliminando eslogan...</string>
-    <string name="slogan_deleted">Eslogan eliminado</string>
-    <string name="you_are_banned">Estás inhabilitado para publicar frases por una denuncia de frase que no cumple con las bases del concurso. Si crees que ha sido un error, ponte en contacto en el correo: julio@triskelapps.com</string>
-    <string name="delete">Eliminar</string>
-    <string name="ban_user">Banear usuario</string>
-    <string name="denounces">Denuncias</string>
-    <string name="slogan_denounced">Lema denunciado</string>
-    <string name="slogan_validated">Eslogan validado</string>
-    <string name="is_valid">Es válido</string>
-    <string name="contest">Concurso</string>
-    <string name="email_already_exists">Este email ya existe</string>
+    <string name="more_info_web_contest">Más info en la web</string>
+    <string name="remain">Me quedo</string>
     <string name="continue_link_message">Vaya, parece que este no es un tipo de link que puedas abrir esta app. Para abrirlo en la web pulsa el botón inferior, y si no siempre puedes quedarte por aquí a puntuar algunas pancartas :P</string>
     <string name="open_in_web">Abrir en la web</string>
-    <string name="remain">Me quedo</string>
-    <string name="more_info_web_contest">Más info en la web</string>
-    <string name="slogan_already_exists">Este lema ya existe! Seguro que se te ocurre uno mejor ;)</string>
 
     <string name="channel_notifs_title">Canal de notificaciones</string>
     <string name="channel_notifs_description">Notificaciones importantes para el funcionamiento de la app</string>

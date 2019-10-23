@@ -23,4 +23,12 @@
         <item name="android:textStyle">bold</item>
         <item name="fontFamily">@font/nosifer</item>
     </style>
+
+    <style name="FrameThumb">
+        <item name="android:layout_width">@dimen/size_frames_thumb</item>
+        <item name="android:layout_height">@dimen/size_frames_thumb</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
 </resources>

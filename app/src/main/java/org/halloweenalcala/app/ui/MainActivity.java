@@ -4,14 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +13,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.crashlytics.android.Crashlytics;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 import org.halloweenalcala.app.R;
 import org.halloweenalcala.app.base.BaseActivity;
@@ -35,6 +36,7 @@ import org.halloweenalcala.app.ui.performances.list.PerformancesFragment;
 import org.halloweenalcala.app.ui.poems.PoemsFragment;
 import org.halloweenalcala.app.ui.static_info.TextHtmlActivity;
 import org.halloweenalcala.app.ui.static_info.WebViewActivity;
+import org.halloweenalcala.app.ui.zombiselfie.ZombiSelfieFragment;
 import org.halloweenalcala.app.util.SoftKeyboardManager;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainView, BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -138,8 +140,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onBackPressed() {
 
-        if (drawerLayout.isDrawerOpen(Gravity.START)) {
-            drawerLayout.closeDrawer(Gravity.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -163,9 +165,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     showSection(MapsPresenter.newFragment(placeToSelect));
                     setToolbarTitle(R.string.app_name);
                     return true;
+                case R.id.navigation_zombiselfie:
+                    showSection(new ZombiSelfieFragment());
+                    setToolbarTitle(R.string.zombiecuadro);
+                    return true;
                 case R.id.navigation_poems:
                     showSection(new PoemsFragment());
-                    setToolbarTitle(R.string.zinemazombies);
+                    setToolbarTitle(R.string.poems);
                     return true;
                 case R.id.navigation_news:
                     presenter.onNewsButtonClick();
@@ -213,8 +219,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
         }
 
-        if (drawerLayout.isDrawerOpen(Gravity.START)) {
-            drawerLayout.closeDrawer(Gravity.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         }
 
         return false;

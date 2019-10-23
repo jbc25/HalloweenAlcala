@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="poem_title">40sp</dimen>
+    <dimen name="poem_subtitle">35sp</dimen>
+    <dimen name="poem_text">30sp</dimen>
+    <dimen name="max_height_turba">300dp</dimen>
+    <dimen name="text_counter_voting">27sp</dimen>
+    <dimen name="max_width_banner">370dp</dimen>
+    <dimen name="max_height_banner">240dp</dimen>
+
+</resources>

@@ -1,10 +1,11 @@
 package org.halloweenalcala.app;
 
-import androidx.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
 import androidx.multidex.MultiDexApplication;
+import androidx.room.Room;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -65,8 +66,8 @@ public class App extends MultiDexApplication {
 
         db = Room.databaseBuilder(getApplicationContext(),
                 MyDatabase.class, DB_NAME)
-//                .addMigrations(MyDatabase.MIGRATION_1_2)
-                .fallbackToDestructiveMigration()
+                .addMigrations(MyDatabase.MIGRATION_7_8)
+//                .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
 

@@ -19,4 +19,7 @@
     <dimen name="text_counter_voting">17sp</dimen>
     <dimen name="max_width_banner">270dp</dimen>
     <dimen name="max_height_banner">130dp</dimen>
+
+    <dimen name="size_frames_thumb">60dp</dimen>
+    <dimen name="size_frame">250dp</dimen>
 </resources>

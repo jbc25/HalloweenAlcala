@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="org.halloweenalcala.app.ui.zombiselfie.ZombiSelfieFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="23sp"
+        android:textColor="@color/white"
+        android:text="@string/zombiselfie_soon_message"
+        app:fontPath="fonts/typewriter.ttf"
+        android:visibility="gone"/>
+
+    <com.otaliastudios.cameraview.CameraView
+        android:id="@+id/cameraview"
+        android:keepScreenOn="true"
+        android:layout_width="@dimen/size_frame"
+        android:layout_height="@dimen/size_frame"
+        android:layout_above="@+id/view_take_picture"
+        app:cameraAudio="off"
+        app:cameraMode="picture"
+        app:cameraFacing="front"
+        android:visibility="visible"
+        android:layout_centerHorizontal="true">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_frame_picture"
+            android:layout_width="@dimen/size_frame"
+            android:layout_height="@dimen/size_frame"
+            android:src="@mipmap/marco02"
+            android:adjustViewBounds="true"
+            app:layout_drawOnPreview="true"
+            app:layout_drawOnPictureSnapshot="true" />
+
+    </com.otaliastudios.cameraview.CameraView>
+
+    <LinearLayout
+        android:id="@+id/view_take_picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_frame_1"
+            style="@style/FrameThumb"
+            android:src="@mipmap/marco01"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_frame_2"
+            android:src="@mipmap/marco02"
+            style="@style/FrameThumb" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_frame_3"
+            style="@style/FrameThumb"
+            android:src="@mipmap/marco03"/>
+
+        <View style="@style/XpansorHoriz" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_take_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_photo_zombie"
+            android:adjustViewBounds="true"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

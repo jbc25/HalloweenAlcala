@@ -27,6 +27,7 @@ public class Place implements Serializable {
     private double lat;
     private double lng;
     private String type;
+    private Integer visible;
 
     @Ignore
     private List<Performance> performances = new ArrayList<>();
@@ -107,5 +108,17 @@ public class Place implements Serializable {
 
     public String getType() {
         return type;
+    }
+
+    public Integer getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Integer visible) {
+        this.visible = visible;
+    }
+
+    public boolean hidden() {
+        return getVisible() == null || getVisible() == 0;
     }
 }

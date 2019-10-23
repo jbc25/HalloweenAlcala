@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -23,6 +24,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     public final String TAG = this.getClass().getSimpleName();
     protected BaseActivity baseActivity;
+    private BasePresenter basePresenter;
 
 
     @Override
@@ -46,7 +48,12 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         FirebaseAnalytics.getInstance(getActivity()).setCurrentScreen(getActivity(), screenName, screenName);
     }
 
-    public abstract BasePresenter getPresenter();
+    public void setBasePresenter(BasePresenter basePresenter) {
+        this.basePresenter = basePresenter;
+    }
+    public BasePresenter getPresenter() {
+        return basePresenter;
+    }
 
     protected SharedPreferences getPrefs() {
         return PreferenceManager.getDefaultSharedPreferences(getActivity());

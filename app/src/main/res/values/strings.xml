@@ -25,7 +25,7 @@
     <string name="update_available">Actualización disponible</string>
     <string name="update">ACTUALIZAR</string>
     <string name="resurrect">¡RESUCITAR!</string>
-    <string name="app_dying">App moribunda</string>
+    <string name="app_dying">ZombieApp moribunda</string>
     <string name="cannot_open_link">No se puede abrir este link</string>
     <string name="zinemazombies">ZombiePatrimoniales</string>
     <string name="news">Noticias</string>
@@ -39,7 +39,7 @@
         · Concurso de decoración de establecimientos\n
         · Concurso de fotografía\n
         · Sorteo solidario\n
-        · Concurso ZombiSelfie. Crea un cuadro del Prado en esta app y compártela en instagram con los hastags #9MZ #MarchaZombiedAlcala #ZombiSelfie\n\n
+        · Concurso Zombicuadro en el Prado. Crea tu propio cuadro del Prado zombie a través de esta app y compártela en instagram con los hastags #9MZ #MarchaZombiedAlcala #ZombieCuadro\n\n
 
         Toda la información, bases e inscripciones en la web de la Marcha Zombie\n
         ¡Te esperamos!
@@ -78,5 +78,9 @@
 
     <string name="channel_notifs_title">Canal de notificaciones</string>
     <string name="channel_notifs_description">Notificaciones importantes para el funcionamiento de la app</string>
+
+    <string name="zombiecuadro">ZombieCuadro</string>
+    <string name="zombiselfie_soon_message">Zombiecuadro en el Prado\n\nEn breve estará disponible esta sección con la que podrás participar en el concurso creando tu propio cuadro zombie del Museo del Prado</string>
+    <string name="select_frame">Selecciona tu cuadro</string>
 
 </resources>

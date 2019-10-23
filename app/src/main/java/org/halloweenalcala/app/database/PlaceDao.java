@@ -13,7 +13,7 @@ import java.util.List;
 public interface PlaceDao {
 
 
-    @Query("SELECT * FROM place ORDER BY id_server")
+    @Query("SELECT * FROM place WHERE visible = 1 ORDER BY id_server")
     List<Place> getAll();
 
     @Query("SELECT * FROM place WHERE id_server = :idServer")

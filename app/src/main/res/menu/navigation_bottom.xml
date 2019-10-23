@@ -11,6 +11,11 @@
         android:icon="@mipmap/ic_map"
         android:title="@string/map" />
 
+    <item
+        android:id="@+id/navigation_zombiselfie"
+        android:icon="@mipmap/ic_zombiselfie"
+        android:title="@string/zombiecuadro"
+        android:visible="true"/>
 
     <item
         android:id="@+id/navigation_poems"

@@ -63,6 +63,11 @@ public class MapsPresenter extends BasePresenter {
         List<Place> placeList = App.getDB().placeDao().getAll();
 
         for (Place place : placeList) {
+
+            if (place.hidden()) {
+                continue;
+            }
+
             List<Performance> performanceList = App.getDB().performanceDao().getPerformancesOfPlace(place.getId_server());
             Collections.sort(performanceList);
             place.setPerformances(performanceList);
@@ -86,7 +91,7 @@ public class MapsPresenter extends BasePresenter {
         String title = place.getRealNameWithHalloweenName();
         String text = "";
         for (Performance performance : place.getPerformances()) {
-            text += "- " + performance.getDateTimeHumanFriendly() + ": " + performance.getTitle() + "\n\n";
+            text += "- " + performance.getDateTimeHumanFriendly() + ": " + performance.getTitle() + ". " + performance.getSubtitle() + "\n\n";
         }
 
         AlertDialog.Builder ab = new AlertDialog.Builder(context);

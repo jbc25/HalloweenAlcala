@@ -19,7 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -312,7 +312,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 anim.setRepeatMode(Animation.REVERSE);
                 iconNewNewsBadge.startAnimation(anim);
             } catch (Exception e) {
-                Crashlytics.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             }
         } else {
             iconNewNewsBadge.setVisibility(View.GONE);

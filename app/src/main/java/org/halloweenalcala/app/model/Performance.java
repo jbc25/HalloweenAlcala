@@ -5,7 +5,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -78,7 +78,7 @@ public class Performance implements Comparable, Serializable {
             Date dateTime = dateTimeFormatApi.parse(getDateTime());
             return dateTimeFormatHuman.format(dateTime);
         } catch (ParseException e) {
-            Crashlytics.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
 
         return getTime_begin();
@@ -94,7 +94,7 @@ public class Performance implements Comparable, Serializable {
             return (long) dayInt;
         } catch (ParseException e) {
             e.printStackTrace();
-            Crashlytics.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
             throw new IllegalStateException("wrong date");
         }
     }
@@ -136,7 +136,7 @@ public class Performance implements Comparable, Serializable {
             return dateTime;
         } catch (ParseException e) {
             e.printStackTrace();
-            Crashlytics.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
 
         return null;

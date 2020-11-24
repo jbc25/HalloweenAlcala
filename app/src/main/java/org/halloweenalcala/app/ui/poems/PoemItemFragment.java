@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.halloweenalcala.app.App;
@@ -212,7 +212,7 @@ public class PoemItemFragment extends BaseFragment implements View.OnClickListen
         String correctCode = PoemBook.codesPlaces.get(poemCharacter.getIdPlaceServer());
         boolean success = code.toLowerCase().equals(correctCode.toLowerCase());
 
-        Crashlytics.logException(new Exception("Poem guess: " + getString(poemCharacter.getPoemTitleId()) + ". Success: " + success));
+        FirebaseCrashlytics.getInstance().recordException(new Exception("Poem guess: " + getString(poemCharacter.getPoemTitleId()) + ". Success: " + success));
         return success;
     }
 

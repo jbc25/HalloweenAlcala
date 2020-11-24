@@ -8,7 +8,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.halloweenalcala.app.App;
 import org.halloweenalcala.app.BuildConfig;
@@ -95,7 +95,7 @@ public class MainPresenter extends BasePresenter {
             @Override
             public void onError(String message) {
 //                 view.toast(message);
-                Crashlytics.logException(new Error("Data request error (configuration): " + message));
+                FirebaseCrashlytics.getInstance().recordException(new Error("Data request error (configuration): " + message));
 
             }
         });
@@ -116,7 +116,7 @@ public class MainPresenter extends BasePresenter {
             @Override
             public void onError(String message) {
                 Log.e(TAG, "Error -> getNews: " + message);
-                Crashlytics.logException(new Error("Data request error (news): " + message));
+                FirebaseCrashlytics.getInstance().recordException(new Error("Data request error (news): " + message));
             }
         });
     }
@@ -228,7 +228,7 @@ public class MainPresenter extends BasePresenter {
             @Override
             public void onError(String message) {
 
-                Crashlytics.logException(new Error("Data request error (places): " + message));
+                FirebaseCrashlytics.getInstance().recordException(new Error("Data request error (places): " + message));
                 Log.e(TAG, "Error -> getPlaces: " + message);
             }
         });
@@ -243,7 +243,7 @@ public class MainPresenter extends BasePresenter {
             @Override
             public void onError(String message) {
                 Log.e(TAG, "Error -> getParticipants: " + message);
-                Crashlytics.logException(new Error("Data request error (participants): " + message));
+                FirebaseCrashlytics.getInstance().recordException(new Error("Data request error (participants): " + message));
             }
         });
 
@@ -258,7 +258,7 @@ public class MainPresenter extends BasePresenter {
             @Override
             public void onError(String message) {
                 Log.e(TAG, "Error -> getPerformances: " + message);
-                Crashlytics.logException(new Error("Data request error (performances): " + message));
+                FirebaseCrashlytics.getInstance().recordException(new Error("Data request error (performances): " + message));
 
             }
         });

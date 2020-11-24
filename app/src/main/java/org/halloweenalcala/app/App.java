@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import androidx.multidex.MultiDexApplication;
 import androidx.room.Room;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.halloweenalcala.app.base.BaseInteractor;
@@ -67,6 +68,8 @@ public class App extends MultiDexApplication {
 
         NotificationHelper.with(this).initializeOreoChannelsNotification();
 
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(DebugHelper.SWITCH_CRASH_REPORT_ENABLED);
+
         db = Room.databaseBuilder(getApplicationContext(),
                 MyDatabase.class, DB_NAME)
                 .addMigrations(MyDatabase.MIGRATION_7_8)
@@ -97,7 +100,7 @@ public class App extends MultiDexApplication {
 //                .build());
 
 
-//        Crashlytics.logException(new Exception("My first Android non-fatal error"));
+//        FirebaseCrashlytics.getInstance().recordException(new Exception("My first Android non-fatal error"));
 
 //        if (BuildConfig.DEBUG) {
 //            FirebaseMessaging.getInstance().subscribeToTopic(FIREBASE_TOPIC_REPORT_SLOGAN);

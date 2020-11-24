@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
@@ -172,7 +172,7 @@ public class ParticipantDetailActivity extends BaseActivity implements View.OnCl
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
 //        toast("Error en Youtube Player");
-        Crashlytics.logException(new Error("Error en Youtube player"));
+        FirebaseCrashlytics.getInstance().recordException(new Error("Error en Youtube player"));
         youtubePlayerFragment.getView().setVisibility(View.GONE);
     }
 }

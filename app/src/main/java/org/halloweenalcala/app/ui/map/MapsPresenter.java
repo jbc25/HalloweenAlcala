@@ -1,6 +1,6 @@
 package org.halloweenalcala.app.ui.map;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -94,7 +94,7 @@ public class MapsPresenter extends BasePresenter {
             text += "- " + performance.getDateTimeHumanFriendly() + ": " + performance.getTitle() + ". " + performance.getSubtitle() + "\n\n";
         }
 
-        AlertDialog.Builder ab = new AlertDialog.Builder(context);
+        AlertDialog.Builder ab = new AlertDialog.Builder(context, R.style.MyDialogTheme);
         ab.setTitle(title)
                 .setMessage(text)
                 .setNegativeButton(R.string.close, null)

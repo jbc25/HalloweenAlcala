@@ -134,7 +134,7 @@ public class MainPresenter extends BasePresenter {
     }
 
     private void continueWithLink(final Uri uri) {
-        new AlertDialog.Builder(context)
+        new AlertDialog.Builder(context, R.style.MyDialogTheme)
                 .setTitle(R.string.continue_str)
                 .setMessage(R.string.continue_link_message)
                 .setPositiveButton(R.string.open_in_web, new DialogInterface.OnClickListener() {

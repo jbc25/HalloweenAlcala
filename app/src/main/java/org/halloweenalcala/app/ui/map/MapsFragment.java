@@ -1,15 +1,16 @@
 package org.halloweenalcala.app.ui.map;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -43,7 +44,6 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Ma
     public BasePresenter getPresenter() {
         return presenter;
     }
-
 
 
     @Nullable

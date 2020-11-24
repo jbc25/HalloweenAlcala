@@ -227,7 +227,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void showContestDecorationInfo() {
-        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        AlertDialog.Builder ab = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         ab.setTitle(R.string.contests_and_raffle);
         ab.setMessage(R.string.contest_and_raffle_info);
         ab.setPositiveButton(R.string.more_info_web_contest, new DialogInterface.OnClickListener() {

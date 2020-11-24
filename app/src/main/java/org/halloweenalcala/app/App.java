@@ -42,9 +42,12 @@ public class App extends MultiDexApplication {
     public static final String SHARED_USER_BANNED = PREFIX + "shared_user_banned";
     public static final String SHARED_USER_INITIALIZED_FIRST_TIME = PREFIX + "shared_user_initialized_first_time";
     public static final String SHARED_SHOW_TUTO_BANNERS = PREFIX + "shared_show_tuto_banners";
+    public static final String SHARED_FIRST_TIME_SCREEN_ZOMBICUADRO = PREFIX + "shared_first_time_screen_zombicuadro";
 
     public static final String URL_GOOGLE_PLAY_APP = "https://play.google.com/store/apps/details?id=org.halloweenalcala.app";
     public static final String URL_DIRECT_GOOGLE_PLAY_APP = "market://details?id=org.halloweenalcala.app";
+
+    public static final String URL_BASES_ZOMBICUADRO = "http://www.marchazombiealcala.com/pdfs/9mz_instagram.pdf";
 
     public static final String URL_QUERY_PROMOTE = "share-slogan";
     public static final String URL_PROMOTE_SLOGAN = "http://www.marchazombiealcala.com/?" + URL_QUERY_PROMOTE + "=%s";

@@ -1,6 +1,6 @@
 package org.halloweenalcala.app.ui.performances.list;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 
 import org.halloweenalcala.app.App;
@@ -68,7 +68,7 @@ import java.util.List;
     }
 
     private void showPerformanceInfo(Performance performance) {
-        AlertDialog.Builder ab = new AlertDialog.Builder(context);
+        AlertDialog.Builder ab = new AlertDialog.Builder(context, R.style.MyDialogTheme);
         ab.setTitle(performance.getTitle());
         ab.setMessage(performance.getSubtitle() + "\n\n" + performance.getInfo() + "\n\n" +
                 performance.getPlaceInfo());
